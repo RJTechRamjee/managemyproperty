@@ -1,4 +1,4 @@
-using { rj.re.manageproperty as mngprp } from '../db/schema';
+using { rj.re.managemyproperty as mngprp } from '../db/schema';
 
 service CatalogService {
 

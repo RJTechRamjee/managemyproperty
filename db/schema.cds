@@ -1,5 +1,5 @@
 using {  cuid, managed } from '@sap/cds/common';
-namespace rj.re.manageproperty;
+namespace rj.re.managemyproperty;
 
 entity Properties : cuid , managed 
 {
