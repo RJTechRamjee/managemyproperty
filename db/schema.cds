@@ -1,4 +1,4 @@
-using {  cuid, managed } from '@sap/cds/common';
+using {  cuid, managed , Currency } from '@sap/cds/common';
 namespace rj.re.managemyproperty;
 
 entity Properties : cuid , managed 
@@ -12,6 +12,24 @@ entity Properties : cuid , managed
     state : PropertyState;
     isVacant : Boolean;
     availableFrom : Date;
+    noOfRooms : Integer;
+    propertySize : Decimal(5, 2);
+    propertySizeUnit : String(10) default 'sqm';
+    coldRent : Integer;
+    warmRent : Integer;
+    currency : Currency;
+    hasBalcony : Boolean;
+    hasdGarten : Boolean;
+    noOfParkingSpace : Boolean;
+    isGaragaParking : Boolean;
+    floorNo : Integer;
+    totalFloors : Integer;
+    yearOfConstruction: Int16 ; // dynaminc range
+    hasPassengerLift : Boolean;
+    arePetsAllowed : Boolean;
+    heatingType : String(20) ; // Floor Heating , Central Heating,
+    energyEffieicenyClass : String(2); // A+,B,C,D,E,F,G,H
+    minmumInternetSpeed: String(10); // 100Mbps , 250Mbps, 1000 Mbps
     contactPerson : Association to one Users;
     address : Association to one Addresses;
 }
