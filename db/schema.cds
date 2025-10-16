@@ -20,7 +20,7 @@ entity Properties : cuid , managed
     currency : Currency;
     hasBalcony : Boolean;
     hasdGarten : Boolean;
-    noOfParkingSpace : Boolean;
+    noOfParkingSpace : Int16;
     hasGarageParking : Boolean;
     floorNo : Integer;
     totalFloors : Integer;
