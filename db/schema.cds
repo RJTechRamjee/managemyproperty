@@ -15,15 +15,16 @@ entity Properties : cuid , managed
     noOfRooms : Integer;
     propertySize : Decimal(5, 2);
     propertySizeUnit : String(10) default 'sqm';
-    coldRent : Integer;
-    warmRent : Integer;
+    coldRent : Decimal(4,2);
+    warmRent : Decimal(4, 2);
     currency : Currency;
     hasBalcony : Boolean;
     hasdGarten : Boolean;
     noOfParkingSpace : Boolean;
-    isGaragaParking : Boolean;
+    hasGarageParking : Boolean;
     floorNo : Integer;
     totalFloors : Integer;
+    @Common : { Text  }
     yearOfConstruction: Int16 ; // dynaminc range
     hasPassengerLift : Boolean;
     arePetsAllowed : Boolean;
@@ -83,3 +84,4 @@ type PropertyType : Integer enum
     Apartment = 1;
     House = 2;
 }
+
