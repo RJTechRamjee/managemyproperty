@@ -1,6 +1,6 @@
 using {rj.re.managemyproperty as mngprp} from '../db/schema';
 
-service CatalogService {
+service CatalogService @(path:'CatalogService'){
 
     entity Addresses  as projection on mngprp.Addresses;
 
@@ -9,6 +9,9 @@ service CatalogService {
     @readonly
     entity Users      as projection on mngprp.Users;
 
+    action ReservepProperty(
+        
+    ) returns array of  Properties;
 }
 
 

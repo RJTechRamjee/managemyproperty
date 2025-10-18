@@ -15,8 +15,8 @@ entity Properties : cuid , managed
     noOfRooms : Integer;
     propertySize : Decimal(5, 2);
     propertySizeUnit : String(10) default 'sqm';
-    coldRent : Decimal(4,2);
-    warmRent : Decimal(4, 2);
+    coldRent : Decimal(6,2);
+    warmRent : Decimal(6, 2);
     currency : Currency;
     hasBalcony : Boolean;
     hasdGarten : Boolean;
@@ -33,6 +33,7 @@ entity Properties : cuid , managed
     minmumInternetSpeed: String(10); // 100Mbps , 250Mbps, 1000 Mbps
     contactPerson : Association to one Users;
     address : Association to one Addresses;
+    listingStatus : String(20) default 'Open'
 }
 
 entity Users : cuid, managed
