@@ -4,7 +4,10 @@ service CatalogService @(path:'CatalogService'){
 
     entity Addresses  as projection on mngprp.Addresses;
 
-    entity Properties as projection on mngprp.Properties;
+    entity Properties as projection on mngprp.Properties
+    actions{
+        action SetToStatus ( newStatusCode : String(10))
+    };
 
     @readonly
     entity Users      as projection on mngprp.Users;
