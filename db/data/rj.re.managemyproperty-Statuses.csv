@@ -1,10 +1,10 @@
 code,name,descr
-STATUS_01,New,The property listing has been created but is not yet active or public.
-STATUS_02,Accepting Requests,The listing is public and is now accepting inquiries or applications.
-STATUS_03,Reviewing Requests In Progress,The property manager/owner is actively looking through received inquiries.
-STATUS_04,Viewings/Visits Planned,Appointments for property viewings have been scheduled with potential tenants.
-STATUS_05,Shortlisting Requests,The pool of candidates is being narrowed down to the most serious individuals.
-STATUS_06,Shortlisted,The final few candidates have been selected for background checks and final processing.
-STATUS_07,Contract In Progress,An offer has been accepted and the legal contract/lease agreement is being prepared.
-STATUS_08,Awaiting Sign Off,The contract is ready and is waiting for the final signatures from all parties.
-STATUS_09,Rented,The contract is fully executed, and the property has been successfully leased.
+NEWLISTING,New,The property listing has been created but is not yet active or public.
+ACCEPTREQ,Accepting Requests,The listing is public and is now accepting inquiries or applications.
+REVIEWREQ,Reviewing Requests In Progress,The property manager/owner is actively looking through received inquiries.
+VIEWPLANN,Viewings Planned,Appointments for property viewings have been scheduled with potential tenants.
+SHORTLIST,Shortlisting Requests,The pool of candidates is being narrowed down to the most serious individuals.
+SHORTLSTD,Shortlisted,The final few candidates have been selected for background checks and final processing.
+CONTRACTIN,Contract In Progress,An offer has been accepted and the legal contract/lease agreement is being prepared.
+AWAITSIGN,Awaiting Sign Off,The contract is ready and is waiting for the final signatures from all parties.
+RENTEDPROP,Rented,The contract is fully executed and the property has been successfully leased.
