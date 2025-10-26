@@ -1,0 +1,26 @@
+###
+
+GET http://localhost:4004/odata/v4/AdminService/Statuses
+
+
+### Create new statuses
+
+POST http://localhost:4004/odata/v4/AdminService/Statuses
+Content-Type: application/json
+
+{
+    "code": "VISTPLND",
+      "descr": "Visits are planned",
+      "name": "Visits are planned"
+}
+
+### Patch statuses
+
+PATCH http://localhost:4004/odata/v4/AdminService/Statuses/NEW
+Content-Type: application/json
+
+{
+    "code": "NEW",
+      "descr": "New",
+      "name": "New"
+}

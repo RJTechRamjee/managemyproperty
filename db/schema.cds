@@ -1,5 +1,9 @@
-using {  cuid, managed , Currency } from '@sap/cds/common';
+using {  cuid, managed , Currency , sap.common.CodeList} from '@sap/cds/common';
 namespace rj.re.managemyproperty;
+
+entity Statuses : CodeList {
+    key code : String(10);
+}
 
 entity Properties : cuid , managed 
 {
