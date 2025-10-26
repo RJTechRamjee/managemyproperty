@@ -37,7 +37,7 @@ entity Properties : cuid , managed
     minmumInternetSpeed: String(10); // 100Mbps , 250Mbps, 1000 Mbps
     contactPerson : Association to one Users;
     address : Association to one Addresses;
-    listingStatus : String(20) default 'NEWLISTING'
+    listingStatus : Association to Statuses default 'NEWLISTING'
 }
 
 entity Users : cuid, managed
