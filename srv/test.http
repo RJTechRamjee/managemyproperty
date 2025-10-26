@@ -96,5 +96,7 @@ POST http://localhost:4004/odata/v4/CatalogService/Properties/0a67h890-23h4-4c56
 Content-Type: application/json
 
 {
-    "newStatusCode" : "ACCEPTREQ"
+   // "newStatusCode" : "NEWLISTING"
+     "newStatusCode" : "ACCEPTREQ"
 }
+

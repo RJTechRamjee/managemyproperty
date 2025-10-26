@@ -25,24 +25,14 @@ module.exports = cds.service.impl(async function () {
             const tx = cds.tx(request);
 
             await tx.update(Properties).with({
-                listingStatus : newStatusCode
-            }).where(ID) ;        
+                listingStatus_code : newStatusCode
+            }).where(ID) ; 
+            
+            const response = await tx.read(Properties).where(ID);
+            return response;
         } catch (error) {
             return "Error : "+ error.toString();
         }
     })
-
-/*     this.on('ReservePropery', Properties, ( async ( request , response ) ) => {
-        const ID = req.params[0].ID;
-
-        // 2. CORE LOGIC: Use cds.run() to execute the UPDATE statement.
-    // We update the 'status' to 'Reserved' for the specific property ID.
-    await cds.run(
-      UPDATE(Properties)
-        .set({ status: 'Reserved' }) // Set the new value
-        .where({ ID: propertyId })    // Target the specific record
-    );
-
-    }) */
 
 })

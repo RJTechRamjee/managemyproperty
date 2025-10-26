@@ -6,7 +6,7 @@ service CatalogService @(path:'CatalogService'){
 
     entity Properties as projection on mngprp.Properties
     actions{
-        action SetToStatus ( newStatusCode : String(10))
+        action SetToStatus ( newStatusCode : String(10)) returns Properties
     };
 
     @readonly
