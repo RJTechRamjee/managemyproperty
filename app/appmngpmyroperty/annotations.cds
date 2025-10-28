@@ -108,13 +108,14 @@ annotate service.Properties with @(
     UI.FieldGroup #GeneralInfo: {
         $Type: 'UI.FieldGroupType',
         Data : [
-            {
-                $Type: 'UI.DataField',
-                Value: Type
-            },
+
             {
                 $Type: 'UI.DataField',
                 Value: listingFor
+            },
+                        {
+                $Type: 'UI.DataField',
+                Value: type
             },
             {
                 $Type: 'UI.DataField',
@@ -150,7 +151,7 @@ annotate service.Properties with @(
             },
             {
                 $Type: 'UI.DataField',
-                Value: listingStatus
+                Value: listingStatus.code
             }
         ]
     }

@@ -1,92 +1,84 @@
-using {  cuid, managed , Currency , sap.common.CodeList} from '@sap/cds/common';
+using { cuid, managed, Currency, sap.common.CodeList } from '@sap/cds/common';
+
 namespace rj.re.managemyproperty;
 
 entity Statuses : CodeList {
-    key code : String(10);
+  key code : String(10) @(title: '{i18n>code}');
 }
 
-entity Properties : cuid , managed 
-{
-    popertyId : String(10);
-    title : String(100);
-    description : String(200);
-    type : PropertyType;
-    listingFor : PropertyListingFor;
-    purpose : PropertyPurpose;
-    state : PropertyState;
-    isVacant : Boolean;
-    availableFrom : Date;
-    noOfRooms : Integer;
-    propertySize : Decimal(5, 2);
-    propertySizeUnit : String(10) default 'sqm';
-    coldRent : Decimal(6,2);
-    warmRent : Decimal(6, 2);
-    currency : Currency;
-    hasBalcony : Boolean;
-    hasdGarten : Boolean;
-    noOfParkingSpace : Int16;
-    hasGarageParking : Boolean;
-    floorNo : Integer;
-    totalFloors : Integer;
-    @Common : { Text  }
-    yearOfConstruction: Int16 ; // dynaminc range
-    hasPassengerLift : Boolean;
-    arePetsAllowed : Boolean;
-    heatingType : String(20) ; // Floor Heating , Central Heating,
-    energyEffieicenyClass : String(2); // A+,B,C,D,E,F,G,H
-    minmumInternetSpeed: String(10); // 100Mbps , 250Mbps, 1000 Mbps
-    contactPerson : Association to one Users;
-    address : Association to one Addresses;
-    listingStatus : Association to Statuses default 'NEWLISTING'
+entity Properties : cuid, managed {
+  popertyId             : String(10) @(title: '{i18n>popertyId}');
+  title                 : String(100) @(title: '{i18n>title}');
+  description           : String(200) @(title: '{i18n>description}');
+  type                  : PropertyType @(title: '{i18n>PropertyType}');
+  listingFor            : PropertyListingFor @(title: '{i18n>listingFor}');
+  purpose               : PropertyPurpose @(title: '{i18n>purpose}');
+  state                 : PropertyState @(title: '{i18n>state}');
+  isVacant              : Boolean @(title: '{i18n>isVacant}');
+  availableFrom         : Date @(title: '{i18n>availableFrom}');
+  noOfRooms             : Integer @(title: '{i18n>noOfRooms}');
+  propertySize          : Decimal(5, 2) @(title: '{i18n>propertySize}');
+  propertySizeUnit      : String(10) default 'sqm' @(title: '{i18n>propertySizeUnit}');
+  coldRent              : Decimal(6, 2) @(title: '{i18n>coldRent}');
+  warmRent              : Decimal(6, 2) @(title: '{i18n>warmRent}');
+  currency              : Currency @(title: '{i18n>currency}');
+  hasBalcony            : Boolean @(title: '{i18n>hasBalcony}');
+  hasdGarten            : Boolean @(title: '{i18n>hasdGarten}');
+  noOfParkingSpace      : Int16 @(title: '{i18n>noOfParkingSpace}');
+  hasGarageParking      : Boolean @(title: '{i18n>hasGarageParking}');
+  floorNo               : Integer @(title: '{i18n>floorNo}');
+  totalFloors           : Integer @(title: '{i18n>totalFloors}');
+  @Common : { Text }
+  yearOfConstruction    : Int16 @(title: '{i18n>yearOfConstruction}');
+  hasPassengerLift      : Boolean @(title: '{i18n>hasPassengerLift}');
+  arePetsAllowed        : Boolean @(title: '{i18n>arePetsAllowed}');
+  heatingType           : String(20) @(title: '{i18n>heatingType}');
+  energyEffieicenyClass : String(2) @(title: '{i18n>energyEffieicenyClass}');
+  minmumInternetSpeed   : String(10) @(title: '{i18n>minmumInternetSpeed}');
+  contactPerson         : Association to one Users @(title: '{i18n>contactPerson}');
+  address               : Association to one Addresses @(title: '{i18n>address}');
+  listingStatus         : Association to Statuses default 'NEWLISTING' @(title: '{i18n>listingStatus}');
 }
 
-entity Users : cuid, managed
-{
-    userId : String(10);
-    firstName : String(40);
-    lastName : String(40);
-    emailId : String(50);
-    address : Association to one Addresses;
-    ShortIntro : String(200);
-    DetailedIntro : String(500);
+entity Users : cuid, managed {
+  userId        : String(10) @(title: '{i18n>userId}');
+  firstName     : String(40) @(title: '{i18n>firstName}');
+  lastName      : String(40) @(title: '{i18n>lastName}');
+  emailId       : String(50) @(title: '{i18n>emailId}');
+  address       : Association to one Addresses @(title: '{i18n>address}');
+  ShortIntro    : String(200) @(title: '{i18n>ShortIntro}');
+  DetailedIntro : String(500) @(title: '{i18n>DetailedIntro}');
 }
 
-entity Addresses : cuid , managed
-{
-    addressId : String(10) ;
-    houseNo : Int16;
-    streetName : String(40);
-    city : String(40);
-    postalCode : String(6);
-    ctate : String(40);
-    Country : String(20);
-
+entity Addresses : cuid, managed {
+  addressId  : String(10) @(title: '{i18n>addressId}');
+  houseNo    : Int16 @(title: '{i18n>houseNo}');
+  streetName : String(40) @(title: '{i18n>streetName}');
+  city       : String(40) @(title: '{i18n>city}');
+  postalCode : String(6) @(title: '{i18n>postalCode}');
+  ctate      : String(40) @(title: '{i18n>ctate}');
+  Country    : String(20) @(title: '{i18n>Country}');
 }
 
-type PropertyListingFor : Integer enum
-{
-    Sale = 1;
-    Rent = 2;
-    Lease = 3;
+type PropertyListingFor : Integer enum {
+  Sale = 1 @(title: '{i18n>Sale}');
+  Rent = 2 @(title: '{i18n>Rent}');
+  Lease = 3 @(title: '{i18n>Lease}');
 }
 
-type PropertyPurpose : Integer enum
-{
-    Living = 1;
-    Commercial = 2;
+type PropertyPurpose : Integer enum {
+  Living = 1 @(title: '{i18n>Living}');
+  Commercial = 2 @(title: '{i18n>Commercial}');
 }
 
-type PropertyState : String enum
-{
-    New;
-    Renovated;
-    VeryGood = 'Very Good';
-    NeedsRenovation = 'Needs renovation';
+type PropertyState : String enum {
+  New @(title: '{i18n>New}');
+  Renovated @(title: '{i18n>Renovated}');
+  VeryGood = 'Very Good' @(title: '{i18n>VeryGood}');
+  NeedsRenovation = 'Needs renovation' @(title: '{i18n>NeedsRenovation}');
 }
 
-type PropertyType : Integer enum
-{
-    Apartment = 1;
-    House = 2;
+type PropertyType : Integer enum {
+  Apartment = 1 @(title: '{i18n>Apartment}');
+  House = 2 @(title: '{i18n>House}');
 }
-
