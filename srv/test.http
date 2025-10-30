@@ -106,4 +106,4 @@ Content-Type: application/json
 GET http://localhost:4004/odata/v4/CatalogService/Properties
 
 ### Read
-GET http://localhost:4004/odata/v4/CatalogService/Properties/4e01l234-67l8-40a9-2c34-ac0123456789
+GET http://localhost:4004/odata/v4/CatalogService/Properties/4e01l234-67l8-40a9-2c34-af0123456789

@@ -9,7 +9,7 @@ entity Statuses : CodeList {
 entity Properties : cuid, managed {
   popertyId             : String(10) @(title: '{i18n>popertyId}');
   title                 : String(100) @(title: '{i18n>title}');
-  description           : String(200) @(title: '{i18n>description}');
+  description           : String(500) @(title: '{i18n>description}');
   type                  : PropertyType @(title: '{i18n>PropertyType}');
   listingFor            : PropertyListingFor @(title: '{i18n>listingFor}');
   purpose               : PropertyPurpose @(title: '{i18n>purpose}');
@@ -60,15 +60,15 @@ entity Addresses : cuid, managed {
   Country    : String(20) @(title: '{i18n>Country}');
 }
 
-type PropertyListingFor : Integer enum {
-  Sale = 1 @(title: '{i18n>Sale}');
-  Rent = 2 @(title: '{i18n>Rent}');
-  Lease = 3 @(title: '{i18n>Lease}');
+type PropertyListingFor : String(10) enum {
+  Sale  @(title: '{i18n>Sale}');
+  Rent  @(title: '{i18n>Rent}');
+  Lease @(title: '{i18n>Lease}');
 }
 
-type PropertyPurpose : Integer enum {
-  Living = 1 @(title: '{i18n>Living}');
-  Commercial = 2 @(title: '{i18n>Commercial}');
+type PropertyPurpose : String(20) enum {
+  Living @(title: '{i18n>Living}');
+  Commercial @(title: '{i18n>Commercial}');
 }
 
 type PropertyState : String enum {
@@ -78,7 +78,7 @@ type PropertyState : String enum {
   NeedsRenovation = 'Needs renovation' @(title: '{i18n>NeedsRenovation}');
 }
 
-type PropertyType : Integer enum {
-  Apartment = 1 @(title: '{i18n>Apartment}');
-  House = 2 @(title: '{i18n>House}');
+type PropertyType : String(20) enum {
+  Apartment  @(title: '{i18n>Apartment}');
+  House @(title: '{i18n>House}');
 }

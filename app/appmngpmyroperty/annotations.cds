@@ -16,6 +16,29 @@ annotate service.Properties with @(
 
     UI.LineItem               : [
         {
+            $Type: 'UI.DataFieldForActionGroup',
+            Label : 'Set to status',
+            Actions :[
+                {
+                    $Type : 'UI.DataFieldForAction',
+                    Action : 'CatalogService.ReservepProperty',
+                     Label : 'Reserve Property'
+                    // InvocationGrouping : ,
+                    // Inline : ,
+                    // Determining : ,
+                    // Label : '',
+                    // Criticality : ,
+                    // CriticalityRepresentation : ,
+                    // IconUrl : '',
+                },
+                {
+                      $Type : 'UI.DataFieldForAction',
+                    Action : 'CatalogService.SetToStatus',
+                    Label : 'Set to Status'
+                }
+            ]
+        }        ,
+        {
             $Type: 'UI.DataField',
             Value: popertyId,
         },

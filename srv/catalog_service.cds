@@ -1,10 +1,11 @@
 using {rj.re.managemyproperty as mngprp} from '../db/schema';
 
+//@odata.draft.enabled
 service CatalogService @(path:'CatalogService'){
 
     entity Addresses  as projection on mngprp.Addresses;
 
-    entity Properties as projection on mngprp.Properties
+    entity Properties as projection on mngprp.Properties order by popertyId asc
     actions{
         action SetToStatus ( newStatusCode : String(10)) returns Properties
     };
