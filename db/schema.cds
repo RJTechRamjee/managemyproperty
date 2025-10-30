@@ -2,6 +2,7 @@ using { cuid, managed, Currency, sap.common.CodeList } from '@sap/cds/common';
 
 namespace rj.re.managemyproperty;
 
+@cds.odata.valuelist
 entity Statuses : CodeList {
   key code : String(10) @(title: '{i18n>code}');
 }

@@ -4,7 +4,7 @@ annotate service.Properties with @(
 odata.draft.enabled,
 
     UI.SelectionFields        : [
-        listingStatus,
+        listingStatus_code,
         type,
         listingFor,
         purpose,
@@ -47,10 +47,10 @@ odata.draft.enabled,
             $Type: 'UI.DataField',
             Value: title,
         },
-        {
-            $Type: 'UI.DataField',
-            Value: description,
-        },
+        // {
+        //     $Type: 'UI.DataField',
+        //     Value: description,
+        // },
         {
             $Type: 'UI.DataField',
             Value: type,
