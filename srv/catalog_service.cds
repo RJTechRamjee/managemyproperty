@@ -1,6 +1,6 @@
 using {rj.re.managemyproperty as mngprp} from '../db/schema';
 
-//@odata.draft.enabled
+
 service CatalogService @(path:'CatalogService'){
 
     entity Addresses  as projection on mngprp.Addresses;

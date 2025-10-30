@@ -1,6 +1,7 @@
 using CatalogService as service from '../../srv/catalog_service';
 
 annotate service.Properties with @(
+odata.draft.enabled,
 
     UI.SelectionFields        : [
         listingStatus,
