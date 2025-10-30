@@ -13,7 +13,9 @@
   },
   "scripts": {
     "start": "cds-serve",
-    "watch-appmngpmyroperty": "cds watch --open appmngpmyroperty/index.html?sap-ui-xx-viewCache=false --livereload false"
+    "watch-appmngpmyroperty": "cds watch --open appmngpmyroperty/index.html?sap-ui-xx-viewCache=false --livereload false",
+    "watch-appmngmyuser": "cds watch --open appmngmyuser/index.html?sap-ui-xx-viewCache=false --livereload false",
+    "watch-appmnguserprofiles": "cds watch --open appmnguserprofiles/index.html?sap-ui-xx-viewCache=false --livereload false"
   },
   "private": true,
   "cds": {},
@@ -21,6 +23,8 @@
     "app/*"
   ],
   "sapux": [
-    "app/appmngpmyroperty"
+    "app/appmngpmyroperty",
+    "app/appmngmyuser",
+    "app/appmnguserprofiles"
   ]
 }
