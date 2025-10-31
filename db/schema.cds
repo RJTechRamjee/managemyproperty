@@ -39,6 +39,18 @@ entity Properties : cuid, managed {
   contactPerson         : Association to one Users @(title: '{i18n>contactPerson}');
   address               : Association to one Addresses @(title: '{i18n>address}');
   listingStatus         : Association to Statuses default 'NEWLISTING' @(title: '{i18n>listingStatus}');
+  nearByAmenities       : Composition of many NearByAmenities 
+                                        on nearByAmenities.property = $self;
+}
+
+entity NearByAmenities : cuid, managed {
+  property : Association to one Properties;
+  type : String(20);
+  name : String(50);
+  distance : Int16;
+  distanceUnit : String(5) default 'km';
+  walkTime : Int16;
+  walkTimeUnit : String(5) default 'min'
 }
 
 entity Users : cuid, managed {

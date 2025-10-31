@@ -127,8 +127,14 @@ odata.draft.enabled,
             Label : 'General Info',
             Target: '@UI.FieldGroup#GeneralInfo1'
         },
+            
         ]
-    }],
+    },
+        {   
+            $Type : 'UI.ReferenceFacet',
+            Label : 'Near by Amenities',
+            Target: 'nearByAmenities/@UI.LineItem'
+        },],
     UI.FieldGroup #GeneralInfo: {
         $Type: 'UI.FieldGroupType',
         Data : [
@@ -179,6 +185,35 @@ odata.draft.enabled,
             }
         ]
     }
+);
+
+annotate service.NearByAmenities with @(
+    UI.LineItem : [
+              {
+            $Type: 'UI.DataField',
+            Value: type,
+        },
+              {
+            $Type: 'UI.DataField',
+            Value: name,
+        },
+              {
+            $Type: 'UI.DataField',
+            Value: distance,
+        },
+              {
+            $Type: 'UI.DataField',
+            Value: distanceUnit,
+        },
+              {
+            $Type: 'UI.DataField',
+            Value: walkTime,
+        },
+              {
+            $Type: 'UI.DataField',
+            Value: walkTimeUnit,
+        },
+    ]
 );
 
 // annotate service.Properties with {

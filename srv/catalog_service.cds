@@ -9,7 +9,7 @@ service CatalogService @(path:'CatalogService'){
     actions{
         action SetToStatus ( newStatusCode : String(10)) returns Properties
     };
-
+    entity NearByAmenities as projection on mngprp.NearByAmenities;
     @readonly
     entity Users      as projection on mngprp.Users;
 
