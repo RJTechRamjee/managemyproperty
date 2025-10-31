@@ -7,7 +7,9 @@ service CatalogService @(path:'CatalogService'){
 
     entity Properties as projection on mngprp.Properties order by popertyId asc
     actions{
-        action SetToStatus ( newStatusCode : String(10)) returns Properties
+        action SetToStatus ( newStatusCode : String(10)) returns Properties;
+
+        action SendEmail ( UserId : String(10) , personalMessage : String(300) ) ;
     };
     entity NearByAmenities as projection on mngprp.NearByAmenities;
     @readonly

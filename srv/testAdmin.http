@@ -24,3 +24,10 @@ Content-Type: application/json
       "descr": "New",
       "name": "New"
 }
+
+###
+GET http://localhost:4004/odata/v4/AdminService/Users
+
+###
+
+GET http://localhost:4004/odata/v4/AdminService/Users(ID=0t1577ff-9012-40fc-1abc-d45d807ba8cc)

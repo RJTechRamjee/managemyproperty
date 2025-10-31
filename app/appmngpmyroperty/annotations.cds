@@ -1,7 +1,7 @@
 using CatalogService as service from '../../srv/catalog_service';
 
 annotate service.Properties with @(
-odata.draft.enabled,
+    odata.draft.enabled,
 
     UI.SelectionFields        : [
         listingStatus_code,
@@ -17,28 +17,33 @@ odata.draft.enabled,
 
     UI.LineItem               : [
         {
-            $Type: 'UI.DataFieldForActionGroup',
-            Label : 'Set to status',
-            Actions :[
+            $Type  : 'UI.DataFieldForActionGroup',
+            Label  : 'Set to status',
+            Actions: [
                 {
                     $Type : 'UI.DataFieldForAction',
-                    Action : 'CatalogService.ReservepProperty',
-                     Label : 'Reserve Property'
-                    // InvocationGrouping : ,
-                    // Inline : ,
-                    // Determining : ,
-                    // Label : '',
-                    // Criticality : ,
-                    // CriticalityRepresentation : ,
-                    // IconUrl : '',
+                    Action: 'CatalogService.ReservepProperty',
+                    Label : 'Reserve Property'
+                // InvocationGrouping : ,
+                // Inline : ,
+                // Determining : ,
+                // Label : '',
+                // Criticality : ,
+                // CriticalityRepresentation : ,
+                // IconUrl : '',
                 },
                 {
-                      $Type : 'UI.DataFieldForAction',
-                    Action : 'CatalogService.SetToStatus',
+                    $Type : 'UI.DataFieldForAction',
+                    Action: 'CatalogService.SetToStatus',
                     Label : 'Set to Status'
                 }
             ]
-        }        ,
+        },
+        {
+            $Type : 'UI.DataFieldForAction',
+            Label : 'Send Email',
+            Action: 'CatalogService.SendEmail'
+        },
         {
             $Type: 'UI.DataField',
             Value: popertyId,
@@ -109,41 +114,47 @@ odata.draft.enabled,
             Value: title
         }
     },
- 
 
 
-
-    UI.Facets                 : [{
-        $Type : 'UI.CollectionFacet',
-        Label : 'Purchase Order Details',
-        Facets: [
-            {   
-            $Type : 'UI.ReferenceFacet',
+    UI.Facets                 : [
+        {
+            $Type : 'UI.CollectionFacet',
             Label : 'General Info',
-            Target: '@UI.FieldGroup#GeneralInfo'
+            Facets: [
+                {
+                    $Type : 'UI.ReferenceFacet',
+                    Label : 'General Info',
+                    Target: '@UI.FieldGroup#GeneralInfo'
+                },
+                {
+                    $Type : 'UI.ReferenceFacet',
+                    Label : 'General Info',
+                    Target: '@UI.FieldGroup#GeneralInfo1'
+                },
+
+            ]
         },
-          {   
-            $Type : 'UI.ReferenceFacet',
-            Label : 'General Info',
-            Target: '@UI.FieldGroup#GeneralInfo1'
-        },
-            
-        ]
-    },
-        {   
+        {
             $Type : 'UI.ReferenceFacet',
             Label : 'Near by Amenities',
             Target: 'nearByAmenities/@UI.LineItem'
-        },],
+        },
+    ],
+
+    UI.identification         : [{
+        $Type : 'UI.DataFieldForAction',
+        Label : 'Send Email',
+        Action: 'CatalogService.SendEmail'
+    }],
+
     UI.FieldGroup #GeneralInfo: {
         $Type: 'UI.FieldGroupType',
         Data : [
-
             {
                 $Type: 'UI.DataField',
                 Value: listingFor
             },
-                        {
+            {
                 $Type: 'UI.DataField',
                 Value: type
             },
@@ -187,34 +198,32 @@ odata.draft.enabled,
     }
 );
 
-annotate service.NearByAmenities with @(
-    UI.LineItem : [
-              {
-            $Type: 'UI.DataField',
-            Value: type,
-        },
-              {
-            $Type: 'UI.DataField',
-            Value: name,
-        },
-              {
-            $Type: 'UI.DataField',
-            Value: distance,
-        },
-              {
-            $Type: 'UI.DataField',
-            Value: distanceUnit,
-        },
-              {
-            $Type: 'UI.DataField',
-            Value: walkTime,
-        },
-              {
-            $Type: 'UI.DataField',
-            Value: walkTimeUnit,
-        },
-    ]
-);
+annotate service.NearByAmenities with @(UI.LineItem: [
+    {
+        $Type: 'UI.DataField',
+        Value: type,
+    },
+    {
+        $Type: 'UI.DataField',
+        Value: name,
+    },
+    {
+        $Type: 'UI.DataField',
+        Value: distance,
+    },
+    {
+        $Type: 'UI.DataField',
+        Value: distanceUnit,
+    },
+    {
+        $Type: 'UI.DataField',
+        Value: walkTime,
+    },
+    {
+        $Type: 'UI.DataField',
+        Value: walkTimeUnit,
+    },
+]);
 
 // annotate service.Properties with {
 //     contactPerson @Common.ValueList : {

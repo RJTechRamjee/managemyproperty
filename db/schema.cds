@@ -95,3 +95,15 @@ type PropertyType : String(20) enum {
   Apartment  @(title: '{i18n>Apartment}');
   House @(title: '{i18n>House}');
 }
+
+entity ContactRequests : cuid , managed {
+  property : Association to one Properties;
+  requester : Association to one Users;
+  messages : Composition of many ConactReqMessages on messages.contactRequest = $self;
+}
+
+entity ConactReqMessages : cuid, managed {
+  contactRequest : Association to one ContactRequests;
+  sender : Association to one Users;
+  message : String(300);
+}
