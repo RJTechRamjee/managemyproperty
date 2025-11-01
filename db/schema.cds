@@ -41,6 +41,7 @@ entity Properties : cuid, managed {
   listingStatus         : Association to Statuses default 'NEWLISTING' @(title: '{i18n>listingStatus}');
   nearByAmenities       : Composition of many NearByAmenities 
                                         on nearByAmenities.property = $self;
+  contactRequests : Association to many ContactRequests on contactRequests.property = $self;                                        
 }
 
 entity NearByAmenities : cuid, managed {

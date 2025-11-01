@@ -139,6 +139,11 @@ annotate service.Properties with @(
             Label : 'Near by Amenities',
             Target: 'nearByAmenities/@UI.LineItem'
         },
+             {
+            $Type : 'UI.ReferenceFacet',
+            Label : 'Contact Requests',
+            Target: 'contactRequests/@UI.LineItem'
+        },
     ],
 
     UI.identification         : [{
@@ -224,6 +229,17 @@ annotate service.NearByAmenities with @(UI.LineItem: [
         Value: walkTimeUnit,
     },
 ]);
+
+annotate service.ContactRequests with @(
+    UI.lineItem : [
+        {
+            $Type : 'UI.DataField',
+            Value : 'requester_ID'
+        },
+
+    ]
+) ;
+
 
 // annotate service.Properties with {
 //     contactPerson @Common.ValueList : {
