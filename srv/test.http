@@ -110,3 +110,17 @@ GET http://localhost:4004/odata/v4/CatalogService/Properties/4e01l234-67l8-40a9-
 
 ### read users
 GET http://localhost:4004/odata/v4/CatalogService/Users
+
+
+
+### Deep expand for properties
+
+GET http://localhost:4004/odata/v4/CatalogService/Properties(ID=1a2b3c4d-5e6f-4a7b-8c9d-0e1f2a3b4c5d,IsActiveEntity=true)?$expand=contactRequests($expand=requester),listingStatus
+
+
+### Post another action into an another entity
+
+POST http://localhost:4004/odata/v4/CatalogService/Properties(ID=e45f6789-01f2-4a34-c567-89abcdeff123,IsActiveEntity=true)/CatalogService.SendRequest
+Content-Type: application/json
+
+{"UserId":"","requestMessage":"dummy"}

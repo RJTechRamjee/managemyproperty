@@ -1,19 +1,19 @@
-code,locale,name,descr
-NEWLISTING,en,New,The property listing has been created but is not yet active or public.
-ACCEPTREQ,en,Accepting Requests,The listing is public and is now accepting inquiries or applications.
-REVIEWREQ,en,Reviewing Requests In Progress,The property manager/owner is actively looking through received inquiries.
-VIEWPLANN,en,Viewings Planned,Appointments for property viewings have been scheduled with potential tenants.
-SHORTLIST,en,Shortlisting Requests,The pool of candidates is being narrowed down to the most serious individuals.
-SHORTLSTD,en,Shortlisted,The final few candidates have been selected for background checks and final processing.
-CONTRACTIN,en,Contract In Progress,An offer has been accepted and the legal contract/lease agreement is being prepared.
-AWAITSIGN,en,Awaiting Sign Off,The contract is ready and is waiting for the final signatures from all parties.
-RENTEDPROP,en,Rented,The contract is fully executed and the property has been successfully leased.
-NEWLISTING,de,Neu,Die Immobilienanzeige wurde erstellt ist aber noch nicht aktiv oder öffentlich.
-ACCEPTREQ,de,Anfragen werden angenommen,Die Anzeige ist öffentlich und nimmt Anfragen oder Bewerbungen entgegen.
-REVIEWREQ,de,Anfragen werden geprüft,Der Property Manager oder Eigentümer sichtet aktiv die eingegangenen Anfragen.
-VIEWPLANN,de,Besichtigungen geplant,Termine für Objektbesichtigungen mit potenziellen Mietern wurden vereinbart.
-SHORTLIST,de,Vorauswahl der Anfragen,Die Auswahl der Kandidaten wird auf die ernsthaftesten Interessenten eingegrenzt.
-SHORTLSTD,de,In der engeren Wahl,Die letzten Kandidaten wurden für die abschließende Bearbeitung ausgewählt.
-CONTRACTIN,de,Vertrag in Arbeit,Ein Angebot wurde angenommen und der Mietvertrag wird vorbereitet und verhandelt.
-AWAITSIGN,de,Warten auf Unterschrift,Der Vertrag ist unterschriftsreif und wartet auf die finalen Unterschriften aller Parteien.
-RENTEDPROP,de,Vermietet,Der Vertrag ist vollständig ausgeführt und die Immobilie wurde erfolgreich vermietet.
+LOCALE,NAME,DESCR,CODE
+en,New,The property listing has been created but is not yet active or public.,NEWLISTING
+en,Accepting Requests,The listing is public and is now accepting inquiries or applications.,ACCEPTREQ
+en,Reviewing Requests In Progress,The property manager/owner is actively looking through received inquiries.,REVIEWREQ
+en,Viewings Planned,Appointments for property viewings have been scheduled with potential tenants.,VIEWPLANN
+en,Shortlisting Requests,The pool of candidates is being narrowed down to the most serious individuals.,SHORTLIST
+en,Shortlisted,The final few candidates have been selected for background checks and final processing.,SHORTLSTD
+en,Contract In Progress,An offer has been accepted and the legal contract/lease agreement is being prepared.,CONTRACTIN
+en,Awaiting Sign Off,The contract is ready and is waiting for the final signatures from all parties.,AWAITSIGN
+en,Rented,The contract is fully executed and the property has been successfully leased.,RENTEDPROP
+de,Neu,Die Immobilienanzeige wurde erstellt ist aber noch nicht aktiv oder öffentlich.,NEWLISTING
+de,Anfragen werden angenommen,Die Anzeige ist öffentlich und nimmt Anfragen oder Bewerbungen entgegen.,ACCEPTREQ
+de,Anfragen werden geprüft,Der Property Manager oder Eigentümer sichtet aktiv die eingegangenen Anfragen.,REVIEWREQ
+de,Besichtigungen geplant,Termine für Objektbesichtigungen mit potenziellen Mietern wurden vereinbart.,VIEWPLANN
+de,Vorauswahl der Anfragen,Die Auswahl der Kandidaten wird auf die ernsthaftesten Interessenten eingegrenzt.,SHORTLIST
+de,In der engeren Wahl,Die letzten Kandidaten wurden für die abschließende Bearbeitung ausgewählt.,SHORTLSTD
+de,Vertrag in Arbeit,Ein Angebot wurde angenommen und der Mietvertrag wird vorbereitet und verhandelt.,CONTRACTIN
+de,Warten auf Unterschrift,Der Vertrag ist unterschriftsreif und wartet auf die finalen Unterschriften aller Parteien.,AWAITSIGN
+de,Vermietet,Der Vertrag ist vollständig ausgeführt und die Immobilie wurde erfolgreich vermietet.,RENTEDPROP

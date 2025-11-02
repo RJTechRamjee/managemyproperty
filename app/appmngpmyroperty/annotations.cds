@@ -41,8 +41,8 @@ annotate service.Properties with @(
         },
         {
             $Type : 'UI.DataFieldForAction',
-            Label : 'Send Email',
-            Action: 'CatalogService.SendEmail'
+            Label : 'Send Request',
+            Action: 'CatalogService.SendRequest'
         },
         {
             $Type: 'UI.DataField',
@@ -139,7 +139,7 @@ annotate service.Properties with @(
             Label : 'Near by Amenities',
             Target: 'nearByAmenities/@UI.LineItem'
         },
-             {
+        {
             $Type : 'UI.ReferenceFacet',
             Label : 'Contact Requests',
             Target: 'contactRequests/@UI.LineItem'
@@ -148,8 +148,8 @@ annotate service.Properties with @(
 
     UI.identification         : [{
         $Type : 'UI.DataFieldForAction',
-        Label : 'Send Email',
-        Action: 'CatalogService.SendEmail'
+        Label : 'Send Request',
+        Action: 'CatalogService.SendRequest'
     }],
 
     UI.FieldGroup #GeneralInfo: {
@@ -230,15 +230,24 @@ annotate service.NearByAmenities with @(UI.LineItem: [
     },
 ]);
 
-annotate service.ContactRequests with @(
-    UI.lineItem : [
-        {
-            $Type : 'UI.DataField',
-            Value : 'requester_ID'
-        },
-
-    ]
-) ;
+annotate service.ContactRequests with @(UI.lineItem: [
+    {
+        $Type: 'UI.DataField',
+        Value: requester_ID
+    },
+    {
+        $Type: 'UI.DataField',
+        Value: requester.firstName
+    },
+    {
+        $Type: 'UI.DataField',
+        Value: requester.lastName
+    },
+    {
+        $Type: 'UI.DataField',
+        Value: requester.shortIntro
+    },
+]);
 
 
 // annotate service.Properties with {

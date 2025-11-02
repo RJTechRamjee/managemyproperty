@@ -100,6 +100,7 @@ type PropertyType : String(20) enum {
 entity ContactRequests : cuid , managed {
   property : Association to one Properties;
   requester : Association to one Users;
+  requestMessage : String(500);
   messages : Composition of many ConactReqMessages on messages.contactRequest = $self;
 }
 

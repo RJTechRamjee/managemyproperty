@@ -13,7 +13,7 @@ service CatalogService @(path: 'CatalogService') {
         actions {
             action SetToStatus(newStatusCode: String(10)) returns Properties;
 
-            action SendEmail(UserId: String(10), personalMessage: String(300));
+            action SendRequest(UserId: String(10), requestMessage: String(300));
         };
 @cds.odata.valuelist
     entity NearByAmenities   as projection on mngprp.NearByAmenities;
@@ -25,6 +25,11 @@ service CatalogService @(path: 'CatalogService') {
     @odata.draft.enabled
     @cds.odata.valuelist
     entity ContactRequests   as projection on mngprp.ContactRequests;
+    // entity ContactRequests   as projection on mngprp.ContactRequests {
+        // requester.ID, requester.firstName, requester.lastName , requester.ShortIntro,
+        // requester : redirected to Users,
+        // property : redirected to Properties,
+    // };
     entity ConactReqMessages as projection on mngprp.ConactReqMessages;
 
     action ReservepProperty(

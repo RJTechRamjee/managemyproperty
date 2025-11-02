@@ -17,22 +17,47 @@ module.exports = cds.service.impl(async function () {
         }
     })
 
-    this.on('SetToStatus', async (request,response) => {
+    this.on('SetToStatus', async (request, response) => {
         try {
             const ID = request.params[0];
-            const { newStatusCode } = request.data ;
+            const { newStatusCode } = request.data;
 
             const tx = cds.tx(request);
 
             await tx.update(Properties).with({
-                listingStatus_code : newStatusCode
-            }).where(ID) ; 
-            
+                listingStatus_code: newStatusCode
+            }).where(ID);
+
             const response = await tx.read(Properties).where(ID);
             return response;
         } catch (error) {
-            return "Error : "+ error.toString();
+            return "Error : " + error.toString();
         }
+    })
+
+    this.on('SendRequest', async (request, response) => {
+
+        const { ContactRequests } = this.entities;
+        try {
+            const propertyID = request.params[0];
+            const requestMessage = request.data;
+
+            const newContactReq = {
+                property_ID: propertyID,
+                requester_ID: '4g2b1c0d-9d55-4e77-f999-1e2f3a4b5c56',
+                requestMessage: requestMessage,
+            }
+
+            const tx = cds.transaction(request);
+
+            const insertResult = await tx.run(
+                INSERT.into(ContactRequests).entries(newContactReq)
+            );
+            return 'Contact request for Property ID ${propertyID} successfully logged.';
+        } catch (error) {
+            return "Error: " + error.toString();
+        }
+
     })
 
 })
