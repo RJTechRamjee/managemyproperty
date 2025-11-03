@@ -6,29 +6,41 @@ service CatalogService @(path: 'CatalogService') {
     @cds.odata.valuelist
     entity Addresses         as projection on mngprp.Addresses;
 
-@cds.odata.valuelist
-    entity Properties        as projection on mngprp.Properties
-                                order by
-                                    popertyId asc
+    @cds.odata.valuelist
+    entity Properties        as
+        projection on mngprp.Properties {
+            *,
+            contactRequests : redirected to ContactRequests
+        }
+        order by
+            popertyId asc
         actions {
             action SetToStatus(newStatusCode: String(10)) returns Properties;
 
-            action SendRequest(UserId: String(10), requestMessage: String(300));
+            action SendRequest(requestMessage: String(300)) returns String;
+
         };
-@cds.odata.valuelist
+
+    @cds.odata.valuelist
     entity NearByAmenities   as projection on mngprp.NearByAmenities;
 
     @readonly
-     @cds.odata.valuelist
+    @cds.odata.valuelist
     entity Users             as projection on mngprp.Users;
 
     @odata.draft.enabled
     @cds.odata.valuelist
-    entity ContactRequests   as projection on mngprp.ContactRequests;
+    entity ContactRequests   as projection on mngprp.ContactRequests{
+        *,
+        requester.firstName,
+        requester.lastName,
+        requester.ShortIntro
+    };
+
     // entity ContactRequests   as projection on mngprp.ContactRequests {
-        // requester.ID, requester.firstName, requester.lastName , requester.ShortIntro,
-        // requester : redirected to Users,
-        // property : redirected to Properties,
+    // requester.ID, requester.firstName, requester.lastName , requester.ShortIntro,
+    // requester : redirected to Users,
+    // property : redirected to Properties,
     // };
     entity ConactReqMessages as projection on mngprp.ConactReqMessages;
 

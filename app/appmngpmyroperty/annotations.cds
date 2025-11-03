@@ -146,10 +146,10 @@ annotate service.Properties with @(
         },
     ],
 
-    UI.identification         : [{
+    UI.Identification         : [{
         $Type : 'UI.DataFieldForAction',
         Label : 'Send Request',
-        Action: 'CatalogService.SendRequest'
+        Action: 'service.SendRequest'
     }],
 
     UI.FieldGroup #GeneralInfo: {

@@ -9,40 +9,12 @@ POST http://localhost:4004/odata/v4/CatalogService/Properties
 Content-Type: application/json
 
 {
-    "ID": "4e01l234-67l8-40a9-2c34-ag0123456789",
+    "ID": "4e01l234-67l8-40a9-2c34-ag0123456756",
     "address_ID": "9e0f1a2b-3c55-4d77-1f77-1f2a3b4c5016",
     "arePetsAllowed": false,
     "availableFrom": "2026-05-01",
-    "coldRent": "0.00",
-    "contactPerson_ID": "4g2b1c0d-9d55-4e77-f999-1e2f3a4b5c56",
-    "createdAt": "2025-04-12T07:00:00.000Z",
-    "createdBy": "RJTechRamjee",
-    "currency_code": "EUR",
-    "description": "Large warehouse for storage",
-    "energyEffieicenyClass": "F",
-    "floorNo": 0,
-    "hasBalcony": false,
-    "hasGarageParking": false,
-    "hasPassengerLift": false,
-    "hasdGarten": false,
-    "heatingType": "Central Heating",
-    "isVacant": false,
-    "listingFor": 3,
-    "minmumInternetSpeed": "100Mbps",
-    "modifiedAt": "2025-07-01T09:30:00.000Z",
-    "modifiedBy": "data-generator",
-    "noOfParkingSpace": 0,
-    "noOfRooms": 0,
-    "popertyId": "P0015",
-    "propertySize": "950.00",
-    "propertySizeUnit": "sqm",
-    "purpose": 2,
-    "state": "Needs renovation",
-    "title": "Industrial Warehouse",
-    "totalFloors": 1,
-    "type": 2,
-    "warmRent": "0.00",
-    "yearOfConstruction": 1970
+    "coldRent": "0.00"
+
 }
 
 
@@ -120,7 +92,7 @@ GET http://localhost:4004/odata/v4/CatalogService/Properties(ID=1a2b3c4d-5e6f-4a
 
 ### Post another action into an another entity
 
-POST http://localhost:4004/odata/v4/CatalogService/Properties(ID=e45f6789-01f2-4a34-c567-89abcdeff123,IsActiveEntity=true)/CatalogService.SendRequest
+POST http://localhost:4004/odata/v4/CatalogService/Properties(ID=4e01a234-67b8-40a9-2c34-ad0123456789,IsActiveEntity=true)/CatalogService.SendRequest
 Content-Type: application/json
 
-{"UserId":"","requestMessage":"dummy"}
+{"requestMessage":"dummy"}
