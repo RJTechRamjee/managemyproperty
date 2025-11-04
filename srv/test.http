@@ -9,7 +9,7 @@ POST http://localhost:4004/odata/v4/CatalogService/Properties
 Content-Type: application/json
 
 {
-    "ID": "4e01l234-67l8-40a9-2c34-ag0123456756",
+    "ID": "4e01l234-67l8-40a9-2c34-ag0123456746",
     "address_ID": "9e0f1a2b-3c55-4d77-1f77-1f2a3b4c5016",
     "arePetsAllowed": false,
     "availableFrom": "2026-05-01",

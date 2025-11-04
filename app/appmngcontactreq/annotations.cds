@@ -23,7 +23,11 @@ annotate service.ContactRequests with @(
             {
                 $Type: 'UI.DataField',
                 Value: requester.ShortIntro,
-            }
+            },
+               {
+            $Type: 'UI.DataField',
+            Value: requestMessage,
+        }
         ],
     },
     UI.Facets                    : [
@@ -61,6 +65,10 @@ annotate service.ContactRequests with @(
         {
             $Type: 'UI.DataField',
             Value: requester.ShortIntro,
+        },
+                {
+            $Type: 'UI.DataField',
+            Value: requestMessage,
         }
     ],
 );

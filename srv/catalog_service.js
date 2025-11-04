@@ -1,10 +1,10 @@
 const { request } = require("http");
 const cds = require('@sap/cds');
-   
+
 module.exports = cds.service.impl(async function () {
     //Step-1 get the object from OData service
 
- const { Properties, ContactRequests  } = this.entities;
+    const { Properties, ContactRequests } = this.entities;
     // console.log(this.entities.ContactRequests); // Debug: check if ContactRequests is listed
     const { uuid } = cds.utils;
     this.before('INSERT', Properties, (request, response) => {
@@ -14,22 +14,27 @@ module.exports = cds.service.impl(async function () {
     })
 
     this.before('UPDATE', Properties, (request, response) => {
-        if (request.data.coldRent == 0.00 || request.data.warmRent == 0.00) {
-            request.error(400, 'Cold rent and Warm rent must be a positive value')
+        if (request.data.coldRent == 0.00 ) {
+            request.error(400, 'Cold rent must be a positive value')
+        }
+             if (request.data.warmRent == 0.00) {
+            request.error(400, 'Warm rent must be a positive value')
         }
     })
 
-    this.before('INSERT', ContactRequests, (request, response ) => {
+    this.before('INSERT', ContactRequests, (request, response) => {
 
-        if (request.data.requestMessage == '') {
-            request.error(400, 'Cold rent and Warm rent must be a positive value')
+        if (!request.data.requestMessage || 
+            (typeof request.data.requestMessage === 'string' && request.data.requestMessage.trim() === '')  ) {
+            request.error(400, 'Request message cannot be empty.')
         }
 
     })
-        this.before('UPDATE', ContactRequests, (request, response ) => {
+    this.before('UPDATE', ContactRequests, (request, response) => {
 
-        if (request.data.requestMessage == '') {
-            request.error(400, 'Cold rent and Warm rent must be a positive value')
+        if (!request.data.requestMessage || 
+            (typeof request.data.requestMessage === 'string' && request.data.requestMessage.trim() === '')  ) {
+            request.error(400, 'Request message cannot be empty.')
         }
 
     })

@@ -1,7 +1,7 @@
 using {rj.re.managemyproperty as mngprp} from '../db/schema';
 
 
-service CatalogService @(path: '/CatalogService') {
+service CatalogService @(path: 'CatalogService') {
 
     @cds.odata.valuelist
     entity Addresses         as projection on mngprp.Addresses;
