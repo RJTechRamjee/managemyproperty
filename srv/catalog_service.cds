@@ -1,14 +1,15 @@
 using {rj.re.managemyproperty as mngprp} from '../db/schema';
 
 
-service CatalogService @(path: 'CatalogService') {
+service CatalogService @(path: '/CatalogService') {
 
     @cds.odata.valuelist
     entity Addresses         as projection on mngprp.Addresses;
 
     @cds.odata.valuelist
     entity Properties        as
-        projection on mngprp.Properties {
+        projection on mngprp.Properties
+         {
             *,
             contactRequests : redirected to ContactRequests
         }
@@ -50,15 +51,3 @@ service CatalogService @(path: 'CatalogService') {
 }
 
 
-service AdminService @(path: 'AdminService') {
-
-    entity Addresses  as projection on mngprp.Addresses;
-
-    entity Properties as projection on mngprp.Properties;
-
-    @odata.draft.enabled
-    entity Users      as projection on mngprp.Users;
-
-    entity Statuses   as projection on mngprp.Statuses;
-
-}
