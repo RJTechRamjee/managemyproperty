@@ -47,6 +47,17 @@ class CatalogService extends cds.ApplicationService {
 
         })
 
+
+        this.on('READ', 'DynamicYears', async () => {
+            const currentYear = new Date().getFullYear();
+            const years = [];
+            for (let i = -3; i <= 3; i++) {
+                years.push({ year: String(currentYear + i) });
+            }
+            return years;
+        });
+
+
         this.on('SetToStatus', async (request, response) => {
             try {
                 const ID = request.params[0];

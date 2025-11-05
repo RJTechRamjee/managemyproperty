@@ -12,7 +12,8 @@ annotate service.Properties with @(
         isVacant,
         propertySize,
         coldRent,
-        warmRent
+        warmRent,
+        yearOfConstruction
     ],
 
     UI.LineItem               : [
@@ -97,8 +98,11 @@ annotate service.Properties with @(
             Value: hasBalcony,
         },
         {
-            $Type: 'UI.DataField',
-            Value: yearOfConstruction,
+            $Type          : 'UI.DataField',
+            Value          : yearOfConstruction,
+            formatOptions  : {groupingEnabled: false},
+            textArrangement: #TextOnly
+
         },
     ],
 
@@ -188,8 +192,12 @@ annotate service.Properties with @(
                 Value: warmRent
             },
             {
-                $Type: 'UI.DataField',
-                Value: yearOfConstruction
+                $Type          : 'UI.DataField',
+                Value          : yearOfConstruction,
+
+                formatOptions  : {groupingEnabled: false},
+                textArrangement: #TextOnly
+
             },
             {
                 $Type: 'UI.DataField',
@@ -249,7 +257,18 @@ annotate service.ContactRequests with @(UI.lineItem: [
     },
 ]);
 
+annotate service.Properties with {
+    yearOfConstruction @Common.ValueList: {
+        CollectionPath: 'DynamicYears',
+        Parameters    : [{
+            $Type            : 'Common.ValueListParameterInOut',
+            LocalDataProperty: 'yearOfConstruction',
+            ValueListProperty: 'year'
+        }]
 
+
+    }
+};
 // annotate service.Properties with {
 //     contactPerson @Common.ValueList : {
 //         $Type : 'Common.ValueListType',

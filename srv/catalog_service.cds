@@ -11,6 +11,7 @@ service CatalogService @(path: 'CatalogService') {
         projection on mngprp.Properties
          {
             *,
+            @readonly
             contactRequests : redirected to ContactRequests
         }
         order by
@@ -48,6 +49,8 @@ service CatalogService @(path: 'CatalogService') {
     action ReservepProperty(
 
     ) returns array of Properties;
+
+    entity DynamicYears @cds.persistence.skip as projection on mngprp.DynamicYears;
 }
 
 
