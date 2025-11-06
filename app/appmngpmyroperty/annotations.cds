@@ -265,66 +265,35 @@ annotate service.Properties with {
             LocalDataProperty: 'yearOfConstruction',
             ValueListProperty: 'year'
         }]
+    };
+    listingStatus      @Common.ValueList: {
+        CollectionPath: 'Statuses',
+        Parameters    : [
+            {
+                $Type            : 'Common.ValueListParameterInOut',
+                LocalDataProperty: 'listingStatus_code',
+                ValueListProperty: 'code'
+            },
+            {
+                $Type            : 'Common.ValueListParameterDisplayOnly',
+                ValueListProperty: 'name'
+            }
+        ]
+    };
+};
 
-
+annotate service.ActionParams with {
+    newStatusCode @Common.ValueList: {
+        CollectionPath: 'Statuses',
+        Parameters    : [{
+            $Type            : 'Common.ValueListParameterInOut',
+            LocalDataProperty: 'newStatusCode',
+            ValueListProperty: 'code'
+        },
+        {
+            $Type            : 'Common.ValueListParameterDisplayOnly',
+            ValueListProperty: 'name'
+        }]
     }
 };
-// annotate service.Properties with {
-//     contactPerson @Common.ValueList : {
-//         $Type : 'Common.ValueListType',
-//         CollectionPath : 'Users',
-//         Parameters : [
-//             {
-//                 $Type : 'Common.ValueListParameterInOut',
-//                 LocalDataProperty : contactPerson_ID,
-//                 ValueListProperty : 'ID',
-//             },
-//             {
-//                 $Type : 'Common.ValueListParameterDisplayOnly',
-//                 ValueListProperty : 'userId',
-//             },
-//             {
-//                 $Type : 'Common.ValueListParameterDisplayOnly',
-//                 ValueListProperty : 'firstName',
-//             },
-//             {
-//                 $Type : 'Common.ValueListParameterDisplayOnly',
-//                 ValueListProperty : 'lastName',
-//             },
-//             {
-//                 $Type : 'Common.ValueListParameterDisplayOnly',
-//                 ValueListProperty : 'emailId',
-//             },
-//         ],
-//     }
-// };
 
-// annotate service.Properties with {
-//     address @Common.ValueList : {
-//         $Type : 'Common.ValueListType',
-//         CollectionPath : 'Addresses',
-//         Parameters : [
-//             {
-//                 $Type : 'Common.ValueListParameterInOut',
-//                 LocalDataProperty : address_ID,
-//                 ValueListProperty : 'ID',
-//             },
-//             {
-//                 $Type : 'Common.ValueListParameterDisplayOnly',
-//                 ValueListProperty : 'addressId',
-//             },
-//             {
-//                 $Type : 'Common.ValueListParameterDisplayOnly',
-//                 ValueListProperty : 'houseNo',
-//             },
-//             {
-//                 $Type : 'Common.ValueListParameterDisplayOnly',
-//                 ValueListProperty : 'streetName',
-//             },
-//             {
-//                 $Type : 'Common.ValueListParameterDisplayOnly',
-//                 ValueListProperty : 'city',
-//             },
-//         ],
-//     }
-// };

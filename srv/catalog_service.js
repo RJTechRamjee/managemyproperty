@@ -51,7 +51,7 @@ class CatalogService extends cds.ApplicationService {
         this.on('READ', 'DynamicYears', async () => {
             const currentYear = new Date().getFullYear();
             const years = [];
-            for (let i = -3; i <= 3; i++) {
+            for (let i = -30; i <= 0; i++) {
                 years.push({ year: String(currentYear + i) });
             }
             return years;
