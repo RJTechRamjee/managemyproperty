@@ -18,7 +18,7 @@ service CatalogService @(path: 'CatalogService') {
             contactRequests : redirected to ContactRequests
         }
         order by
-            popertyId asc
+            propertyId asc
         actions {
             action SetToStatus(newStatusCode: ActionParams:newStatusCode) returns Properties;
 
@@ -57,4 +57,6 @@ service CatalogService @(path: 'CatalogService') {
     entity DynamicYears @cds.persistence.skip as projection on mngprp.DynamicYears;
 
     entity Statuses                           as projection on mngprp.Statuses;
+
+    function getNextPropertyId() returns Properties:propertyId ;
 }

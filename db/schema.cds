@@ -13,7 +13,7 @@ entity Statuses : CodeList {
 }
 
 entity Properties : cuid, managed {
-  popertyId             : String(10)                                   @(title: '{i18n>popertyId}');
+  propertyId             : String(10)                                   @(title: '{i18n>popertyId}');
   title                 : String(100)                                  @(title: '{i18n>title}');
   description           : String(500)                                  @(title: '{i18n>description}');
   type                  : PropertyType                                 @(title: '{i18n>PropertyType}');

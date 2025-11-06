@@ -1,5 +1,6 @@
 const { request } = require("http");
 const cds = require('@sap/cds');
+const { SELECT } = require("@sap/cds/lib/ql/cds-ql");
 
 // module.exports = cds.service.impl(async function () {
 
@@ -102,6 +103,24 @@ class CatalogService extends cds.ApplicationService {
                 return "Error: " + error.toString();
             }
 
+        })
+
+        this.on('getNextPropertyId', async() => {
+
+            const currentMaxProp = await SELECT.one.from(Properties).columns('propertyId').orderBy('propertyId desc');
+            let nextPropertyId = 1;
+
+            if( currentMaxProp && currentMaxProp.propertyId ){
+                currentMaxPropIdNum = parseInt(currentMaxProp.propertyId.replace('P',' '),10);
+            nextPropertyId = currentMaxPropIdNum + 1 ;
+            }
+
+            return `P${String(nextPropertyId).padStart(4,'0')}`;
+        })
+
+        this.before('CREATE',Properties, async ( req) => {
+            const nextPropertyId = await this.emit('getNextPropertyId');
+            req.data.propertyId = nextPropertyId;
         })
 
         return super.init();

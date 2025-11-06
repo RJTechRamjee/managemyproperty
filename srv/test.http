@@ -4,6 +4,10 @@ GET http://localhost:4004/odata/v4/CatalogService
 ### Read
 GET http://localhost:4004/odata/v4/CatalogService/Properties
 
+### call function
+GET http://localhost:4004/odata/v4/CatalogService/getNextPropertyId()
+
+
 ### Create
 POST http://localhost:4004/odata/v4/CatalogService/Properties
 Content-Type: application/json
