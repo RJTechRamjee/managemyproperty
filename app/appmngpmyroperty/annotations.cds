@@ -47,7 +47,7 @@ annotate service.Properties with @(
         },
         {
             $Type: 'UI.DataField',
-            Value: popertyId,
+            Value: propertyId,
         },
         {
             $Type: 'UI.DataField',
@@ -111,7 +111,7 @@ annotate service.Properties with @(
         TypeNamePlural: 'Properties',
         Title         : {
             Label: 'Property ID',
-            Value: popertyId
+            Value: propertyId
         },
         Description   : {
             Label: 'Titie',

@@ -12,8 +12,21 @@ class CatalogService extends cds.ApplicationService {
         const { Properties, ContactRequests } = this.entities;
         // console.log(this.entities.ContactRequests); // Debug: check if ContactRequests is listed
         const { uuid } = cds.utils;
+
+        
+        this.before('CREATE', Properties, async (req) => {
+            try {
+                // const srv = cds.connect.to('CatalogService');
+                // const nextPropertyId = await srv.getNextPropertyId();
+                const nextPropertyId = await getNextPropertyId(req.tx);
+                req.data.propertyId = nextPropertyId;
+            }
+            catch (error) {
+                return "Error: " + error.toString();
+            }
+        })
         this.before('INSERT', Properties, (request, response) => {
-            if (request.data.coldRent == 0.00) {
+            if (!request.data.coldRent || request.data.coldRent == 0.00) {
                 request.error(400, 'Cold rent must be a positive value', 'in/coldRent')
             }
             if (request.data.warmRent == 0.00) {
@@ -105,23 +118,33 @@ class CatalogService extends cds.ApplicationService {
 
         })
 
-        this.on('getNextPropertyId', async() => {
+        this.on('getNextPropertyId', async (req) => {
 
-            const currentMaxProp = await SELECT.one.from(Properties).columns('propertyId').orderBy('propertyId desc');
+            // const currentMaxProp = await SELECT.one.from(Properties).orderBy('propertyId desc').columns('propertyId'); //;
+            // let nextPropertyId = 1;
+
+            // if( currentMaxProp && currentMaxProp.propertyId ){
+            //     let currentMaxPropIdNum = parseInt(currentMaxProp.propertyId.replace('P',' '),10);
+            // nextPropertyId = currentMaxPropIdNum + 1 ;
+            // }
+
+            // return `P${String(nextPropertyId).padStart(4,'0')}`;
+            return await getNextPropertyId(req.tx);
+        })
+
+
+        // Reusable function to calculate next propertyId
+        async function getNextPropertyId(tx) {
+            const currentMaxProp = await SELECT.one.from(Properties).orderBy('propertyId desc').columns('propertyId'); //;
             let nextPropertyId = 1;
 
-            if( currentMaxProp && currentMaxProp.propertyId ){
-                currentMaxPropIdNum = parseInt(currentMaxProp.propertyId.replace('P',' '),10);
-            nextPropertyId = currentMaxPropIdNum + 1 ;
+            if (currentMaxProp && currentMaxProp.propertyId) {
+                let currentMaxPropIdNum = parseInt(currentMaxProp.propertyId.replace('P', ' '), 10);
+                nextPropertyId = currentMaxPropIdNum + 1;
             }
 
-            return `P${String(nextPropertyId).padStart(4,'0')}`;
-        })
-
-        this.before('CREATE',Properties, async ( req) => {
-            const nextPropertyId = await this.emit('getNextPropertyId');
-            req.data.propertyId = nextPropertyId;
-        })
+            return `P${String(nextPropertyId).padStart(4, '0')}`;
+        }
 
         return super.init();
 
