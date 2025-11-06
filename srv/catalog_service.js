@@ -132,7 +132,6 @@ class CatalogService extends cds.ApplicationService {
             return await getNextPropertyId(req.tx);
         })
 
-
         // Reusable function to calculate next propertyId
         async function getNextPropertyId(tx) {
             const currentMaxProp = await SELECT.one.from(Properties).orderBy('propertyId desc').columns('propertyId'); //;
