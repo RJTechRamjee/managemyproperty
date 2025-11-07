@@ -8,7 +8,7 @@
 |**Template Used**<br>List Report Page V4|
 |**Service Type**<br>Local CAP|
 |**Service URL**<br>http://localhost:4004/odata/v4/CatalogService/|
-|**Module Name**<br>appmngpmyroperty|
+|**Module Name**<br>appmngpmyproperty|
 |**Application Title**<br>Manage My Property|
 |**Namespace**<br>|
 |**UI5 Theme**<br>sap_horizon|
@@ -18,7 +18,7 @@
 |**Add Eslint configuration**<br>False|
 |**Main Entity**<br>Properties|
 
-## appmngpmyroperty
+## appmngpmyproperty
 
 An SAP Fiori application to manage my property
 
@@ -26,7 +26,7 @@ An SAP Fiori application to manage my property
 
 -   This app has been generated using the SAP Fiori tools - App Generator, as part of the SAP Fiori tools suite.  To launch the generated app, start your CAP project:  and navigate to the following location in your browser:
 
-http://localhost:4004/appmngpmyroperty/webapp/index.html
+http://localhost:4004/appmngpmyproperty/webapp/index.html
 
 #### Pre-requisites:
 

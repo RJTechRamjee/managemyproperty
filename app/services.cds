@@ -1,5 +1,5 @@
 
-using from './appmngpmyroperty/annotations';
+using from './appmngpmyproperty/annotations';
 
 using from './appmngmyuser/annotations';
 

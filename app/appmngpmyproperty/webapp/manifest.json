@@ -1,7 +1,7 @@
 {
   "_version": "1.76.0",
   "sap.app": {
-    "id": "appmngpmyroperty",
+    "id": "appmngpmyproperty",
     "type": "application",
     "i18n": "i18n/i18n.properties",
     "applicationVersion": {
@@ -60,7 +60,7 @@
       "i18n": {
         "type": "sap.ui.model.resource.ResourceModel",
         "settings": {
-          "bundleName": "appmngpmyroperty.i18n.i18n"
+          "bundleName": "appmngpmyproperty.i18n.i18n"
         }
       },
       "": {

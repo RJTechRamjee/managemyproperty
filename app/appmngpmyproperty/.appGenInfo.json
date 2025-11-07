@@ -5,7 +5,7 @@
     "serviceType": "Local CAP",
     "metadataFilename": "",
     "serviceUrl": "http://localhost:4004/odata/v4/CatalogService/",
-    "appName": "appmngpmyroperty",
+    "appName": "appmngpmyproperty",
     "appTitle": "Manage My Property",
     "appDescription": "An SAP Fiori application to manage my property",
     "appNamespace": "",
@@ -24,6 +24,6 @@
         "value": "Properties"
       }
     ],
-    "launchText": "To launch the generated app, start your CAP project:  and navigate to the following location in your browser:\n\nhttp://localhost:4004/appmngpmyroperty/webapp/index.html"
+    "launchText": "To launch the generated app, start your CAP project:  and navigate to the following location in your browser:\n\nhttp://localhost:4004/appmngpmyproperty/webapp/index.html"
   }
 }

@@ -13,7 +13,7 @@
   },
   "scripts": {
     "start": "cds-serve",
-    "watch-appmngpmyroperty": "cds watch --open appmngpmyroperty/index.html?sap-ui-xx-viewCache=false --livereload false",
+    "watch-appmngpmyproperty": "cds watch --open appmngpmyproperty/index.html?sap-ui-xx-viewCache=false --livereload false",
     "watch-appmngmyuser": "cds watch --open appmngmyuser/index.html?sap-ui-xx-viewCache=false --livereload false",
     "watch-appmnguserprofiles": "cds watch --open appmnguserprofiles/index.html?sap-ui-xx-viewCache=false --livereload false",
     "watch-appmngcontactreq": "cds watch --open appmngcontactreq/index.html?sap-ui-xx-viewCache=false --livereload false"
@@ -24,7 +24,7 @@
     "app/*"
   ],
   "sapux": [
-    "app/appmngpmyroperty",
+    "app/appmngpmyproperty",
     "app/appmngmyuser",
     "app/appmnguserprofiles",
     "app/appmngcontactreq"
