@@ -107,14 +107,14 @@ annotate service.Properties with @(
     ],
 
     UI.HeaderInfo             : {
-        TypeName      : 'Property',
-        TypeNamePlural: 'Properties',
+        TypeName      : '{i18n>Properties}',
+        TypeNamePlural: '{i18n>Properties}',
         Title         : {
-            Label: 'Property ID',
+            Label: '{i18n>popertyId}',
             Value: propertyId
         },
         Description   : {
-            Label: 'Titie',
+            Label: '{i18n>title}',
             Value: title
         }
     },
@@ -123,16 +123,16 @@ annotate service.Properties with @(
     UI.Facets                 : [
         {
             $Type : 'UI.CollectionFacet',
-            Label : 'General Info',
+            Label : '{i18n>GeneralInfo}',
             Facets: [
                 {
                     $Type : 'UI.ReferenceFacet',
-                    Label : 'General Info',
+                    Label : '{i18n>GeneralInfo}',
                     Target: '@UI.FieldGroup#GeneralInfo'
                 },
                 {
                     $Type : 'UI.ReferenceFacet',
-                    Label : 'General Info',
+                    Label : '{i18n>GeneralInfo1}',
                     Target: '@UI.FieldGroup#GeneralInfo1'
                 },
 
@@ -140,19 +140,19 @@ annotate service.Properties with @(
         },
         {
             $Type : 'UI.ReferenceFacet',
-            Label : 'Near by Amenities',
+            Label : '{i18n>NearByAmenities}',
             Target: 'nearByAmenities/@UI.LineItem'
         },
         {
             $Type : 'UI.ReferenceFacet',
-            Label : 'Contact Requests',
+            Label : '{i18n>ContactRequests}',
             Target: 'contactRequests/@UI.LineItem'
         },
     ],
 
     UI.Identification         : [{
         $Type : 'UI.DataFieldForAction',
-        Label : 'Send Request',
+        Label : '{i18n>SendRequest}',
         Action: 'service.SendRequest'
     }],
 

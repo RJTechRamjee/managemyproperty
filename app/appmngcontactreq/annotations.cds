@@ -34,13 +34,13 @@ annotate service.ContactRequests with @(
         {
             $Type : 'UI.ReferenceFacet',
             ID    : 'General',
-            Label : 'General Information',
+            Label : '{i18n>GeneralInfo}',
             Target: '@UI.FieldGroup#GeneratedGroup',
         },
         {
             $Type : 'UI.ReferenceFacet',
             ID    : 'Messages',
-            Label : 'Messages',
+            Label : '{i18n>Messages}',
             Target: 'messages/@UI.LineItem',
         },
 

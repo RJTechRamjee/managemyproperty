@@ -44,19 +44,19 @@ entity Properties : cuid, managed {
   address               : Association to one Addresses                 @(title: '{i18n>address}');
   listingStatus         : Association to Statuses default 'NEWLISTING' @(title: '{i18n>listingStatus}');
   nearByAmenities       : Composition of many NearByAmenities
-                            on nearByAmenities.property = $self;
+                            on nearByAmenities.property = $self        @(title: '{i18n>nearByAmenities}');
   contactRequests       : Association to many ContactRequests
-                            on contactRequests.property = $self;
+                            on contactRequests.property = $self        @(title: '{i18n>contactRequests}');
 }
 
 entity NearByAmenities : cuid, managed {
-  property     : Association to one Properties;
-  type         : String(20);
-  name         : String(50);
-  distance     : Int16;
-  distanceUnit : String(5) default 'km';
-  walkTime     : Int16;
-  walkTimeUnit : String(5) default 'min'
+  property     : Association to one Properties                 @(title: '{i18n>property}');
+  type         : String(20)                                    @(title: '{i18n>type}');
+  name         : String(50)                                    @(title: '{i18n>name}');
+  distance     : Int16                                         @(title: '{i18n>distance}');
+  distanceUnit : String(5) default 'km'                        @(title: '{i18n>distanceUnit}');
+  walkTime     : Int16                                         @(title: '{i18n>walkTime}');
+  walkTimeUnit : String(5) default 'min'                       @(title: '{i18n>walkTimeUnit}')
 }
 
 entity Users : cuid, managed {
@@ -104,19 +104,19 @@ type PropertyType       : String(20) enum {
 
 
 entity DynamicYears @cds.persistence.skip {
-  key year : String(4);
+  key year : String(4) @(title: '{i18n>year}');
 }
 
 entity ContactRequests : cuid, managed {
-  property       : Association to one Properties;
-  requester      : Association to one Users;
-  requestMessage : String(500);
+  property       : Association to one Properties                 @(title: '{i18n>property}');
+  requester      : Association to one Users                      @(title: '{i18n>requester}');
+  requestMessage : String(500)                                   @(title: '{i18n>requestMessage}');
   messages       : Composition of many ConactReqMessages
-                     on messages.contactRequest = $self;
+                     on messages.contactRequest = $self          @(title: '{i18n>messages}');
 }
 
 entity ConactReqMessages : cuid, managed {
-  contactRequest : Association to one ContactRequests;
-  sender         : Association to one Users;
-  message        : String(300);
+  contactRequest : Association to one ContactRequests            @(title: '{i18n>contactRequest}');
+  sender         : Association to one Users                      @(title: '{i18n>sender}');
+  message        : String(300)                                   @(title: '{i18n>message}');
 }
