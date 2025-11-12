@@ -1,0 +1,21 @@
+ID,property_ID,requester_ID,requestMessage,status,emailSent,notificationSent
+cr1a2b3c-d4e5-f6g7-h8i9-j0k1l2m3n4o5,p1a2b3c4-d5e6-f7g8-h9i0-j1k2l3m4n5o6,1a2b3c4d-5e6f-7g8h-9i0j-1k2l3m4n5o6p,I'm interested in viewing this apartment. Is it still available?,Responded,true,true
+cr2b3c4d-e5f6-g7h8-i9j0-k1l2m3n4o5p6,p1a2b3c4-d5e6-f7g8-h9i0-j1k2l3m4n5o6,5e6f7g8h-9i0j-1k2l-3m4n-5o6p7q8r9s0t,Can I schedule a viewing for this weekend?,Pending,true,true
+cr3c4d5e-f6g7-h8i9-j0k1-l2m3n4o5p6q7,p2b3c4d5-e6f7-g8h9-i0j1-k2l3m4n5o6p7,6f7g8h9i-0j1k-2l3m-4n5o-6p7q8r9s0t1u,This villa looks perfect for my family. What's the asking price?,Pending,true,true
+cr4d5e6f-g7h8-i9j0-k1l2-m3n4o5p6q7r8,p3c4d5e6-f7g8-h9i0-j1k2-l3m4n5o6p7q8,5e6f7g8h-9i0j-1k2l-3m4n-5o6p7q8r9s0t,Is this studio available from next month? I'm a student.,Responded,true,true
+cr5e6f7g-h8i9-j0k1-l2m3-n4o5p6q7r8s9,p4d5e6f7-g8h9-i0j1-k2l3-m4n5o6p7q8r9,1k2l3m4n-5o6p-7q8r-9s0t-1u2v3w4x5y6z,We're looking for office space for 20 employees. Can we arrange a tour?,Pending,true,true
+cr6f7g8h-i9j0-k1l2-m3n4-o5p6q7r8s9t0,p5e6f7g8-h9i0-j1k2-l3m4-n5o6p7q8r9s0,6f7g8h9i-0j1k-2l3m-4n5o-6p7q8r9s0t1u,I would like to make an offer on this property. Please contact me.,Responded,true,true
+cr7g8h9i-j0k1-l2m3-n4o5-p6q7r8s9t0u1,p6f7g8h9-i0j1-k2l3-m4n5-o6p7q8r9s0t1,1a2b3c4d-5e6f-7g8h-9i0j-1k2l3m4n5o6p,The penthouse looks amazing! When can I schedule a viewing?,Pending,true,true
+cr8h9i0j-k1l2-m3n4-o5p6-q7r8s9t0u1v2,p7g8h9i0-j1k2-l3m4-n5o6-p7q8r9s0t1u2,0j1k2l3m-4n5o-6p7q-8r9s-0t1u2v3w4x5y,Is this apartment pet-friendly? I have a small dog.,Responded,false,true
+cr9i0j1k-l2m3-n4o5-p6q7-r8s9t0u1v2w3,p8h9i0j1-k2l3-m4n5-o6p7-q8r9s0t1u2v3,1k2l3m4n-5o6p-7q8r-9s0t-1u2v3w4x5y6z,We need warehouse space for our growing business. Can we discuss terms?,Pending,true,true
+cr0j1k2l-m3n4-o5p6-q7r8-s9t0u1v2w3x4,p9i0j1k2-l3m4-n5o6-p7q8-r9s0t1u2v3w4,6f7g8h9i-0j1k-2l3m-4n5o-6p7q8r9s0t1u,I love historic buildings! Is this apartment still under contract?,Closed,true,true
+cr1k2l3m-n4o5-p6q7-r8s9-t0u1v2w3x4y5,p0j1k2l3-m4n5-o6p7-q8r9-s0t1u2v3w4x5,5e6f7g8h-9i0j-1k2l-3m4n-5o6p7q8r9s0t,Perfect for my pets! Can I see the garden apartment this week?,Responded,true,true
+cr2l3m4n-o5p6-q7r8-s9t0-u1v2w3x4y5z6,p1k2l3m4-n5o6-p7q8-r9s0-t1u2v3w4x5y6,1a2b3c4d-5e6f-7g8h-9i0j-1k2l3m4n5o6p,The amenities in this condo are impressive. What's included in the price?,Pending,true,true
+cr3m4n5o-p6q7-r8s9-t0u1-v2w3x4y5z6a7,p2l3m4n5-o6p7-q8r9-s0t1-u2v3w4x5y6z7,6f7g8h9i-0j1k-2l3m-4n5o-6p7q8r9s0t1u,I'm interested in this country property. Does it need major renovations?,Responded,true,true
+cr4n5o6p-q7r8-s9t0-u1v2-w3x4y5z6a7b8,p3m4n5o6-p7q8-r9s0-t1u2-v3w4x5y6z7a8,5e6f7g8h-9i0j-1k2l-3m4n-5o6p7q8r9s0t,Looking for a place in the arts district. Is this loft pet-friendly?,Pending,false,true
+cr5o6p7q-r8s9-t0u1-v2w3-x4y5z6a7b8c9,p4n5o6p7-q8r9-s0t1-u2v3-w4x5y6z7a8b9,1k2l3m4n-5o6p-7q8r-9s0t-1u2v3w4x5y6z,We want to open a retail store. What are the lease terms?,Responded,true,true
+cr6p7q8r-s9t0-u1v2-w3x4-y5z6a7b8c9d0,p5o6p7q8-r9s0-t1u2-v3w4-x5y6z7a8b9c0,6f7g8h9i-0j1k-2l3m-4n5o-6p7q8r9s0t1u,The lake view is stunning! Can we schedule a private showing?,Pending,true,true
+cr7q8r9s-t0u1-v2w3-x4y5-z6a7b8c9d0e1,p6p7q8r9-s0t1-u2v3-w4x5-y6z7a8b9c0d1,5e6f7g8h-9i0j-1k2l-3m4n-5o6p7q8r9s0t,My daughter needs accommodation near the university. Is this available?,Responded,true,true
+cr8r9s0t-u1v2-w3x4-y5z6-a7b8c9d0e1f2,p7q8r9s0-t1u2-v3w4-x5y6-z7a8b9c0d1e2,1k2l3m4n-5o6p-7q8r-9s0t-1u2v3w4x5y6z,Our company is expanding. Can we rent multiple suites?,Pending,true,true
+cr9s0t1u-v2w3-x4y5-z6a7-b8c9d0e1f2g3,p8r9s0t1-u2v3-w4x5-y6z7-a8b9c0d1e2f3,1a2b3c4d-5e6f-7g8h-9i0j-1k2l3m4n5o6p,Beachfront living has always been my dream! What's the HOA fee?,Closed,true,true
+cr0t1u2v-w3x4-y5z6-a7b8-c9d0e1f2g3h4,p9s0t1u2-v3w4-x5y6-z7a8-b9c0d1e2f3g4,0j1k2l3m-4n5o-6p7q-8r9s-0t1u2v3w4x5y,Looking for a safe community for my family. Can we visit this weekend?,Responded,true,true

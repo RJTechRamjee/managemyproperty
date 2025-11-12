@@ -1,0 +1,21 @@
+ID,property_ID,type,name,distance,distanceUnit,walkTime,walkTimeUnit
+na1a2b3c-d4e5-f6g7-h8i9-j0k1l2m3n4o5,p1a2b3c4-d5e6-f7g8-h9i0-j1k2l3m4n5o6,School,Central High School,1,km,12,min
+na2b3c4d-e5f6-g7h8-i9j0-k1l2m3n4o5p6,p1a2b3c4-d5e6-f7g8-h9i0-j1k2l3m4n5o6,Transport,Metro Station,0.5,km,6,min
+na3c4d5e-f6g7-h8i9-j0k1-l2m3n4o5p6q7,p1a2b3c4-d5e6-f7g8-h9i0-j1k2l3m4n5o6,Shopping,Supermarket,0.3,km,4,min
+na4d5e6f-g7h8-i9j0-k1l2-m3n4o5p6q7r8,p2b3c4d5-e6f7-g8h9-i0j1-k2l3m4n5o6p7,School,International School,2,km,25,min
+na5e6f7g-h8i9-j0k1-l2m3-n4o5p6q7r8s9,p2b3c4d5-e6f7-g8h9-i0j1-k2l3m4n5o6p7,Shopping,Shopping Mall,3,km,35,min
+na6f7g8h-i9j0-k1l2-m3n4-o5p6q7r8s9t0,p3c4d5e6-f7g8-h9i0-j1k2-l3m4n5o6p7q8,School,University Campus,0.8,km,10,min
+na7g8h9i-j0k1-l2m3-n4o5-p6q7r8s9t0u1,p3c4d5e6-f7g8-h9i0-j1k2-l3m4n5o6p7q8,Transport,Bus Stop,0.2,km,2,min
+na8h9i0j-k1l2-m3n4-o5p6-q7r8s9t0u1v2,p4d5e6f7-g8h9-i0j1-k2l3-m4n5o6p7q8r9,Transport,Train Station,1.5,km,18,min
+na9i0j1k-l2m3-n4o5-p6q7-r8s9t0u1v2w3,p4d5e6f7-g8h9-i0j1-k2l3-m4n5o6p7q8r9,Restaurant,Business District Cafes,0.4,km,5,min
+na0j1k2l-m3n4-o5p6-q7r8-s9t0u1v2w3x4,p5e6f7g8-h9i0-j1k2-l3m4-n5o6p7q8r9s0,School,Elementary School,0.6,km,8,min
+na1k2l3m-n4o5-p6q7-r8s9-t0u1v2w3x4y5,p5e6f7g8-h9i0-j1k2-l3m4-n5o6p7q8r9s0,Park,Community Park,0.4,km,5,min
+na2l3m4n-o5p6-q7r8-s9t0-u1v2w3x4y5z6,p6f7g8h9-i0j1-k2l3-m4n5-o6p7q8r9s0t1,Restaurant,Fine Dining District,0.5,km,6,min
+na3m4n5o-p6q7-r8s9-t0u1-v2w3x4y5z6a7,p6f7g8h9-i0j1-k2l3-m4n5-o6p7q8r9s0t1,Shopping,Luxury Shopping Center,0.8,km,10,min
+na4n5o6p-q7r8-s9t0-u1v2-w3x4y5z6a7b8,p7g8h9i0-j1k2-l3m4-n5o6-p7q8r9s0t1u2,School,Local Primary School,0.9,km,11,min
+na5o6p7q-r8s9-t0u1-v2w3-x4y5z6a7b8c9,p7g8h9i0-j1k2-l3m4-n5o6-p7q8r9s0t1u2,Transport,Tram Station,0.3,km,4,min
+na6p7q8r-s9t0-u1v2-w3x4-y5z6a7b8c9d0,p8h9i0j1-k2l3-m4n5-o6p7-q8r9s0t1u2v3,Transport,Highway Access,2,km,3,min
+na7q8r9s-t0u1-v2w3-x4y5-z6a7b8c9d0e1,p9i0j1k2-l3m4-n5o6-p7q8-r9s0t1u2v3w4,Restaurant,Historic District Restaurants,0.6,km,7,min
+na8r9s0t-u1v2-w3x4-y5z6-a7b8c9d0e1f2,p0j1k2l3-m4n5-o6p7-q8r9-s0t1u2v3w4x5,Park,Dog Park,0.2,km,3,min
+na9s0t1u-v2w3-x4y5-z6a7-b8c9d0e1f2g3,p1k2l3m4-n5o6-p7q8-r9s0-t1u2v3w4x5y6,Shopping,Premium Shopping District,1,km,12,min
+na0t1u2v-w3x4-y5z6-a7b8-c9d0e1f2g3h4,p1k2l3m4-n5o6-p7q8-r9s0-t1u2v3w4x5y6,Restaurant,Gourmet Food Court,0.7,km,9,min

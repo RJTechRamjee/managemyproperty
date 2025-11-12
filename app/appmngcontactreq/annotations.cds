@@ -24,12 +24,36 @@ annotate service.ContactRequests with @(
                 $Type: 'UI.DataField',
                 Value: requester.ShortIntro,
             },
-               {
-            $Type: 'UI.DataField',
-            Value: requestMessage,
-        }
+            {
+                $Type: 'UI.DataField',
+                Value: requestMessage,
+            },
+            {
+                $Type: 'UI.DataField',
+                Value: status,
+            },
+            {
+                $Type: 'UI.DataField',
+                Value: emailSent,
+            },
+            {
+                $Type: 'UI.DataField',
+                Value: notificationSent,
+            }
         ],
     },
+    UI.Identification            : [
+        {
+            $Type : 'UI.DataFieldForAction',
+            Label : 'Respond to Request',
+            Action: 'CatalogService.RespondToRequest'
+        },
+        {
+            $Type : 'UI.DataFieldForAction',
+            Label : 'Close Request',
+            Action: 'CatalogService.CloseRequest'
+        }
+    ],
     UI.Facets                    : [
         {
             $Type : 'UI.ReferenceFacet',
@@ -46,6 +70,16 @@ annotate service.ContactRequests with @(
 
     ],
     UI.LineItem                  : [
+        {
+            $Type : 'UI.DataFieldForAction',
+            Label : 'Respond to Request',
+            Action: 'CatalogService.RespondToRequest'
+        },
+        {
+            $Type : 'UI.DataFieldForAction',
+            Label : 'Close Request',
+            Action: 'CatalogService.CloseRequest'
+        },
         {
             $Type: 'UI.DataField',
             Value: property_ID,
@@ -66,9 +100,13 @@ annotate service.ContactRequests with @(
             $Type: 'UI.DataField',
             Value: requester.ShortIntro,
         },
-                {
+        {
             $Type: 'UI.DataField',
             Value: requestMessage,
+        },
+        {
+            $Type: 'UI.DataField',
+            Value: status,
         }
     ],
 );
