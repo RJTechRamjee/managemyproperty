@@ -34,7 +34,7 @@ annotate service.Users with @(
         {
             $Type : 'UI.ReferenceFacet',
             ID : 'GeneratedFacet1',
-            Label : 'General Information',
+            Label : '{i18n>GeneralInfo}',
             Target : '@UI.FieldGroup#GeneratedGroup',
         },
     ],
