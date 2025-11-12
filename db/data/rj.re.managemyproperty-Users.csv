@@ -1,0 +1,21 @@
+ID,userId,firstName,lastName,emailId,phoneNumber,role,isActive,emailNotifications,appNotifications,ShortIntro,DetailedIntro
+1a2b3c4d-5e6f-7g8h-9i0j-1k2l3m4n5o6p,U0001,John,Smith,john.smith@email.com,+1234567890,Buyer,true,true,true,Looking for a family home in the city,I am a software engineer looking for a 3-bedroom apartment near good schools
+2b3c4d5e-6f7g-8h9i-0j1k-2l3m4n5o6p7q,U0002,Sarah,Johnson,sarah.j@email.com,+1234567891,Seller,true,true,true,Selling my downtown apartment,Professional real estate investor with multiple properties
+3c4d5e6f-7g8h-9i0j-1k2l-3m4n5o6p7q8r,U0003,Michael,Brown,m.brown@email.com,+1234567892,Agent,true,true,true,Real estate agent with 10 years experience,Specialized in residential properties and first-time buyers
+4d5e6f7g-8h9i-0j1k-2l3m-4n5o6p7q8r9s,U0004,Emily,Davis,emily.davis@email.com,+1234567893,Owner,true,true,false,Property owner and landlord,I own several rental properties in the downtown area
+5e6f7g8h-9i0j-1k2l-3m4n-5o6p7q8r9s0t,U0005,David,Wilson,d.wilson@email.com,+1234567894,Tenant,true,false,true,Looking for a rental apartment,Recent graduate looking for affordable housing
+6f7g8h9i-0j1k-2l3m-4n5o-6p7q8r9s0t1u,U0006,Lisa,Martinez,lisa.m@email.com,+1234567895,Buyer,true,true,true,First-time home buyer,Young professional looking to buy first property
+7g8h9i0j-1k2l-3m4n-5o6p-7q8r9s0t1u2v,U0007,Robert,Anderson,rob.anderson@email.com,+1234567896,Seller,true,true,true,Selling family home after relocation,Moving to another city for work
+8h9i0j1k-2l3m-4n5o-6p7q-8r9s0t1u2v3w,U0008,Jennifer,Taylor,jen.taylor@email.com,+1234567897,Agent,true,true,true,Experienced luxury property agent,Specializing in high-end properties and investment opportunities
+9i0j1k2l-3m4n-5o6p-7q8r-9s0t1u2v3w4x,U0009,William,Thomas,w.thomas@email.com,+1234567898,Owner,true,true,true,Multiple property owner,Real estate portfolio owner managing 15+ properties
+0j1k2l3m-4n5o-6p7q-8r9s-0t1u2v3w4x5y,U0010,Amanda,Jackson,amanda.j@email.com,+1234567899,Tenant,true,true,true,Family looking for spacious home,Family of four looking for 4-bedroom house with garden
+1k2l3m4n-5o6p-7q8r-9s0t-1u2v3w4x5y6z,U0011,James,White,james.white@email.com,+1234567800,Buyer,true,true,false,Investor looking for properties,Real estate investor looking for good ROI properties
+2l3m4n5o-6p7q-8r9s-0t1u-2v3w4x5y6z7a,U0012,Mary,Harris,mary.h@email.com,+1234567801,Seller,true,false,true,Downsizing to smaller home,Empty nesters looking to sell large family home
+3m4n5o6p-7q8r-9s0t-1u2v-3w4x5y6z7a8b,U0013,Thomas,Martin,t.martin@email.com,+1234567802,Agent,true,true,true,Commercial property specialist,20 years in commercial real estate
+4n5o6p7q-8r9s-0t1u-2v3w-4x5y6z7a8b9c,U0014,Patricia,Thompson,pat.thompson@email.com,+1234567803,Owner,true,true,true,Rental property manager,Managing properties for multiple owners
+5o6p7q8r-9s0t-1u2v-3w4x-5y6z7a8b9c0d,U0015,Charles,Garcia,charles.g@email.com,+1234567804,Tenant,true,true,true,Student looking for shared accommodation,University student seeking affordable shared housing
+6p7q8r9s-0t1u-2v3w-4x5y-6z7a8b9c0d1e,U0016,Barbara,Martinez,barbara.m@email.com,+1234567805,Buyer,true,true,true,Looking for investment property,Looking to purchase property for rental income
+7q8r9s0t-1u2v-3w4x-5y6z-7a8b9c0d1e2f,U0017,Joseph,Robinson,joe.rob@email.com,+1234567806,Seller,true,true,true,Relocating overseas,Need to sell property quickly due to job transfer
+8r9s0t1u-2v3w-4x5y-6z7a-8b9c0d1e2f3g,U0018,Linda,Clark,linda.clark@email.com,+1234567807,Agent,true,true,true,New developments specialist,Focus on new construction and pre-sales
+9s0t1u2v-3w4x-5y6z-7a8b-9c0d1e2f3g4h,U0019,Daniel,Rodriguez,dan.rod@email.com,+1234567808,Owner,true,false,false,Vacation rental owner,Owner of several vacation rental properties
+0t1u2v3w-4x5y-6z7a-8b9c-0d1e2f3g4h5i,U0020,Susan,Lewis,susan.lewis@email.com,+1234567809,Tenant,true,true,true,Professional couple seeking apartment,Two working professionals looking for modern apartment
