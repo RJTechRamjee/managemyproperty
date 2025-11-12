@@ -1,6 +1,6 @@
 const { request } = require("http");
 const cds = require('@sap/cds');
-const { SELECT } = require("@sap/cds/lib/ql/cds-ql");
+const { SELECT, INSERT, UPDATE } = require("@sap/cds/lib/ql/cds-ql");
 
 // module.exports = cds.service.impl(async function () {
 
@@ -9,7 +9,7 @@ class CatalogService extends cds.ApplicationService {
 
         //Step-1 get the object from OData service
 
-        const { Properties, ContactRequests } = this.entities;
+        const { Properties, ContactRequests, Notifications, EmailLogs, Users } = this.entities;
         // console.log(this.entities.ContactRequests); // Debug: check if ContactRequests is listed
         const { uuid } = cds.utils;
 
@@ -104,6 +104,7 @@ class CatalogService extends cds.ApplicationService {
                     property_ID: property.ID,
                     requester_ID: "4g2b1c0d-9d55-4e77-f999-1e2f3a4b5c56",
                     requestMessage: requestMessage,
+                    status: 'Pending',
                 }
 
                 const tx = cds.transaction(request);
@@ -111,11 +112,113 @@ class CatalogService extends cds.ApplicationService {
                 const insertResult = await tx.run(
                     INSERT.into('ContactRequests').entries(newContactReq)
                 );
+                
+                // Send notification to property owner
+                const propertyData = await tx.read(Properties).where({ ID: property.ID });
+                if (propertyData && propertyData.length > 0 && propertyData[0].contactPerson_ID) {
+                    await createNotification(tx, {
+                        recipientId: propertyData[0].contactPerson_ID,
+                        notificationType: 'Contact Request Received',
+                        title: 'New Contact Request',
+                        message: `You have received a new contact request for property ${property.propertyId || property.ID}`,
+                        relatedEntity: 'ContactRequests',
+                        relatedEntityId: insertResult
+                    });
+                }
+                
                 request.notify(`Contact request for Property ID "${property.ID}" successfully logged.`);
             } catch (error) {
                 return "Error: " + error.toString();
             }
 
+        })
+
+        // Respond to contact request action
+        this.on('RespondToRequest', async (request) => {
+            try {
+                const contactRequestId = request.params[0].ID;
+                const responseMessage = request.data.responseMessage;
+                const tx = cds.transaction(request);
+
+                // Update contact request status
+                await tx.update(ContactRequests).set({ status: 'Responded' }).where({ ID: contactRequestId });
+
+                // Get contact request details
+                const contactRequest = await tx.read(ContactRequests).where({ ID: contactRequestId });
+                
+                if (contactRequest && contactRequest.length > 0) {
+                    // Create notification for requester
+                    await createNotification(tx, {
+                        recipientId: contactRequest[0].requester_ID,
+                        notificationType: 'Contact Request Response',
+                        title: 'Response to Your Contact Request',
+                        message: `You have received a response to your contact request: ${responseMessage}`,
+                        relatedEntity: 'ContactRequests',
+                        relatedEntityId: contactRequestId
+                    });
+                }
+
+                return "Response sent successfully";
+            } catch (error) {
+                return "Error: " + error.toString();
+            }
+        })
+
+        // Close contact request action
+        this.on('CloseRequest', async (request) => {
+            try {
+                const contactRequestId = request.params[0].ID;
+                const tx = cds.transaction(request);
+
+                await tx.update(ContactRequests).set({ status: 'Closed' }).where({ ID: contactRequestId });
+
+                return "Contact request closed successfully";
+            } catch (error) {
+                return "Error: " + error.toString();
+            }
+        })
+
+        // Send notification action
+        this.on('SendNotification', async (request) => {
+            try {
+                const params = request.data.params;
+                const tx = cds.transaction(request);
+
+                await createNotification(tx, {
+                    recipientId: params.recipientId,
+                    notificationType: 'New Property Match',
+                    title: params.title,
+                    message: params.message,
+                    relatedEntity: '',
+                    relatedEntityId: ''
+                });
+
+                return "Notification sent successfully";
+            } catch (error) {
+                return "Error: " + error.toString();
+            }
+        })
+
+        // Send email action
+        this.on('SendEmail', async (request) => {
+            try {
+                const params = request.data.params;
+                const tx = cds.transaction(request);
+
+                await createEmailLog(tx, {
+                    recipientId: params.recipientId,
+                    senderId: request.user?.id || "system",
+                    emailType: 'Contact Request Confirm',
+                    subject: params.subject,
+                    body: params.body,
+                    relatedEntity: '',
+                    relatedEntityId: ''
+                });
+
+                return "Email sent successfully";
+            } catch (error) {
+                return "Error: " + error.toString();
+            }
         })
 
         this.on('getNextPropertyId', async (req) => {
@@ -143,6 +246,38 @@ class CatalogService extends cds.ApplicationService {
             }
 
             return `P${String(nextPropertyId).padStart(4, '0')}`;
+        }
+
+        // Helper function to create notifications
+        async function createNotification(tx, params) {
+            const notification = {
+                recipient_ID: params.recipientId,
+                notificationType: params.notificationType,
+                title: params.title,
+                message: params.message,
+                isRead: false,
+                relatedEntity: params.relatedEntity || '',
+                relatedEntityId: params.relatedEntityId || ''
+            };
+
+            await tx.run(INSERT.into(Notifications).entries(notification));
+        }
+
+        // Helper function to create email logs
+        async function createEmailLog(tx, params) {
+            const emailLog = {
+                recipient_ID: params.recipientId,
+                sender_ID: params.senderId,
+                emailType: params.emailType,
+                subject: params.subject,
+                body: params.body,
+                sentAt: new Date().toISOString(),
+                deliveryStatus: 'Sent',
+                relatedEntity: params.relatedEntity || '',
+                relatedEntityId: params.relatedEntityId || ''
+            };
+
+            await tx.run(INSERT.into(EmailLogs).entries(emailLog));
         }
 
         return super.init();

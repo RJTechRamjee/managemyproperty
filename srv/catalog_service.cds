@@ -7,6 +7,18 @@ service CatalogService @(path: 'CatalogService') {
         newStatusCode : String(10)
     };
 
+    type NotificationParams : {
+        recipientId : String;
+        title       : String(100);
+        message     : String(500);
+    };
+
+    type EmailParams : {
+        recipientId : String;
+        subject     : String(200);
+        body        : String(2000);
+    };
+
     @cds.odata.valuelist
     entity Addresses                          as projection on mngprp.Addresses;
 
@@ -41,14 +53,17 @@ service CatalogService @(path: 'CatalogService') {
             requester.firstName,
             requester.lastName,
             requester.ShortIntro
+        }
+        actions {
+            action RespondToRequest(responseMessage: String(300))         returns String;
+            action CloseRequest()                                          returns String;
         };
 
-    // entity ContactRequests   as projection on mngprp.ContactRequests {
-    // requester.ID, requester.firstName, requester.lastName , requester.ShortIntro,
-    // requester : redirected to Users,
-    // property : redirected to Properties,
-    // };
     entity ConactReqMessages                  as projection on mngprp.ConactReqMessages;
+
+    entity Notifications                      as projection on mngprp.Notifications;
+
+    entity EmailLogs                          as projection on mngprp.EmailLogs;
 
     action ReservepProperty(
 
@@ -58,5 +73,14 @@ service CatalogService @(path: 'CatalogService') {
 
     entity Statuses                           as projection on mngprp.Statuses;
 
-    function getNextPropertyId() returns Properties:propertyId ;
+    function getNextPropertyId() returns Properties:propertyId;
+
+    // Notification and Email functions
+    action   SendNotification(
+        params : NotificationParams
+    )                         returns String;
+
+    action   SendEmail(
+        params : EmailParams
+    )                         returns String;
 }

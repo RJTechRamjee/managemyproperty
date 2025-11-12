@@ -60,13 +60,18 @@ entity NearByAmenities : cuid, managed {
 }
 
 entity Users : cuid, managed {
-  userId        : String(10)                   @(title: '{i18n>userId}');
-  firstName     : String(40)                   @(title: '{i18n>firstName}');
-  lastName      : String(40)                   @(title: '{i18n>lastName}');
-  emailId       : String(50)                   @(title: '{i18n>emailId}');
-  address       : Association to one Addresses @(title: '{i18n>address}');
-  ShortIntro    : String(200)                  @(title: '{i18n>ShortIntro}');
-  DetailedIntro : String(500)                  @(title: '{i18n>DetailedIntro}');
+  userId             : String(10)                   @(title: '{i18n>userId}');
+  firstName          : String(40)                   @(title: '{i18n>firstName}');
+  lastName           : String(40)                   @(title: '{i18n>lastName}');
+  emailId            : String(50)                   @(title: '{i18n>emailId}');
+  phoneNumber        : String(20)                   @(title: '{i18n>phoneNumber}');
+  address            : Association to one Addresses @(title: '{i18n>address}');
+  ShortIntro         : String(200)                  @(title: '{i18n>ShortIntro}');
+  DetailedIntro      : String(500)                  @(title: '{i18n>DetailedIntro}');
+  role               : UserRole                     @(title: '{i18n>role}');
+  isActive           : Boolean default true         @(title: '{i18n>isActive}');
+  emailNotifications : Boolean default true         @(title: '{i18n>emailNotifications}');
+  appNotifications   : Boolean default true         @(title: '{i18n>appNotifications}');
 }
 
 entity Addresses : cuid, managed {
@@ -102,21 +107,76 @@ type PropertyType       : String(20) enum {
   House     @(title: '{i18n>House}');
 }
 
+type UserRole           : String(20) enum {
+  Buyer      @(title: '{i18n>Buyer}');
+  Seller     @(title: '{i18n>Seller}');
+  Owner      @(title: '{i18n>Owner}');
+  Tenant     @(title: '{i18n>Tenant}');
+  Agent      @(title: '{i18n>Agent}');
+}
+
+type NotificationType   : String(30) enum {
+  ContactRequestReceived = 'Contact Request Received' @(title: '{i18n>ContactRequestReceived}');
+  ContactRequestResponse = 'Contact Request Response' @(title: '{i18n>ContactRequestResponse}');
+  PropertyStatusChanged  = 'Property Status Changed'  @(title: '{i18n>PropertyStatusChanged}');
+  NewPropertyMatch       = 'New Property Match'       @(title: '{i18n>NewPropertyMatch}');
+  PropertyPriceChanged   = 'Property Price Changed'   @(title: '{i18n>PropertyPriceChanged}');
+  ViewingScheduled       = 'Viewing Scheduled'        @(title: '{i18n>ViewingScheduled}');
+}
+
+type EmailType          : String(30) enum {
+  WelcomeEmail           = 'Welcome Email'            @(title: '{i18n>WelcomeEmail}');
+  ContactRequestConfirm  = 'Contact Request Confirm'  @(title: '{i18n>ContactRequestConfirm}');
+  ContactRequestResponse = 'Contact Request Response' @(title: '{i18n>ContactRequestResponse}');
+  PropertyViewingConfirm = 'Property Viewing Confirm' @(title: '{i18n>PropertyViewingConfirm}');
+  DocumentSharing        = 'Document Sharing'         @(title: '{i18n>DocumentSharing}');
+}
 
 entity DynamicYears @cds.persistence.skip {
   key year : String(4) @(title: '{i18n>year}');
 }
 
 entity ContactRequests : cuid, managed {
-  property       : Association to one Properties                 @(title: '{i18n>property}');
-  requester      : Association to one Users                      @(title: '{i18n>requester}');
-  requestMessage : String(500)                                   @(title: '{i18n>requestMessage}');
-  messages       : Composition of many ConactReqMessages
-                     on messages.contactRequest = $self          @(title: '{i18n>messages}');
+  property        : Association to one Properties                 @(title: '{i18n>property}');
+  requester       : Association to one Users                      @(title: '{i18n>requester}');
+  requestMessage  : String(500)                                   @(title: '{i18n>requestMessage}');
+  status          : RequestStatus default 'Pending'               @(title: '{i18n>status}');
+  emailSent       : Boolean default false                         @(title: '{i18n>emailSent}');
+  notificationSent: Boolean default false                         @(title: '{i18n>notificationSent}');
+  messages        : Composition of many ConactReqMessages
+                      on messages.contactRequest = $self          @(title: '{i18n>messages}');
+}
+
+type RequestStatus      : String(20) enum {
+  Pending    @(title: '{i18n>Pending}');
+  Responded  @(title: '{i18n>Responded}');
+  Closed     @(title: '{i18n>Closed}');
 }
 
 entity ConactReqMessages : cuid, managed {
   contactRequest : Association to one ContactRequests            @(title: '{i18n>contactRequest}');
   sender         : Association to one Users                      @(title: '{i18n>sender}');
   message        : String(300)                                   @(title: '{i18n>message}');
+}
+
+entity Notifications : cuid, managed {
+  recipient      : Association to one Users                      @(title: '{i18n>recipient}');
+  notificationType: NotificationType                             @(title: '{i18n>notificationType}');
+  title          : String(100)                                   @(title: '{i18n>notificationTitle}');
+  message        : String(500)                                   @(title: '{i18n>notificationMessage}');
+  isRead         : Boolean default false                         @(title: '{i18n>isRead}');
+  relatedEntity  : String(100)                                   @(title: '{i18n>relatedEntity}');
+  relatedEntityId: String(100)                                   @(title: '{i18n>relatedEntityId}');
+}
+
+entity EmailLogs : cuid, managed {
+  recipient      : Association to one Users                      @(title: '{i18n>emailRecipient}');
+  sender         : Association to one Users                      @(title: '{i18n>emailSender}');
+  emailType      : EmailType                                     @(title: '{i18n>emailType}');
+  subject        : String(200)                                   @(title: '{i18n>emailSubject}');
+  body           : String(2000)                                  @(title: '{i18n>emailBody}');
+  sentAt         : DateTime                                      @(title: '{i18n>sentAt}');
+  deliveryStatus : String(20) default 'Sent'                     @(title: '{i18n>deliveryStatus}');
+  relatedEntity  : String(100)                                   @(title: '{i18n>relatedEntity}');
+  relatedEntityId: String(100)                                   @(title: '{i18n>relatedEntityId}');
 }
