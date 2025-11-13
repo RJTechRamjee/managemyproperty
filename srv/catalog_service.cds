@@ -34,7 +34,7 @@ service CatalogService @(path: 'CatalogService') {
         actions {
             action SetToStatus(newStatusCode: ActionParams:newStatusCode) returns Properties;
 
-            action SendRequest(requestMessage: String(300))               returns String;
+            action SendRequest(requestMessage: String(300) @UI.MultiLineText)               returns String;
 
         };
 
@@ -55,9 +55,14 @@ service CatalogService @(path: 'CatalogService') {
             requester.ShortIntro
         }
         actions {
-            action RespondToRequest(responseMessage: String(300))         returns String;
+            action RespondToRequest(responseMessage: String(300) @UI.MultiLineText)         returns String;
             action CloseRequest()                                          returns String;
         };
+
+// Mark requester_ID as readonly to prevent user modification
+annotate ContactRequests with {
+    requester @readonly @Core.Computed;
+}
 
     entity ConactReqMessages                  as projection on mngprp.ConactReqMessages;
 
