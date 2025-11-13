@@ -146,7 +146,7 @@ annotate service.Properties with @(
         {
             $Type : 'UI.ReferenceFacet',
             Label : '{i18n>ContactRequests}',
-            Target: 'contactRequests/@UI.LineItem#ForProperties'
+            Target: 'contactRequests/@UI.LineItem'
         },
     ],
 
@@ -238,32 +238,24 @@ annotate service.NearByAmenities with @(UI.LineItem: [
     },
 ]);
 
-// ContactRequests table shown in Properties object page (read-only association)
-// Removed property_ID as it's redundant in this context
-annotate service.ContactRequests with @(
-    UI.LineItem #ForProperties: [
-        {
-            $Type: 'UI.DataField',
-            Value: requester.firstName,
-            Label: '{i18n>firstName}'
-        },
-        {
-            $Type: 'UI.DataField',
-            Value: requester.lastName,
-            Label: '{i18n>lastName}'
-        },
-        {
-            $Type: 'UI.DataField',
-            Value: requestMessage,
-            Label: '{i18n>requestMessage}'
-        },
-        {
-            $Type: 'UI.DataField',
-            Value: status,
-            Label: '{i18n>status}'
-        }
-    ]
-);
+annotate service.ContactRequests with @(UI.lineItem: [
+    {
+        $Type: 'UI.DataField',
+        Value: requester_ID
+    },
+    {
+        $Type: 'UI.DataField',
+        Value: requester.firstName
+    },
+    {
+        $Type: 'UI.DataField',
+        Value: requester.lastName
+    },
+    {
+        $Type: 'UI.DataField',
+        Value: requester.shortIntro
+    },
+]);
 
 annotate service.Properties with {
     yearOfConstruction @Common.ValueList: {

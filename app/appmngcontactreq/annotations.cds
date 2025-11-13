@@ -78,10 +78,6 @@ annotate service.ContactRequests with @(
         },
         {
             $Type: 'UI.DataField',
-            Value: property_ID,
-        },
-        {
-            $Type: 'UI.DataField',
             Value: requester.firstName,
         },
         {
