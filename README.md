@@ -109,6 +109,20 @@ The application will be available at:
 - CatalogService: http://localhost:4004/odata/v4/CatalogService
 - AdminService: http://localhost:4004/odata/v4/AdminService
 
+### Development Authentication
+
+In development mode, the application uses mock authentication. When accessing the app, you'll be prompted for credentials:
+
+**Available Test Users:**
+- `john.buyer` / `pass` - Buyer role
+- `sarah.seller` / `pass` - Seller role
+- `michael.agent` / `pass` - Agent role
+- `emily.owner` / `pass` - Owner role
+- `david.tenant` / `pass` - Tenant role
+- `lisa.buyer2` / `pass` - Buyer role
+
+For detailed authentication information, see [DEVELOPMENT_AUTH.md](./DEVELOPMENT_AUTH.md).
+
 ## Documentation
 
 ### For Business Users

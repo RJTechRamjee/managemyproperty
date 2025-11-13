@@ -139,9 +139,16 @@ class PropertyManager {
             const property = request.params[0];
             const requestMessage = request.data.requestMessage;
 
+            // Get the logged-in user ID from request context
+            const requesterId = request.user?.id;
+            
+            if (!requesterId || requesterId === 'anonymous') {
+                return request.error(401, 'User must be authenticated to send a contact request.');
+            }
+
             const newContactReq = {
                 property_ID: property.ID,
-                requester_ID: "4g2b1c0d-9d55-4e77-f999-1e2f3a4b5c56",
+                requester_ID: requesterId,
                 requestMessage: requestMessage,
                 status: 'Pending',
             };
