@@ -19,7 +19,47 @@
     "watch-appmngcontactreq": "cds watch --open appmngcontactreq/index.html?sap-ui-xx-viewCache=false --livereload false"
   },
   "private": true,
-  "cds": {},
+  "cds": {
+    "requires": {
+      "[development]": {
+        "auth": {
+          "kind": "mocked",
+          "users": {
+            "john.buyer": {
+              "id": "c9537972-9792-4c6e-9091-21ad34305d8a",
+              "username": "john.buyer",
+              "roles": ["Buyer"]
+            },
+            "sarah.seller": {
+              "id": "79a042b1-7ffa-48e1-96d8-c522a84e3a03",
+              "username": "sarah.seller",
+              "roles": ["Seller"]
+            },
+            "michael.agent": {
+              "id": "d3c31fcf-ecea-4fea-9f67-708d9aa9c96b",
+              "username": "michael.agent",
+              "roles": ["Agent"]
+            },
+            "emily.owner": {
+              "id": "7fdda6bd-b9b3-44d7-b12c-35a49ec57e7a",
+              "username": "emily.owner",
+              "roles": ["Owner"]
+            },
+            "david.tenant": {
+              "id": "6a5270cb-8cd3-4726-9066-f6209e3191cd",
+              "username": "david.tenant",
+              "roles": ["Tenant"]
+            },
+            "lisa.buyer2": {
+              "id": "6ecbc509-9098-45a1-8e03-180f346332c5",
+              "username": "lisa.buyer2",
+              "roles": ["Buyer"]
+            }
+          }
+        }
+      }
+    }
+  },
   "workspaces": [
     "app/*"
   ],
