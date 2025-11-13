@@ -42,7 +42,16 @@ class PropertyManager {
             }
         });
 
-        // Contact request validation handlers
+        // Contact request validation handlers  
+        // Auto-populate requester_ID for all create operations
+        this.srv.before('*', 'ContactRequests', (request) => {
+            // Automatically set requester_ID from authenticated user if not set
+            const requesterId = request.user?.id;
+            if (requesterId && requesterId !== 'anonymous' && request.data && !request.data.requester_ID) {
+                request.data.requester_ID = requesterId;
+            }
+        });
+
         this.srv.before('INSERT', ContactRequests, (request, response) => {
             if (!request.data.requestMessage ||
                 (typeof request.data.requestMessage === 'string' && request.data.requestMessage.trim() === '')) {

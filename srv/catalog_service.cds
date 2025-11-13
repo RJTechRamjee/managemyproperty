@@ -59,6 +59,11 @@ service CatalogService @(path: 'CatalogService') {
             action CloseRequest()                                          returns String;
         };
 
+// Mark requester_ID as readonly to prevent user modification
+annotate ContactRequests with {
+    requester @readonly @Core.Computed;
+}
+
     entity ConactReqMessages                  as projection on mngprp.ConactReqMessages;
 
     entity Notifications                      as projection on mngprp.Notifications;
