@@ -180,3 +180,16 @@ annotate service.ContactRequests with {
         UI.Hidden: true
     )
 };
+
+// Control action visibility based on property ownership
+annotate service.ContactRequests actions {
+    // RespondToRequest should only be visible when user IS the property owner
+    RespondToRequest @(
+        Core.OperationAvailable: {$edmJson: {$Path: 'in/isPropertyOwner'}}
+    );
+    // CloseRequest should only be visible when user IS the property owner
+    CloseRequest @(
+        Core.OperationAvailable: {$edmJson: {$Path: 'in/isPropertyOwner'}}
+    );
+};
+

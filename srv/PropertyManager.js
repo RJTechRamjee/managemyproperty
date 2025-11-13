@@ -81,6 +81,15 @@ class PropertyManager {
             return this.getDynamicYears();
         });
 
+        // Add handlers to populate virtual ownership fields
+        this.srv.after('READ', Properties, (properties, request) => {
+            return this.populatePropertyOwnership(properties, request);
+        });
+
+        this.srv.after('READ', ContactRequests, async (contactRequests, request) => {
+            return await this.populateContactRequestOwnership(contactRequests, request);
+        });
+
         // Property action handlers
         this.srv.on('SetToStatus', async (request, response) => {
             return await this.setPropertyStatus(request);
@@ -363,6 +372,75 @@ class PropertyManager {
     validateNearByAminities(amenitiesData) {
         // Amenities validation logic can be added here
         return true;
+    }
+
+    /**
+     * Populate isOwner field for Properties to control action visibility
+     */
+    populatePropertyOwnership(properties, request) {
+        const userId = request.user?.id;
+        
+        if (!properties) return properties;
+        
+        const propertiesArray = Array.isArray(properties) ? properties : [properties];
+        
+        propertiesArray.forEach(property => {
+            if (property && property.contactPerson_ID) {
+                property.isOwner = (userId === property.contactPerson_ID);
+            } else {
+                property.isOwner = false;
+            }
+        });
+        
+        return properties;
+    }
+
+    /**
+     * Populate isPropertyOwner field for ContactRequests to control action visibility
+     */
+    async populateContactRequestOwnership(contactRequests, request) {
+        const userId = request.user?.id;
+        
+        if (!contactRequests) return contactRequests;
+        
+        const contactRequestsArray = Array.isArray(contactRequests) ? contactRequests : [contactRequests];
+        const { Properties } = this.entities;
+        
+        // Get all property IDs from contact requests
+        const propertyIds = contactRequestsArray
+            .filter(cr => cr && cr.property_ID)
+            .map(cr => cr.property_ID);
+        
+        if (propertyIds.length === 0) {
+            contactRequestsArray.forEach(cr => {
+                if (cr) cr.isPropertyOwner = false;
+            });
+            return contactRequests;
+        }
+        
+        // Fetch property owners for all properties in one query
+        const tx = cds.tx(request);
+        const properties = await tx.read(Properties)
+            .where({ ID: { in: propertyIds } })
+            .columns('ID', 'contactPerson_ID');
+        
+        // Create a map of property ID to owner ID
+        const propertyOwnerMap = new Map();
+        properties.forEach(prop => {
+            propertyOwnerMap.set(prop.ID, prop.contactPerson_ID);
+        });
+        
+        // Set isPropertyOwner flag for each contact request
+        contactRequestsArray.forEach(cr => {
+            if (cr && cr.property_ID) {
+                const ownerId = propertyOwnerMap.get(cr.property_ID);
+                cr.isPropertyOwner = (userId === ownerId);
+            } else {
+                cr.isPropertyOwner = false;
+            }
+        });
+        
+        return contactRequests;
     }
 
 }

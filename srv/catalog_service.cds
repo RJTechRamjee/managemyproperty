@@ -27,7 +27,8 @@ service CatalogService @(path: 'CatalogService') {
         projection on mngprp.Properties {
             *,
             @readonly
-            contactRequests : redirected to ContactRequests
+            contactRequests : redirected to ContactRequests,
+            virtual null as isOwner : Boolean
         }
         order by
             propertyId asc
@@ -52,7 +53,8 @@ service CatalogService @(path: 'CatalogService') {
             *,
             requester.firstName,
             requester.lastName,
-            requester.ShortIntro
+            requester.ShortIntro,
+            virtual null as isPropertyOwner : Boolean
         }
         actions {
             action RespondToRequest(responseMessage: String(300) @UI.MultiLineText)         returns String;

@@ -297,3 +297,15 @@ annotate service.ActionParams with {
     }
 };
 
+// Control action visibility based on property ownership
+annotate service.Properties actions {
+    // SendRequest should only be visible when user is NOT the property owner
+    SendRequest @(
+        Core.OperationAvailable: {$edmJson: {$Not: {$Path: 'in/isOwner'}}}
+    );
+    // SetToStatus should only be visible when user IS the property owner
+    SetToStatus @(
+        Core.OperationAvailable: {$edmJson: {$Path: 'in/isOwner'}}
+    );
+};
+
