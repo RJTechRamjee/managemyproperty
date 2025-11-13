@@ -48,6 +48,16 @@ class PropertyManager {
                 (typeof request.data.requestMessage === 'string' && request.data.requestMessage.trim() === '')) {
                 request.error(400, 'Request message cannot be empty.', 'in/requestMessage');
             }
+            
+            // Automatically set requester_ID from authenticated user if not already set
+            if (!request.data.requester_ID) {
+                const requesterId = request.user?.id;
+                if (!requesterId || requesterId === 'anonymous') {
+                    request.error(401, 'User must be authenticated to create a contact request.');
+                } else {
+                    request.data.requester_ID = requesterId;
+                }
+            }
         });
 
         this.srv.before('UPDATE', ContactRequests, (request, response) => {

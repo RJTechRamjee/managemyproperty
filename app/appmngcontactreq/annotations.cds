@@ -10,10 +10,6 @@ annotate service.ContactRequests with @(
             },
             {
                 $Type: 'UI.DataField',
-                Value: requester_ID,
-            },
-            {
-                $Type: 'UI.DataField',
                 Value: requester.firstName,
             },
             {
@@ -86,10 +82,6 @@ annotate service.ContactRequests with @(
         },
         {
             $Type: 'UI.DataField',
-            Value: requester_ID,
-        },
-        {
-            $Type: 'UI.DataField',
             Value: requester.firstName,
         },
         {
@@ -159,31 +151,36 @@ annotate service.ContactRequests with {
 };
 
 annotate service.ContactRequests with {
-    requester @Common.ValueList: {
-        $Type         : 'Common.ValueListType',
-        CollectionPath: 'Users',
-        Parameters    : [
-            {
-                $Type            : 'Common.ValueListParameterInOut',
-                LocalDataProperty: requester_ID,
-                ValueListProperty: 'ID',
-            },
-            {
-                $Type            : 'Common.ValueListParameterDisplayOnly',
-                ValueListProperty: 'userId',
-            },
-            {
-                $Type            : 'Common.ValueListParameterDisplayOnly',
-                ValueListProperty: 'firstName',
-            },
-            {
-                $Type            : 'Common.ValueListParameterDisplayOnly',
-                ValueListProperty: 'lastName',
-            },
-            {
-                $Type            : 'Common.ValueListParameterDisplayOnly',
-                ValueListProperty: 'emailId',
-            },
-        ],
-    }
+    requester @(
+        Common.ValueList: {
+            $Type         : 'Common.ValueListType',
+            CollectionPath: 'Users',
+            Parameters    : [
+                {
+                    $Type            : 'Common.ValueListParameterInOut',
+                    LocalDataProperty: requester_ID,
+                    ValueListProperty: 'ID',
+                },
+                {
+                    $Type            : 'Common.ValueListParameterDisplayOnly',
+                    ValueListProperty: 'userId',
+                },
+                {
+                    $Type            : 'Common.ValueListParameterDisplayOnly',
+                    ValueListProperty: 'firstName',
+                },
+                {
+                    $Type            : 'Common.ValueListParameterDisplayOnly',
+                    ValueListProperty: 'lastName',
+                },
+                {
+                    $Type            : 'Common.ValueListParameterDisplayOnly',
+                    ValueListProperty: 'emailId',
+                },
+            ],
+        },
+        Core.Computed: true,
+        Core.Immutable: true,
+        UI.Hidden: true
+    )
 };
