@@ -150,11 +150,18 @@ annotate service.Properties with @(
         },
     ],
 
-    UI.Identification         : [{
-        $Type : 'UI.DataFieldForAction',
-        Label : '{i18n>SendRequest}',
-        Action: 'service.SendRequest'
-    }],
+    UI.Identification         : [
+        {
+            $Type : 'UI.DataFieldForAction',
+            Label : '{i18n>SendRequest}',
+            Action: 'service.SendRequest'
+        },
+        {
+            $Type : 'UI.DataFieldForAction',
+            Label : 'Set to Status',
+            Action: 'service.SetToStatus'
+        }
+    ],
 
     UI.FieldGroup #GeneralInfo: {
         $Type: 'UI.FieldGroupType',
@@ -296,4 +303,26 @@ annotate service.ActionParams with {
         }]
     }
 };
+
+// Control action visibility based on property ownership
+annotate service.Properties actions {
+    // SendRequest should only be visible when user is NOT the property owner
+    SendRequest @(
+        Core.OperationAvailable: {$edmJson: {$Not: {$Path: 'in/isOwner'}}}
+    );
+    // SetToStatus should only be visible when user IS the property owner
+    SetToStatus @(
+        Core.OperationAvailable: {$edmJson: {$Path: 'in/isOwner'}}
+    );
+};
+
+// Control Edit/Update capability based on property ownership
+annotate service.Properties with @(
+    Capabilities.UpdateRestrictions: {
+        Updatable: {$edmJson: {$Path: 'isOwner'}}
+    },
+    Capabilities.DeleteRestrictions: {
+        Deletable: {$edmJson: {$Path: 'isOwner'}}
+    }
+);
 

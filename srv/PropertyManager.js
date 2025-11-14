@@ -33,14 +33,69 @@ class PropertyManager {
             }
         });
 
-        this.srv.before('UPDATE', Properties, (request, response) => {
-            if (request.data.coldRent == 0.00) {
-                request.error(400, 'Cold rent must be a positive value', 'in/coldRent');
-            }
-            if (request.data.warmRent == 0.00) {
-                request.error(400, 'Warm rent must be a positive value', 'in/warmRent');
+        // Add handler for draftPrepare to check authentication
+        this.srv.before('draftPrepare', Properties, async (request) => {
+            const userId = request.user?.id;
+            if (!userId || userId === 'anonymous') {
+                return request.reject(401, 'User must be authenticated to edit properties.');
             }
         });
+
+        // Add handler for draftActivate (Save button) to check ownership
+        this.srv.before('draftActivate', Properties, async (request) => {
+            const userId = request.user?.id;
+            if (!userId || userId === 'anonymous') {
+                return request.reject(401, 'User must be authenticated to save properties.');
+            }
+
+            const tx = cds.tx(request);
+            const propertyId = request.params?.[0]?.ID || request.params?.[0];
+            
+            if (propertyId) {
+                const idValue = typeof propertyId === 'string' ? propertyId : propertyId.ID;
+                if (idValue) {
+                    const property = await tx.read(Properties).where({ ID: idValue });
+                    if (property && property.length > 0) {
+                        if (property[0].contactPerson_ID !== userId) {
+                            return request.reject(403, 'You are not authorized to update this property. Only the property owner can make changes.');
+                        }
+                    }
+                }
+            }
+        });
+
+        // this.srv.before(['UPDATE', 'PATCH'], Properties, async (request, response) => {
+        //     // Check ownership before allowing update
+        //     const userId = request.user?.id;
+        //     if (!userId || userId === 'anonymous') {
+        //         return request.reject(401, 'User must be authenticated to update a property.');
+        //     }
+
+        //     const tx = cds.tx(request);
+        //     // For drafts, the ID might be in params[0] or params[0].ID or data.ID
+        //     let propertyId = request.params?.[0]?.ID || request.params?.[0] || request.data.ID;
+            
+        //     // If it's a UUID string, use it directly
+        //     if (typeof propertyId === 'string') {
+        //         propertyId = { ID: propertyId };
+        //     }
+            
+        //     if (propertyId && propertyId.ID) {
+        //         const property = await tx.read(Properties).where({ ID: propertyId.ID });
+        //         if (property && property.length > 0) {
+        //             if (property[0].contactPerson_ID !== userId) {
+        //                 return request.reject(403, 'You are not authorized to update this property. Only the property owner can make changes.');
+        //             }
+        //         }
+        //     }
+
+        //     if (request.data.coldRent == 0.00) {
+        //         request.error(400, 'Cold rent must be a positive value', 'in/coldRent');
+        //     }
+        //     if (request.data.warmRent == 0.00) {
+        //         request.error(400, 'Warm rent must be a positive value', 'in/warmRent');
+        //     }
+        // });
 
         // Contact request validation handlers  
         // Auto-populate requester_ID for all create operations
@@ -79,6 +134,24 @@ class PropertyManager {
         // Dynamic years handler
         this.srv.on('READ', 'DynamicYears', async () => {
             return this.getDynamicYears();
+        });
+
+        // Add handlers to populate virtual ownership fields
+        this.srv.after('READ', Properties, async (properties, request) => {
+            return await this.populatePropertyOwnership(properties, request);
+        });
+
+        this.srv.after('READ', ContactRequests, async (contactRequests, request) => {
+            return await this.populateContactRequestOwnership(contactRequests, request);
+        });
+
+        // Add EDIT handlers to populate virtual fields when editing drafts
+        this.srv.after('EDIT', Properties, async (properties, request) => {
+            return await this.populatePropertyOwnership(properties, request);
+        });
+
+        this.srv.after('EDIT', ContactRequests, async (contactRequests, request) => {
+            return await this.populateContactRequestOwnership(contactRequests, request);
         });
 
         // Property action handlers
@@ -133,8 +206,23 @@ class PropertyManager {
             const { Properties } = this.entities;
             const ID = request.params[0];
             const { newStatusCode } = request.data;
+            const userId = request.user?.id;
+
+            if (!userId || userId === 'anonymous') {
+                return request.reject(401, 'User must be authenticated to change property status.');
+            }
 
             const tx = cds.tx(request);
+
+            // Check ownership before allowing status change
+            const property = await tx.read(Properties).where(ID);
+            if (property && property.length > 0) {
+                if (property[0].contactPerson_ID !== userId) {
+                    return request.reject(403, 'You are not authorized to change this property status. Only the property owner can make changes.');
+                }
+            } else {
+                return request.reject(404, 'Property not found.');
+            }
 
             await tx.update(Properties).with({
                 listingStatus_code: newStatusCode
@@ -162,7 +250,19 @@ class PropertyManager {
             const requesterId = request.user?.id;
             
             if (!requesterId || requesterId === 'anonymous') {
-                return request.error(401, 'User must be authenticated to send a contact request.');
+                return request.reject(401, 'User must be authenticated to send a contact request.');
+            }
+
+            const tx = cds.transaction(request);
+
+            // Check if user is trying to send request to their own property
+            const propertyData = await tx.read(Properties).where({ ID: property.ID });
+            if (propertyData && propertyData.length > 0) {
+                if (propertyData[0].contactPerson_ID === requesterId) {
+                    return request.reject(403, 'You cannot send a contact request to your own property.');
+                }
+            } else {
+                return request.reject(404, 'Property not found.');
             }
 
             const newContactReq = {
@@ -172,15 +272,12 @@ class PropertyManager {
                 status: 'Pending',
             };
 
-            const tx = cds.transaction(request);
-
             const insertResult = await tx.run(
                 INSERT.into('ContactRequests').entries(newContactReq)
             );
 
             // Send notification to property owner
-            const propertyData = await tx.read(Properties).where({ ID: property.ID });
-            if (propertyData && propertyData.length > 0 && propertyData[0].contactPerson_ID) {
+            if (propertyData[0].contactPerson_ID) {
                 await this.createNotification(tx, {
                     recipientId: propertyData[0].contactPerson_ID,
                     notificationType: 'Contact Request Received',
@@ -202,28 +299,46 @@ class PropertyManager {
      */
     async respondToRequest(request) {
         try {
-            const { ContactRequests } = this.entities;
+            const { ContactRequests, Properties } = this.entities;
             const contactRequestId = request.params[0].ID;
             const responseMessage = request.data.responseMessage;
+            const userId = request.user?.id;
+
+            if (!userId || userId === 'anonymous') {
+                return request.reject(401, 'User must be authenticated to respond to a contact request.');
+            }
+
             const tx = cds.transaction(request);
+
+            // Get contact request details
+            const contactRequest = await tx.read(ContactRequests).where({ ID: contactRequestId });
+            
+            if (!contactRequest || contactRequest.length === 0) {
+                return request.reject(404, 'Contact request not found.');
+            }
+
+            // Check if user owns the property
+            const property = await tx.read(Properties).where({ ID: contactRequest[0].property_ID });
+            if (property && property.length > 0) {
+                if (property[0].contactPerson_ID !== userId) {
+                    return request.reject(403, 'You are not authorized to respond to this contact request. Only the property owner can respond.');
+                }
+            } else {
+                return request.reject(404, 'Property not found.');
+            }
 
             // Update contact request status
             await tx.update(ContactRequests).set({ status: 'Responded' }).where({ ID: contactRequestId });
 
-            // Get contact request details
-            const contactRequest = await tx.read(ContactRequests).where({ ID: contactRequestId });
-
-            if (contactRequest && contactRequest.length > 0) {
-                // Create notification for requester
-                await this.createNotification(tx, {
-                    recipientId: contactRequest[0].requester_ID,
-                    notificationType: 'Contact Request Response',
-                    title: 'Response to Your Contact Request',
-                    message: `You have received a response to your contact request: ${responseMessage}`,
-                    relatedEntity: 'ContactRequests',
-                    relatedEntityId: contactRequestId
-                });
-            }
+            // Create notification for requester
+            await this.createNotification(tx, {
+                recipientId: contactRequest[0].requester_ID,
+                notificationType: 'Contact Request Response',
+                title: 'Response to Your Contact Request',
+                message: `You have received a response to your contact request: ${responseMessage}`,
+                relatedEntity: 'ContactRequests',
+                relatedEntityId: contactRequestId
+            });
 
             return "Response sent successfully";
         } catch (error) {
@@ -236,9 +351,32 @@ class PropertyManager {
      */
     async closeRequest(request) {
         try {
-            const { ContactRequests } = this.entities;
+            const { ContactRequests, Properties } = this.entities;
             const contactRequestId = request.params[0].ID;
+            const userId = request.user?.id;
+
+            if (!userId || userId === 'anonymous') {
+                return request.reject(401, 'User must be authenticated to close a contact request.');
+            }
+
             const tx = cds.transaction(request);
+
+            // Get contact request details
+            const contactRequest = await tx.read(ContactRequests).where({ ID: contactRequestId });
+            
+            if (!contactRequest || contactRequest.length === 0) {
+                return request.reject(404, 'Contact request not found.');
+            }
+
+            // Check if user owns the property
+            const property = await tx.read(Properties).where({ ID: contactRequest[0].property_ID });
+            if (property && property.length > 0) {
+                if (property[0].contactPerson_ID !== userId) {
+                    return request.reject(403, 'You are not authorized to close this contact request. Only the property owner can close it.');
+                }
+            } else {
+                return request.reject(404, 'Property not found.');
+            }
 
             await tx.update(ContactRequests).set({ status: 'Closed' }).where({ ID: contactRequestId });
 
@@ -363,6 +501,102 @@ class PropertyManager {
     validateNearByAminities(amenitiesData) {
         // Amenities validation logic can be added here
         return true;
+    }
+
+    /**
+     * Populate isOwner field for Properties to control action visibility
+     */
+    async populatePropertyOwnership(properties, request) {
+        const userId = request.user?.id;
+        
+        if (!properties) return properties;
+        
+        const propertiesArray = Array.isArray(properties) ? properties : [properties];
+        const { Properties } = this.entities;
+        
+        // Check if contactPerson_ID is missing in any property and fetch if needed
+        const propertiesNeedingOwnerInfo = propertiesArray.filter(
+            property => property && property.ID && property.contactPerson_ID === undefined
+        );
+        
+        if (propertiesNeedingOwnerInfo.length > 0) {
+            // Fetch contactPerson_ID for properties that don't have it
+            const tx = cds.tx(request);
+            const propertyIds = propertiesNeedingOwnerInfo.map(p => p.ID);
+            const ownerInfo = await tx.read(Properties)
+                .where({ ID: { in: propertyIds } })
+                .columns('ID', 'contactPerson_ID');
+            
+            // Create a map of property ID to owner ID
+            const ownerMap = new Map();
+            ownerInfo.forEach(prop => {
+                ownerMap.set(prop.ID, prop.contactPerson_ID);
+            });
+            
+            // Update the properties with the fetched owner information
+            propertiesNeedingOwnerInfo.forEach(property => {
+                property.contactPerson_ID = ownerMap.get(property.ID);
+            });
+        }
+        
+        // Now populate isOwner for all properties
+        propertiesArray.forEach(property => {
+            if (property && property.contactPerson_ID) {
+                property.isOwner = (userId === property.contactPerson_ID);
+            } else {
+                property.isOwner = false;
+            }
+        });
+        
+        return properties;
+    }
+
+    /**
+     * Populate isPropertyOwner field for ContactRequests to control action visibility
+     */
+    async populateContactRequestOwnership(contactRequests, request) {
+        const userId = request.user?.id;
+        
+        if (!contactRequests) return contactRequests;
+        
+        const contactRequestsArray = Array.isArray(contactRequests) ? contactRequests : [contactRequests];
+        const { Properties } = this.entities;
+        
+        // Get all property IDs from contact requests
+        const propertyIds = contactRequestsArray
+            .filter(cr => cr && cr.property_ID)
+            .map(cr => cr.property_ID);
+        
+        if (propertyIds.length === 0) {
+            contactRequestsArray.forEach(cr => {
+                if (cr) cr.isPropertyOwner = false;
+            });
+            return contactRequests;
+        }
+        
+        // Fetch property owners for all properties in one query
+        const tx = cds.tx(request);
+        const properties = await tx.read(Properties)
+            .where({ ID: { in: propertyIds } })
+            .columns('ID', 'contactPerson_ID');
+        
+        // Create a map of property ID to owner ID
+        const propertyOwnerMap = new Map();
+        properties.forEach(prop => {
+            propertyOwnerMap.set(prop.ID, prop.contactPerson_ID);
+        });
+        
+        // Set isPropertyOwner flag for each contact request
+        contactRequestsArray.forEach(cr => {
+            if (cr && cr.property_ID) {
+                const ownerId = propertyOwnerMap.get(cr.property_ID);
+                cr.isPropertyOwner = (userId === ownerId);
+            } else {
+                cr.isPropertyOwner = false;
+            }
+        });
+        
+        return contactRequests;
     }
 
 }
