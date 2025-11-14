@@ -102,8 +102,8 @@ class PropertyManager {
         });
 
         // Add handlers to populate virtual ownership fields
-        this.srv.after('READ', Properties, (properties, request) => {
-            return this.populatePropertyOwnership(properties, request);
+        this.srv.after('READ', Properties, async (properties, request) => {
+            return await this.populatePropertyOwnership(properties, request);
         });
 
         this.srv.after('READ', ContactRequests, async (contactRequests, request) => {
@@ -462,13 +462,40 @@ class PropertyManager {
     /**
      * Populate isOwner field for Properties to control action visibility
      */
-    populatePropertyOwnership(properties, request) {
+    async populatePropertyOwnership(properties, request) {
         const userId = request.user?.id;
         
         if (!properties) return properties;
         
         const propertiesArray = Array.isArray(properties) ? properties : [properties];
+        const { Properties } = this.entities;
         
+        // Check if contactPerson_ID is missing in any property and fetch if needed
+        const propertiesNeedingOwnerInfo = propertiesArray.filter(
+            property => property && property.ID && property.contactPerson_ID === undefined
+        );
+        
+        if (propertiesNeedingOwnerInfo.length > 0) {
+            // Fetch contactPerson_ID for properties that don't have it
+            const tx = cds.tx(request);
+            const propertyIds = propertiesNeedingOwnerInfo.map(p => p.ID);
+            const ownerInfo = await tx.read(Properties)
+                .where({ ID: { in: propertyIds } })
+                .columns('ID', 'contactPerson_ID');
+            
+            // Create a map of property ID to owner ID
+            const ownerMap = new Map();
+            ownerInfo.forEach(prop => {
+                ownerMap.set(prop.ID, prop.contactPerson_ID);
+            });
+            
+            // Update the properties with the fetched owner information
+            propertiesNeedingOwnerInfo.forEach(property => {
+                property.contactPerson_ID = ownerMap.get(property.ID);
+            });
+        }
+        
+        // Now populate isOwner for all properties
         propertiesArray.forEach(property => {
             if (property && property.contactPerson_ID) {
                 property.isOwner = (userId === property.contactPerson_ID);
