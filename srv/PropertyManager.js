@@ -33,6 +33,37 @@ class PropertyManager {
             }
         });
 
+        // Add handler for draftPrepare to check authentication
+        this.srv.before('draftPrepare', Properties, async (request) => {
+            const userId = request.user?.id;
+            if (!userId || userId === 'anonymous') {
+                return request.reject(401, 'User must be authenticated to edit properties.');
+            }
+        });
+
+        // Add handler for draftActivate (Save button) to check ownership
+        this.srv.before('draftActivate', Properties, async (request) => {
+            const userId = request.user?.id;
+            if (!userId || userId === 'anonymous') {
+                return request.reject(401, 'User must be authenticated to save properties.');
+            }
+
+            const tx = cds.tx(request);
+            const propertyId = request.params?.[0]?.ID || request.params?.[0];
+            
+            if (propertyId) {
+                const idValue = typeof propertyId === 'string' ? propertyId : propertyId.ID;
+                if (idValue) {
+                    const property = await tx.read(Properties).where({ ID: idValue });
+                    if (property && property.length > 0) {
+                        if (property[0].contactPerson_ID !== userId) {
+                            return request.reject(403, 'You are not authorized to update this property. Only the property owner can make changes.');
+                        }
+                    }
+                }
+            }
+        });
+
         this.srv.before(['UPDATE', 'PATCH'], Properties, async (request, response) => {
             // Check ownership before allowing update
             const userId = request.user?.id;
