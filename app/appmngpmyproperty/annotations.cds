@@ -194,11 +194,6 @@ annotate service.Properties with @(
         },
         {
             $Type : 'UI.ReferenceFacet',
-            Label : '{i18n>contactPerson}',
-            Target: 'contactPerson/@Communication.Contact'
-        },
-        {
-            $Type : 'UI.ReferenceFacet',
             Label : '{i18n>ContactRequests}',
             Target: 'contactRequests/@UI.LineItem'
         },
@@ -405,12 +400,6 @@ annotate service.Properties with {
     propertyTax @(
         Measures.ISOCurrency: currency_code,
         Common.Label        : '{i18n>propertyTax}'
-    );
-
-    // Add contact person as contact card
-    contactPerson @(
-        Common.Label: '{i18n>contactPerson}',
-        UI.IsContactCard
     );
 };
 
@@ -679,25 +668,3 @@ annotate service.PropertyDetails with @(
     }
 );
 
-// Update ContactRequests to use fullName and contact card
-annotate service.ContactRequests with {
-    requester @(
-        Common.Label: '{i18n>requester}',
-        UI.IsContactCard
-    );
-};
-
-// Update Users with contact information annotation
-annotate service.Users with @(
-    Communication.Contact: {
-        fn  : fullName,
-        tel : [{
-            type: #work,
-            uri : phoneNumber
-        }],
-        email: [{
-            type   : #work,
-            address: emailId
-        }]
-    }
-);
