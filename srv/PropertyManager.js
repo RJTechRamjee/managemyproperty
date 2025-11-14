@@ -37,7 +37,7 @@ class PropertyManager {
             // Check ownership before allowing update
             const userId = request.user?.id;
             if (!userId || userId === 'anonymous') {
-                request.reject(401, 'User must be authenticated to update a property.');
+                return request.reject(401, 'User must be authenticated to update a property.');
             }
 
             const tx = cds.tx(request);
@@ -53,7 +53,7 @@ class PropertyManager {
                 const property = await tx.read(Properties).where({ ID: propertyId.ID });
                 if (property && property.length > 0) {
                     if (property[0].contactPerson_ID !== userId) {
-                        request.reject(403, 'You are not authorized to update this property. Only the property owner can make changes.');
+                        return request.reject(403, 'You are not authorized to update this property. Only the property owner can make changes.');
                     }
                 }
             }
@@ -178,7 +178,7 @@ class PropertyManager {
             const userId = request.user?.id;
 
             if (!userId || userId === 'anonymous') {
-                request.reject(401, 'User must be authenticated to change property status.');
+                return request.reject(401, 'User must be authenticated to change property status.');
             }
 
             const tx = cds.tx(request);
@@ -187,10 +187,10 @@ class PropertyManager {
             const property = await tx.read(Properties).where(ID);
             if (property && property.length > 0) {
                 if (property[0].contactPerson_ID !== userId) {
-                    request.reject(403, 'You are not authorized to change this property status. Only the property owner can make changes.');
+                    return request.reject(403, 'You are not authorized to change this property status. Only the property owner can make changes.');
                 }
             } else {
-                request.reject(404, 'Property not found.');
+                return request.reject(404, 'Property not found.');
             }
 
             await tx.update(Properties).with({
@@ -219,7 +219,7 @@ class PropertyManager {
             const requesterId = request.user?.id;
             
             if (!requesterId || requesterId === 'anonymous') {
-                request.reject(401, 'User must be authenticated to send a contact request.');
+                return request.reject(401, 'User must be authenticated to send a contact request.');
             }
 
             const tx = cds.transaction(request);
@@ -228,10 +228,10 @@ class PropertyManager {
             const propertyData = await tx.read(Properties).where({ ID: property.ID });
             if (propertyData && propertyData.length > 0) {
                 if (propertyData[0].contactPerson_ID === requesterId) {
-                    request.reject(403, 'You cannot send a contact request to your own property.');
+                    return request.reject(403, 'You cannot send a contact request to your own property.');
                 }
             } else {
-                request.reject(404, 'Property not found.');
+                return request.reject(404, 'Property not found.');
             }
 
             const newContactReq = {
@@ -274,7 +274,7 @@ class PropertyManager {
             const userId = request.user?.id;
 
             if (!userId || userId === 'anonymous') {
-                request.reject(401, 'User must be authenticated to respond to a contact request.');
+                return request.reject(401, 'User must be authenticated to respond to a contact request.');
             }
 
             const tx = cds.transaction(request);
@@ -283,17 +283,17 @@ class PropertyManager {
             const contactRequest = await tx.read(ContactRequests).where({ ID: contactRequestId });
             
             if (!contactRequest || contactRequest.length === 0) {
-                request.reject(404, 'Contact request not found.');
+                return request.reject(404, 'Contact request not found.');
             }
 
             // Check if user owns the property
             const property = await tx.read(Properties).where({ ID: contactRequest[0].property_ID });
             if (property && property.length > 0) {
                 if (property[0].contactPerson_ID !== userId) {
-                    request.reject(403, 'You are not authorized to respond to this contact request. Only the property owner can respond.');
+                    return request.reject(403, 'You are not authorized to respond to this contact request. Only the property owner can respond.');
                 }
             } else {
-                request.reject(404, 'Property not found.');
+                return request.reject(404, 'Property not found.');
             }
 
             // Update contact request status
@@ -325,7 +325,7 @@ class PropertyManager {
             const userId = request.user?.id;
 
             if (!userId || userId === 'anonymous') {
-                request.reject(401, 'User must be authenticated to close a contact request.');
+                return request.reject(401, 'User must be authenticated to close a contact request.');
             }
 
             const tx = cds.transaction(request);
@@ -334,17 +334,17 @@ class PropertyManager {
             const contactRequest = await tx.read(ContactRequests).where({ ID: contactRequestId });
             
             if (!contactRequest || contactRequest.length === 0) {
-                request.reject(404, 'Contact request not found.');
+                return request.reject(404, 'Contact request not found.');
             }
 
             // Check if user owns the property
             const property = await tx.read(Properties).where({ ID: contactRequest[0].property_ID });
             if (property && property.length > 0) {
                 if (property[0].contactPerson_ID !== userId) {
-                    request.reject(403, 'You are not authorized to close this contact request. Only the property owner can close it.');
+                    return request.reject(403, 'You are not authorized to close this contact request. Only the property owner can close it.');
                 }
             } else {
-                request.reject(404, 'Property not found.');
+                return request.reject(404, 'Property not found.');
             }
 
             await tx.update(ContactRequests).set({ status: 'Closed' }).where({ ID: contactRequestId });
