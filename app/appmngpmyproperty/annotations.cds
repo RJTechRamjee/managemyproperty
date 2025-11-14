@@ -123,15 +123,18 @@ annotate service.Properties with @(
     UI.Facets                 : [
         {
             $Type : 'UI.CollectionFacet',
+            ID    : 'GeneralInfoCollection',
             Label : '{i18n>GeneralInfo}',
             Facets: [
                 {
                     $Type : 'UI.ReferenceFacet',
+                    ID    : 'GeneralInfoFacet',
                     Label : '{i18n>GeneralInfo}',
                     Target: '@UI.FieldGroup#GeneralInfo'
                 },
                 {
                     $Type : 'UI.ReferenceFacet',
+                    ID    : 'GeneralInfo1Facet',
                     Label : '{i18n>GeneralInfo1}',
                     Target: '@UI.FieldGroup#GeneralInfo1'
                 },
@@ -140,10 +143,12 @@ annotate service.Properties with @(
         },
         {
             $Type : 'UI.CollectionFacet',
+            ID    : 'FinancialInfoCollection',
             Label : '{i18n>FinancialInfo}',
             Facets: [
                 {
                     $Type : 'UI.ReferenceFacet',
+                    ID    : 'FinancialInfoFacet',
                     Label : '{i18n>FinancialInfo}',
                     Target: '@UI.FieldGroup#FinancialInfo'
                 }
@@ -151,10 +156,12 @@ annotate service.Properties with @(
         },
         {
             $Type : 'UI.CollectionFacet',
+            ID    : 'PropertyFeaturesCollection',
             Label : '{i18n>PropertyFeatures}',
             Facets: [
                 {
                     $Type : 'UI.ReferenceFacet',
+                    ID    : 'PropertyFeaturesFacet',
                     Label : '{i18n>PropertyFeatures}',
                     Target: '@UI.FieldGroup#PropertyFeatures'
                 }
@@ -162,10 +169,12 @@ annotate service.Properties with @(
         },
         {
             $Type : 'UI.CollectionFacet',
+            ID    : 'UtilitiesAmenitiesCollection',
             Label : '{i18n>UtilitiesAmenities}',
             Facets: [
                 {
                     $Type : 'UI.ReferenceFacet',
+                    ID    : 'UtilitiesAmenitiesFacet',
                     Label : '{i18n>UtilitiesAmenities}',
                     Target: '@UI.FieldGroup#UtilitiesAmenities'
                 }
@@ -173,10 +182,12 @@ annotate service.Properties with @(
         },
         {
             $Type : 'UI.CollectionFacet',
+            ID    : 'LegalComplianceCollection',
             Label : '{i18n>LegalCompliance}',
             Facets: [
                 {
                     $Type : 'UI.ReferenceFacet',
+                    ID    : 'LegalComplianceFacet',
                     Label : '{i18n>LegalCompliance}',
                     Target: '@UI.FieldGroup#LegalCompliance'
                 }
@@ -184,16 +195,13 @@ annotate service.Properties with @(
         },
         {
             $Type : 'UI.ReferenceFacet',
-            Label : '{i18n>PropertyDetailsInfo}',
-            Target: 'propertyDetails/@UI.FieldGroup#PropertyDetailsGroup'
-        },
-        {
-            $Type : 'UI.ReferenceFacet',
+            ID    : 'NearByAmenitiesFacet',
             Label : '{i18n>NearByAmenities}',
             Target: 'nearByAmenities/@UI.LineItem'
         },
         {
             $Type : 'UI.ReferenceFacet',
+            ID    : 'ContactRequestsFacet',
             Label : '{i18n>ContactRequests}',
             Target: 'contactRequests/@UI.LineItem'
         },
