@@ -193,3 +193,13 @@ annotate service.ContactRequests actions {
     );
 };
 
+// Control Edit/Update capability for contact requests based on property ownership
+annotate service.ContactRequests with @(
+    Capabilities.UpdateRestrictions: {
+        Updatable: isPropertyOwner
+    },
+    Capabilities.DeleteRestrictions: {
+        Deletable: isPropertyOwner
+    }
+);
+

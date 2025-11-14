@@ -309,3 +309,13 @@ annotate service.Properties actions {
     );
 };
 
+// Control Edit/Update capability based on property ownership
+annotate service.Properties with @(
+    Capabilities.UpdateRestrictions: {
+        Updatable: isOwner
+    },
+    Capabilities.DeleteRestrictions: {
+        Deletable: isOwner
+    }
+);
+
