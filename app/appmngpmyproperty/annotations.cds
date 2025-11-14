@@ -131,14 +131,7 @@ annotate service.Properties with @(
                     ID    : 'GeneralInfoFacet',
                     Label : '{i18n>GeneralInfo}',
                     Target: '@UI.FieldGroup#GeneralInfo'
-                },
-                {
-                    $Type : 'UI.ReferenceFacet',
-                    ID    : 'GeneralInfo1Facet',
-                    Label : '{i18n>GeneralInfo1}',
-                    Target: '@UI.FieldGroup#GeneralInfo1'
-                },
-
+                }
             ]
         },
         {
@@ -246,14 +239,6 @@ annotate service.Properties with @(
             {
                 $Type: 'UI.DataField',
                 Value: propertySize
-            },
-            {
-                $Type: 'UI.DataField',
-                Value: coldRent
-            },
-            {
-                $Type: 'UI.DataField',
-                Value: warmRent
             },
             {
                 $Type          : 'UI.DataField',
