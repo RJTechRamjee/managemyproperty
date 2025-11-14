@@ -1,5 +1,5 @@
 const cds = require('@sap/cds');
-const { SELECT, INSERT, UPDATE } = require("@sap/cds/lib/ql/cds-ql");
+const { SELECT, INSERT } = require("@sap/cds/lib/ql/cds-ql");
 
 class PropertyManager {
 
@@ -12,19 +12,19 @@ class PropertyManager {
      * Register all event handlers for the service
      */
     registerHandlers() {
-        const { Properties, ContactRequests, Notifications, EmailLogs, Users } = this.entities;
+        const { Properties, ContactRequests } = this.entities;
 
         // Property validation handlers
         this.srv.before('CREATE', Properties, async (req) => {
             try {
-                const nextPropertyId = await this.getNextPropertyId(req.tx);
+                const nextPropertyId = await this.getNextPropertyId();
                 req.data.propertyId = nextPropertyId;
             } catch (error) {
-                return "Error: " + error.toString();
+                req.reject(500, `Failed to generate property ID: ${error.message}`);
             }
         });
 
-        this.srv.before('INSERT', Properties, (request, response) => {
+        this.srv.before('INSERT', Properties, (request) => {
             if (!request.data.coldRent || request.data.coldRent == 0.00) {
                 request.error(400, 'Cold rent must be a positive value', 'in/coldRent');
             }
@@ -64,39 +64,6 @@ class PropertyManager {
             }
         });
 
-        // this.srv.before(['UPDATE', 'PATCH'], Properties, async (request, response) => {
-        //     // Check ownership before allowing update
-        //     const userId = request.user?.id;
-        //     if (!userId || userId === 'anonymous') {
-        //         return request.reject(401, 'User must be authenticated to update a property.');
-        //     }
-
-        //     const tx = cds.tx(request);
-        //     // For drafts, the ID might be in params[0] or params[0].ID or data.ID
-        //     let propertyId = request.params?.[0]?.ID || request.params?.[0] || request.data.ID;
-            
-        //     // If it's a UUID string, use it directly
-        //     if (typeof propertyId === 'string') {
-        //         propertyId = { ID: propertyId };
-        //     }
-            
-        //     if (propertyId && propertyId.ID) {
-        //         const property = await tx.read(Properties).where({ ID: propertyId.ID });
-        //         if (property && property.length > 0) {
-        //             if (property[0].contactPerson_ID !== userId) {
-        //                 return request.reject(403, 'You are not authorized to update this property. Only the property owner can make changes.');
-        //             }
-        //         }
-        //     }
-
-        //     if (request.data.coldRent == 0.00) {
-        //         request.error(400, 'Cold rent must be a positive value', 'in/coldRent');
-        //     }
-        //     if (request.data.warmRent == 0.00) {
-        //         request.error(400, 'Warm rent must be a positive value', 'in/warmRent');
-        //     }
-        // });
-
         // Contact request validation handlers  
         // Auto-populate requester_ID for all create operations
         this.srv.before('*', 'ContactRequests', (request) => {
@@ -107,7 +74,7 @@ class PropertyManager {
             }
         });
 
-        this.srv.before('INSERT', ContactRequests, (request, response) => {
+        this.srv.before('INSERT', ContactRequests, (request) => {
             if (!request.data.requestMessage ||
                 (typeof request.data.requestMessage === 'string' && request.data.requestMessage.trim() === '')) {
                 request.error(400, 'Request message cannot be empty.', 'in/requestMessage');
@@ -124,7 +91,7 @@ class PropertyManager {
             }
         });
 
-        this.srv.before('UPDATE', ContactRequests, (request, response) => {
+        this.srv.before('UPDATE', ContactRequests, (request) => {
             if (!request.data.requestMessage ||
                 (typeof request.data.requestMessage === 'string' && request.data.requestMessage.trim() === '')) {
                 request.error(400, 'Request message cannot be empty.', 'in/requestMessage');
@@ -155,11 +122,11 @@ class PropertyManager {
         });
 
         // Property action handlers
-        this.srv.on('SetToStatus', async (request, response) => {
+        this.srv.on('SetToStatus', async (request) => {
             return await this.setPropertyStatus(request);
         });
 
-        this.srv.on('SendRequest', async (request, response) => {
+        this.srv.on('SendRequest', async (request) => {
             return await this.sendContactRequest(request);
         });
 
@@ -181,8 +148,8 @@ class PropertyManager {
             return await this.sendEmail(request);
         });
 
-        this.srv.on('getNextPropertyId', async (req) => {
-            return await this.getNextPropertyId(req.tx);
+        this.srv.on('getNextPropertyId', async () => {
+            return await this.getNextPropertyId();
         });
     }
 
@@ -231,7 +198,7 @@ class PropertyManager {
             const response = await tx.read(Properties).where(ID);
             return response;
         } catch (error) {
-            return "Error : " + error.toString();
+            request.reject(500, `Failed to update property status: ${error.message}`);
         }
     }
 
@@ -240,8 +207,7 @@ class PropertyManager {
      */
     async sendContactRequest(request) {
         try {
-            const { Properties, ContactRequests } = this.entities;
-            const { uuid } = cds.utils;
+            const { Properties } = this.entities;
 
             const property = request.params[0];
             const requestMessage = request.data.requestMessage;
@@ -253,7 +219,7 @@ class PropertyManager {
                 return request.reject(401, 'User must be authenticated to send a contact request.');
             }
 
-            const tx = cds.transaction(request);
+            const tx = cds.tx(request);
 
             // Check if user is trying to send request to their own property
             const propertyData = await tx.read(Properties).where({ ID: property.ID });
@@ -268,7 +234,7 @@ class PropertyManager {
             const newContactReq = {
                 property_ID: property.ID,
                 requester_ID: requesterId,
-                requestMessage: requestMessage,
+                requestMessage: this.sanitizeInput(requestMessage),
                 status: 'Pending',
             };
 
@@ -290,7 +256,7 @@ class PropertyManager {
 
             request.notify(`Contact request for Property ID "${property.ID}" successfully logged.`);
         } catch (error) {
-            return "Error: " + error.toString();
+            request.reject(500, `Failed to send contact request: ${error.message}`);
         }
     }
 
@@ -308,7 +274,7 @@ class PropertyManager {
                 return request.reject(401, 'User must be authenticated to respond to a contact request.');
             }
 
-            const tx = cds.transaction(request);
+            const tx = cds.tx(request);
 
             // Get contact request details
             const contactRequest = await tx.read(ContactRequests).where({ ID: contactRequestId });
@@ -335,14 +301,14 @@ class PropertyManager {
                 recipientId: contactRequest[0].requester_ID,
                 notificationType: 'Contact Request Response',
                 title: 'Response to Your Contact Request',
-                message: `You have received a response to your contact request: ${responseMessage}`,
+                message: `You have received a response to your contact request: ${this.sanitizeInput(responseMessage)}`,
                 relatedEntity: 'ContactRequests',
                 relatedEntityId: contactRequestId
             });
 
             return "Response sent successfully";
         } catch (error) {
-            return "Error: " + error.toString();
+            request.reject(500, `Failed to respond to contact request: ${error.message}`);
         }
     }
 
@@ -359,7 +325,7 @@ class PropertyManager {
                 return request.reject(401, 'User must be authenticated to close a contact request.');
             }
 
-            const tx = cds.transaction(request);
+            const tx = cds.tx(request);
 
             // Get contact request details
             const contactRequest = await tx.read(ContactRequests).where({ ID: contactRequestId });
@@ -382,7 +348,7 @@ class PropertyManager {
 
             return "Contact request closed successfully";
         } catch (error) {
-            return "Error: " + error.toString();
+            request.reject(500, `Failed to close contact request: ${error.message}`);
         }
     }
 
@@ -392,7 +358,7 @@ class PropertyManager {
     async sendNotification(request) {
         try {
             const params = request.data.params;
-            const tx = cds.transaction(request);
+            const tx = cds.tx(request);
 
             await this.createNotification(tx, {
                 recipientId: params.recipientId,
@@ -405,7 +371,7 @@ class PropertyManager {
 
             return "Notification sent successfully";
         } catch (error) {
-            return "Error: " + error.toString();
+            request.reject(500, `Failed to send notification: ${error.message}`);
         }
     }
 
@@ -415,7 +381,7 @@ class PropertyManager {
     async sendEmail(request) {
         try {
             const params = request.data.params;
-            const tx = cds.transaction(request);
+            const tx = cds.tx(request);
 
             await this.createEmailLog(tx, {
                 recipientId: params.recipientId,
@@ -429,14 +395,14 @@ class PropertyManager {
 
             return "Email sent successfully";
         } catch (error) {
-            return "Error: " + error.toString();
+            request.reject(500, `Failed to send email: ${error.message}`);
         }
     }
 
     /**
      * Get next property ID
      */
-    async getNextPropertyId(tx) {
+    async getNextPropertyId() {
         const { Properties } = this.entities;
         const currentMaxProp = await SELECT.one.from(Properties).orderBy('propertyId desc').columns('propertyId');
         let nextPropertyId = 1;
@@ -488,18 +454,108 @@ class PropertyManager {
     }
 
     /**
+     * Check if user is authenticated
+     * @returns {string|null} User ID if authenticated, null otherwise (rejection is sent)
+     */
+    checkAuthentication(request, message = 'User must be authenticated') {
+        const userId = request.user?.id;
+        if (!userId || userId === 'anonymous') {
+            request.reject(401, message);
+            return null;
+        }
+        return userId;
+    }
+
+    /**
+     * Check if user owns a property
+     * @returns {Promise<object|null>} Property object if authorized, null otherwise (rejection is sent)
+     */
+    async checkPropertyOwnership(request, propertyId) {
+        const userId = this.checkAuthentication(request);
+        if (!userId) return null;
+        
+        const { Properties } = this.entities;
+        const tx = cds.tx(request);
+        const property = await tx.read(Properties).where({ ID: propertyId });
+        
+        if (!property || property.length === 0) {
+            request.reject(404, 'Property not found');
+            return null;
+        }
+        
+        if (property[0].contactPerson_ID !== userId) {
+            request.reject(403, 'Only the property owner can perform this action');
+            return null;
+        }
+        
+        return property[0];
+    }
+
+    /**
+     * Sanitize user input to prevent XSS attacks
+     */
+    sanitizeInput(input) {
+        if (typeof input !== 'string') return input;
+        // Remove HTML tags and trim whitespace
+        return input.trim()
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;')
+            .replace(/"/g, '&quot;')
+            .replace(/'/g, '&#x27;')
+            .replace(/\//g, '&#x2F;');
+    }
+
+    /**
      * Validate property data
      */
     validateProperty(propertyData) {
-        // Property validation logic can be added here
+        if (!propertyData) {
+            throw new Error('Property data is required');
+        }
+        
+        // Validate required fields
+        const requiredFields = ['title', 'type', 'listingFor'];
+        for (const field of requiredFields) {
+            if (!propertyData[field]) {
+                throw new Error(`${field} is required`);
+            }
+        }
+        
+        // Validate numeric fields
+        if (propertyData.coldRent !== undefined && propertyData.coldRent <= 0) {
+            throw new Error('Cold rent must be positive');
+        }
+        
+        if (propertyData.warmRent !== undefined && propertyData.warmRent <= 0) {
+            throw new Error('Warm rent must be positive');
+        }
+        
+        if (propertyData.noOfRooms !== undefined && propertyData.noOfRooms < 0) {
+            throw new Error('Number of rooms cannot be negative');
+        }
+        
         return true;
     }
 
     /**
      * Validate nearby amenities
      */
-    validateNearByAminities(amenitiesData) {
-        // Amenities validation logic can be added here
+    validateNearbyAmenities(amenitiesData) {
+        if (!amenitiesData || !Array.isArray(amenitiesData)) {
+            throw new Error('Amenities data must be an array');
+        }
+        
+        // Validate each amenity
+        for (const amenity of amenitiesData) {
+            if (!amenity.name || typeof amenity.name !== 'string') {
+                throw new Error('Each amenity must have a valid name');
+            }
+            
+            if (amenity.distance !== undefined && (typeof amenity.distance !== 'number' || amenity.distance < 0)) {
+                throw new Error('Amenity distance must be a non-negative number');
+            }
+        }
+        
         return true;
     }
 
