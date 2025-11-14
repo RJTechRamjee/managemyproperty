@@ -33,38 +33,38 @@ class PropertyManager {
             }
         });
 
-        this.srv.before(['UPDATE', 'PATCH'], Properties, async (request, response) => {
-            // Check ownership before allowing update
-            const userId = request.user?.id;
-            if (!userId || userId === 'anonymous') {
-                return request.reject(401, 'User must be authenticated to update a property.');
-            }
+        // this.srv.before(['UPDATE', 'PATCH'], Properties, async (request, response) => {
+        //     // Check ownership before allowing update
+        //     const userId = request.user?.id;
+        //     if (!userId || userId === 'anonymous') {
+        //         return request.reject(401, 'User must be authenticated to update a property.');
+        //     }
 
-            const tx = cds.tx(request);
-            // For drafts, the ID might be in params[0] or params[0].ID or data.ID
-            let propertyId = request.params?.[0]?.ID || request.params?.[0] || request.data.ID;
+        //     const tx = cds.tx(request);
+        //     // For drafts, the ID might be in params[0] or params[0].ID or data.ID
+        //     let propertyId = request.params?.[0]?.ID || request.params?.[0] || request.data.ID;
             
-            // If it's a UUID string, use it directly
-            if (typeof propertyId === 'string') {
-                propertyId = { ID: propertyId };
-            }
+        //     // If it's a UUID string, use it directly
+        //     if (typeof propertyId === 'string') {
+        //         propertyId = { ID: propertyId };
+        //     }
             
-            if (propertyId && propertyId.ID) {
-                const property = await tx.read(Properties).where({ ID: propertyId.ID });
-                if (property && property.length > 0) {
-                    if (property[0].contactPerson_ID !== userId) {
-                        return request.reject(403, 'You are not authorized to update this property. Only the property owner can make changes.');
-                    }
-                }
-            }
+        //     if (propertyId && propertyId.ID) {
+        //         const property = await tx.read(Properties).where({ ID: propertyId.ID });
+        //         if (property && property.length > 0) {
+        //             if (property[0].contactPerson_ID !== userId) {
+        //                 return request.reject(403, 'You are not authorized to update this property. Only the property owner can make changes.');
+        //             }
+        //         }
+        //     }
 
-            if (request.data.coldRent == 0.00) {
-                request.error(400, 'Cold rent must be a positive value', 'in/coldRent');
-            }
-            if (request.data.warmRent == 0.00) {
-                request.error(400, 'Warm rent must be a positive value', 'in/warmRent');
-            }
-        });
+        //     if (request.data.coldRent == 0.00) {
+        //         request.error(400, 'Cold rent must be a positive value', 'in/coldRent');
+        //     }
+        //     if (request.data.warmRent == 0.00) {
+        //         request.error(400, 'Warm rent must be a positive value', 'in/warmRent');
+        //     }
+        // });
 
         // Contact request validation handlers  
         // Auto-populate requester_ID for all create operations
