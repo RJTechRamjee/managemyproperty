@@ -150,11 +150,18 @@ annotate service.Properties with @(
         },
     ],
 
-    UI.Identification         : [{
-        $Type : 'UI.DataFieldForAction',
-        Label : '{i18n>SendRequest}',
-        Action: 'service.SendRequest'
-    }],
+    UI.Identification         : [
+        {
+            $Type : 'UI.DataFieldForAction',
+            Label : '{i18n>SendRequest}',
+            Action: 'service.SendRequest'
+        },
+        {
+            $Type : 'UI.DataFieldForAction',
+            Label : 'Set to Status',
+            Action: 'service.SetToStatus'
+        }
+    ],
 
     UI.FieldGroup #GeneralInfo: {
         $Type: 'UI.FieldGroupType',
