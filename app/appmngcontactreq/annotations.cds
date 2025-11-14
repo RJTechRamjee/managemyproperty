@@ -196,10 +196,10 @@ annotate service.ContactRequests actions {
 // Control Edit/Update capability for contact requests based on property ownership
 annotate service.ContactRequests with @(
     Capabilities.UpdateRestrictions: {
-        Updatable: isPropertyOwner
+        Updatable: {$edmJson: {$Path: 'isPropertyOwner'}}
     },
     Capabilities.DeleteRestrictions: {
-        Deletable: isPropertyOwner
+        Deletable: {$edmJson: {$Path: 'isPropertyOwner'}}
     }
 );
 
