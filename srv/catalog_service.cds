@@ -47,7 +47,10 @@ service CatalogService @(path: 'CatalogService') {
 
     @readonly
     @cds.odata.valuelist
-    entity Users                              as projection on mngprp.Users;
+    entity Users                              as projection on mngprp.Users {
+        *,
+        firstName || ' ' || lastName as fullName : String(81) @title: '{i18n>fullName}'
+    };
 
     @odata.draft.enabled
     @cds.odata.valuelist

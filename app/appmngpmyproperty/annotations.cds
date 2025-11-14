@@ -194,6 +194,11 @@ annotate service.Properties with @(
         },
         {
             $Type : 'UI.ReferenceFacet',
+            Label : '{i18n>contactPerson}',
+            Target: 'contactPerson/@Communication.Contact'
+        },
+        {
+            $Type : 'UI.ReferenceFacet',
             Label : '{i18n>ContactRequests}',
             Target: 'contactRequests/@UI.LineItem'
         },
@@ -303,11 +308,8 @@ annotate service.ContactRequests with @(UI.lineItem: [
     },
     {
         $Type: 'UI.DataField',
-        Value: requester.firstName
-    },
-    {
-        $Type: 'UI.DataField',
-        Value: requester.lastName
+        Value: requester.fullName,
+        Label: '{i18n>fullName}'
     },
     {
         $Type: 'UI.DataField',
