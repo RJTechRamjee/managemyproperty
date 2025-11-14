@@ -358,14 +358,15 @@ annotate service.Properties actions {
 };
 
 // Control Edit/Update capability based on property ownership
-annotate service.Properties with @(
-    Capabilities.UpdateRestrictions: {
-        Updatable: {$edmJson: {$Path: 'isOwner'}}
-    },
-    Capabilities.DeleteRestrictions: {
-        Deletable: {$edmJson: {$Path: 'isOwner'}}
-    }
-);
+// Temporarily disabled to allow editing during development
+// annotate service.Properties with @(
+//     Capabilities.UpdateRestrictions: {
+//         Updatable: {$edmJson: {$Path: 'isOwner'}}
+//     },
+//     Capabilities.DeleteRestrictions: {
+//         Deletable: {$edmJson: {$Path: 'isOwner'}}
+//     }
+// );
 
 
 annotate service.Properties with {
