@@ -496,8 +496,13 @@ class PropertyManager {
      */
     sanitizeInput(input) {
         if (typeof input !== 'string') return input;
-        // Remove potential script tags and trim whitespace
-        return input.trim().replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '');
+        // Remove HTML tags and trim whitespace
+        return input.trim()
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;')
+            .replace(/"/g, '&quot;')
+            .replace(/'/g, '&#x27;')
+            .replace(/\//g, '&#x2F;');
     }
 
     /**
