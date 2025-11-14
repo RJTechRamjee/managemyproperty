@@ -20,6 +20,7 @@ service CatalogService @(path: 'CatalogService') {
     };
 
     @cds.odata.valuelist
+    @odata.draft.enabled
     entity Addresses                          as projection on mngprp.Addresses;
 
     @cds.odata.valuelist
@@ -46,7 +47,6 @@ service CatalogService @(path: 'CatalogService') {
     @cds.odata.valuelist
     entity PropertyDetails                    as projection on mngprp.PropertyDetails;
 
-    @readonly
     @cds.odata.valuelist
     entity Users                              as projection on mngprp.Users {
         *,
@@ -85,6 +85,7 @@ annotate ContactRequests with {
 
     entity DynamicYears @cds.persistence.skip as projection on mngprp.DynamicYears;
 
+    @odata.draft.enabled
     entity Statuses                           as projection on mngprp.Statuses;
 
     function getNextPropertyId() returns Properties:propertyId;
