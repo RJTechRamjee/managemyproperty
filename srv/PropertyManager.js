@@ -110,6 +110,15 @@ class PropertyManager {
             return await this.populateContactRequestOwnership(contactRequests, request);
         });
 
+        // Add EDIT handlers to populate virtual fields when editing drafts
+        this.srv.after('EDIT', Properties, async (properties, request) => {
+            return await this.populatePropertyOwnership(properties, request);
+        });
+
+        this.srv.after('EDIT', ContactRequests, async (contactRequests, request) => {
+            return await this.populateContactRequestOwnership(contactRequests, request);
+        });
+
         // Property action handlers
         this.srv.on('SetToStatus', async (request, response) => {
             return await this.setPropertyStatus(request);
