@@ -1,21 +1,21 @@
 ID,property_ID,type,name,distance,distanceUnit,walkTime,walkTimeUnit
 1cb5e515-453b-4c34-95c2-b36614ab6820,9c842a2d-7d08-433b-a4c6-86394d3cb017,School,Central High School,1,km,12,min
-3052af86-9929-4195-a12e-82db1830e3b8,9c842a2d-7d08-433b-a4c6-86394d3cb017,Transport,Metro Station,0,km,6,min
-0d9ceff4-1968-4d81-b743-992c896f2718,9c842a2d-7d08-433b-a4c6-86394d3cb017,Shopping,Supermarket,0,km,4,min
+3052af86-9929-4195-a12e-82db1830e3b8,9c842a2d-7d08-433b-a4c6-86394d3cb017,PublicTransport,Metro Station,0,km,6,min
+0d9ceff4-1968-4d81-b743-992c896f2718,9c842a2d-7d08-433b-a4c6-86394d3cb017,Supermarket,City Supermarket,0,km,4,min
 1d6e7cae-4281-4890-9502-cba70a7e4a91,0cefcf4c-ab3f-46e9-ba36-2f93df18e50b,School,International School,2,km,25,min
-3202203d-ce51-4599-85d1-430ebd6c5ff8,0cefcf4c-ab3f-46e9-ba36-2f93df18e50b,Shopping,Shopping Mall,3,km,35,min
+3202203d-ce51-4599-85d1-430ebd6c5ff8,0cefcf4c-ab3f-46e9-ba36-2f93df18e50b,ShoppingMall,Shopping Mall,3,km,35,min
 22b1d0d1-9ed7-49a2-af91-c8d5fd61cb40,b73601cd-1df1-431a-8976-a7d410e7767c,School,University Campus,1,km,10,min
-5db8898f-622a-4352-8e4a-3b1cfb7865b4,b73601cd-1df1-431a-8976-a7d410e7767c,Transport,Bus Stop,0,km,2,min
-a4386c20-3cdd-40e2-b4dc-1992d8de1acd,141d44fb-596d-447d-accc-8a674df4f6eb,Transport,Train Station,2,km,18,min
+5db8898f-622a-4352-8e4a-3b1cfb7865b4,b73601cd-1df1-431a-8976-a7d410e7767c,PublicTransport,Bus Stop,0,km,2,min
+a4386c20-3cdd-40e2-b4dc-1992d8de1acd,141d44fb-596d-447d-accc-8a674df4f6eb,PublicTransport,Train Station,2,km,18,min
 a05a4c72-1838-47b6-81f9-ccadd77eef33,141d44fb-596d-447d-accc-8a674df4f6eb,Restaurant,Business District Cafes,0,km,5,min
 7a0802e0-4593-4ba2-bbfb-2ed51eddaa7a,e3e9963c-034d-4096-a486-50784175ebe5,School,Elementary School,1,km,8,min
 871a0ca3-c069-4218-8e3f-3d699c0e5d91,e3e9963c-034d-4096-a486-50784175ebe5,Park,Community Park,0,km,5,min
 19273b7f-d623-49b4-ad79-5820cea0eca7,dbda527d-724f-41b2-8f82-b8f42ef5fc6f,Restaurant,Fine Dining District,0,km,6,min
-bf51a50c-8ed9-4798-85f9-1ff57c956e3a,dbda527d-724f-41b2-8f82-b8f42ef5fc6f,Shopping,Luxury Shopping Center,1,km,10,min
+bf51a50c-8ed9-4798-85f9-1ff57c956e3a,dbda527d-724f-41b2-8f82-b8f42ef5fc6f,ShoppingMall,Luxury Shopping Center,1,km,10,min
 8e07f9b9-df30-4219-84f8-93b7ea56ee72,9780fa37-3c72-48cd-9362-1707f674c0f4,School,Local Primary School,1,km,11,min
-5331d059-c259-4c07-bbf0-35466b38db55,9780fa37-3c72-48cd-9362-1707f674c0f4,Transport,Tram Station,0,km,4,min
-2d3d77c4-0863-4fc3-a521-52a062188c2e,a0c3b464-a5ba-471d-b009-073eba69aba2,Transport,Highway Access,2,km,3,min
+5331d059-c259-4c07-bbf0-35466b38db55,9780fa37-3c72-48cd-9362-1707f674c0f4,PublicTransport,Tram Station,0,km,4,min
+2d3d77c4-0863-4fc3-a521-52a062188c2e,a0c3b464-a5ba-471d-b009-073eba69aba2,PublicTransport,Highway Access,2,km,3,min
 8f2bece3-a14d-4dd9-9102-3dd8054633b1,8e3430fb-4136-4745-a911-786e4b40119d,Restaurant,Historic District Restaurants,1,km,7,min
 0e6a7296-ddbe-4953-ae1d-4cea7afc397c,325e8541-aef7-4989-876d-fa74fdabd037,Park,Dog Park,0,km,3,min
-ea1f821d-1c74-45a3-b438-38b649c7b913,5e061f6e-7181-42a1-85d0-dd7f799549f9,Shopping,Premium Shopping District,1,km,12,min
+ea1f821d-1c74-45a3-b438-38b649c7b913,5e061f6e-7181-42a1-85d0-dd7f799549f9,ShoppingMall,Premium Shopping District,1,km,12,min
 8893fc27-b76a-484a-ab75-ed95d0ced1d7,5e061f6e-7181-42a1-85d0-dd7f799549f9,Restaurant,Gourmet Food Court,1,km,9,min
