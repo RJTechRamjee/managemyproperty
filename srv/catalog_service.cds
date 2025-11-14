@@ -23,6 +23,7 @@ service CatalogService @(path: 'CatalogService') {
     entity Addresses                          as projection on mngprp.Addresses;
 
     @cds.odata.valuelist
+    @odata.draft.enabled
     entity Properties                         as
         projection on mngprp.Properties {
             *,
