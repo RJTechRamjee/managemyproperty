@@ -33,7 +33,7 @@ class PropertyManager {
             }
         });
 
-        this.srv.before('UPDATE', Properties, async (request, response) => {
+        this.srv.before(['UPDATE', 'PATCH'], Properties, async (request, response) => {
             // Check ownership before allowing update
             const userId = request.user?.id;
             if (!userId || userId === 'anonymous') {
@@ -42,10 +42,16 @@ class PropertyManager {
             }
 
             const tx = cds.tx(request);
-            const propertyId = request.data.ID || request.params?.[0]?.ID;
+            // For drafts, the ID might be in params[0] or params[0].ID or data.ID
+            let propertyId = request.params?.[0]?.ID || request.params?.[0] || request.data.ID;
             
-            if (propertyId) {
-                const property = await tx.read(Properties).where({ ID: propertyId });
+            // If it's a UUID string, use it directly
+            if (typeof propertyId === 'string') {
+                propertyId = { ID: propertyId };
+            }
+            
+            if (propertyId && propertyId.ID) {
+                const property = await tx.read(Properties).where({ ID: propertyId.ID });
                 if (property && property.length > 0) {
                     if (property[0].contactPerson_ID !== userId) {
                         request.error(403, 'You are not authorized to update this property. Only the property owner can make changes.');
