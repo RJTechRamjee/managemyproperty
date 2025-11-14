@@ -10,6 +10,7 @@ namespace rj.re.managemyproperty;
 @cds.odata.valuelist
 entity Statuses : CodeList {
   key code : String(10) @(title: '{i18n>code}');
+  criticality : Integer;
 }
 
 entity Properties : cuid, managed {
@@ -40,18 +41,65 @@ entity Properties : cuid, managed {
   heatingType           : String(20)                                   @(title: '{i18n>heatingType}');
   energyEffieicenyClass : String(2)                                    @(title: '{i18n>energyEffieicenyClass}');
   minmumInternetSpeed   : String(10)                                   @(title: '{i18n>minmumInternetSpeed}');
+  // New Financial Fields
+  securityDeposit       : Decimal(6, 2)                                @(title: '{i18n>securityDeposit}');
+  maintenanceCost       : Decimal(6, 2)                                @(title: '{i18n>maintenanceCost}');
+  utilityCost           : Decimal(6, 2)                                @(title: '{i18n>utilityCost}');
+  brokerCommission      : Decimal(5, 2)                                @(title: '{i18n>brokerCommission}');
+  propertyTax           : Decimal(6, 2)                                @(title: '{i18n>propertyTax}');
+  // New Property Features
+  noOfBathrooms         : Integer                                      @(title: '{i18n>noOfBathrooms}');
+  noOfBedrooms          : Integer                                      @(title: '{i18n>noOfBedrooms}');
+  balconySize           : Decimal(4, 2)                                @(title: '{i18n>balconySize}');
+  gardenSize            : Decimal(5, 2)                                @(title: '{i18n>gardenSize}');
+  isFurnished           : Boolean                                      @(title: '{i18n>isFurnished}');
+  hasAirConditioning    : Boolean                                      @(title: '{i18n>hasAirConditioning}');
+  hasBasement           : Boolean                                      @(title: '{i18n>hasBasement}');
+  hasAttic              : Boolean                                      @(title: '{i18n>hasAttic}');
+  // New Utilities & Amenities
+  waterSupply           : WaterSupplyType                              @(title: '{i18n>waterSupply}');
+  powerBackup           : Boolean                                      @(title: '{i18n>powerBackup}');
+  hasSwimmingPool       : Boolean                                      @(title: '{i18n>hasSwimmingPool}');
+  hasGym                : Boolean                                      @(title: '{i18n>hasGym}');
+  // New Legal & Compliance
+  lastRenovationYear    : String(4)                                    @(title: '{i18n>lastRenovationYear}');
+  occupancyCertificate  : Boolean                                      @(title: '{i18n>occupancyCertificate}');
+  fireComplianceCert    : Boolean                                      @(title: '{i18n>fireComplianceCert}');
+  
   contactPerson         : Association to one Users                     @(title: '{i18n>contactPerson}');
   address               : Association to one Addresses                 @(title: '{i18n>address}');
   listingStatus         : Association to Statuses default 'NEWLISTING' @(title: '{i18n>listingStatus}');
+  propertyDetails       : Association to one PropertyDetails           @(title: '{i18n>propertyDetails}');
   nearByAmenities       : Composition of many NearByAmenities
                             on nearByAmenities.property = $self        @(title: '{i18n>nearByAmenities}');
   contactRequests       : Association to many ContactRequests
                             on contactRequests.property = $self        @(title: '{i18n>contactRequests}');
 }
 
+entity PropertyDetails : cuid, managed {
+  property              : Association to one Properties                 @(title: '{i18n>property}');
+  interiorDescription   : String(1000)                                  @(title: '{i18n>interiorDescription}');
+  exteriorDescription   : String(1000)                                  @(title: '{i18n>exteriorDescription}');
+  kitchenType           : KitchenType                                   @(title: '{i18n>kitchenType}');
+  flooringType          : String(50)                                    @(title: '{i18n>flooringType}');
+  windowType            : String(50)                                    @(title: '{i18n>windowType}');
+  roofType              : String(50)                                    @(title: '{i18n>roofType}');
+  facingDirection       : FacingDirection                               @(title: '{i18n>facingDirection}');
+  viewFromProperty      : String(200)                                   @(title: '{i18n>viewFromProperty}');
+  neighborhoodType      : NeighborhoodType                              @(title: '{i18n>neighborhoodType}');
+  parkingType           : ParkingType                                   @(title: '{i18n>parkingType}');
+  storageSpace          : Boolean                                       @(title: '{i18n>storageSpace}');
+  laundryFacility       : Boolean                                       @(title: '{i18n>laundryFacility}');
+  disabledAccess        : Boolean                                       @(title: '{i18n>disabledAccess}');
+  smokingAllowed        : Boolean                                       @(title: '{i18n>smokingAllowed}');
+  soundproofing         : SoundproofingLevel                            @(title: '{i18n>soundproofing}');
+  securityFeatures      : String(500)                                   @(title: '{i18n>securityFeatures}');
+  specialNotes          : String(1000)                                  @(title: '{i18n>specialNotes}');
+}
+
 entity NearByAmenities : cuid, managed {
   property     : Association to one Properties                 @(title: '{i18n>property}');
-  type         : String(20)                                    @(title: '{i18n>type}');
+  type         : AmenityType                                   @(title: '{i18n>type}');
   name         : String(50)                                    @(title: '{i18n>name}');
   distance     : Int16                                         @(title: '{i18n>distance}');
   distanceUnit : String(5) default 'km'                        @(title: '{i18n>distanceUnit}');
@@ -63,6 +111,7 @@ entity Users : cuid, managed {
   userId             : String(10)                   @(title: '{i18n>userId}');
   firstName          : String(40)                   @(title: '{i18n>firstName}');
   lastName           : String(40)                   @(title: '{i18n>lastName}');
+  virtual fullName   : String(81)                   @(title: '{i18n>fullName}');
   emailId            : String(50)                   @(title: '{i18n>emailId}');
   phoneNumber        : String(20)                   @(title: '{i18n>phoneNumber}');
   address            : Association to one Addresses @(title: '{i18n>address}');
@@ -130,6 +179,62 @@ type EmailType          : String(30) enum {
   ContactRequestResponse = 'Contact Request Response' @(title: '{i18n>ContactRequestResponse}');
   PropertyViewingConfirm = 'Property Viewing Confirm' @(title: '{i18n>PropertyViewingConfirm}');
   DocumentSharing        = 'Document Sharing'         @(title: '{i18n>DocumentSharing}');
+}
+
+type AmenityType        : String(20) enum {
+  School         @(title: '{i18n>School}');
+  Hospital       @(title: '{i18n>Hospital}');
+  Supermarket    @(title: '{i18n>Supermarket}');
+  PublicTransport = 'Public Transport' @(title: '{i18n>PublicTransport}');
+  Restaurant     @(title: '{i18n>Restaurant}');
+  Park           @(title: '{i18n>Park}');
+  Pharmacy       @(title: '{i18n>Pharmacy}');
+  Bank           @(title: '{i18n>Bank}');
+  PostOffice = 'Post Office' @(title: '{i18n>PostOffice}');
+  ShoppingMall = 'Shopping Mall' @(title: '{i18n>ShoppingMall}');
+}
+
+type WaterSupplyType    : String(20) enum {
+  Municipal      @(title: '{i18n>Municipal}');
+  Borewell       @(title: '{i18n>Borewell}');
+  Both           @(title: '{i18n>Both}');
+}
+
+type KitchenType        : String(20) enum {
+  Modular        @(title: '{i18n>Modular}');
+  SemiModular = 'Semi Modular'    @(title: '{i18n>SemiModular}');
+  Traditional    @(title: '{i18n>Traditional}');
+}
+
+type FacingDirection    : String(10) enum {
+  North          @(title: '{i18n>North}');
+  South          @(title: '{i18n>South}');
+  East           @(title: '{i18n>East}');
+  West           @(title: '{i18n>West}');
+  NorthEast = 'North East'      @(title: '{i18n>NorthEast}');
+  NorthWest = 'North West'      @(title: '{i18n>NorthWest}');
+  SouthEast = 'South East'      @(title: '{i18n>SouthEast}');
+  SouthWest = 'South West'      @(title: '{i18n>SouthWest}');
+}
+
+type NeighborhoodType   : String(20) enum {
+  Residential    @(title: '{i18n>Residential}');
+  Commercial     @(title: '{i18n>CommercialNeighborhood}');
+  Mixed          @(title: '{i18n>Mixed}');
+}
+
+type ParkingType        : String(20) enum {
+  Covered        @(title: '{i18n>Covered}');
+  Open           @(title: '{i18n>Open}');
+  Basement       @(title: '{i18n>BasementParking}');
+  Street         @(title: '{i18n>Street}');
+}
+
+type SoundproofingLevel : String(10) enum {
+  None           @(title: '{i18n>None}');
+  Basic          @(title: '{i18n>Basic}');
+  Standard       @(title: '{i18n>Standard}');
+  Advanced       @(title: '{i18n>Advanced}');
 }
 
 entity DynamicYears @cds.persistence.skip {

@@ -42,6 +42,9 @@ service CatalogService @(path: 'CatalogService') {
     @cds.odata.valuelist
     entity NearByAmenities                    as projection on mngprp.NearByAmenities;
 
+    @cds.odata.valuelist
+    entity PropertyDetails                    as projection on mngprp.PropertyDetails;
+
     @readonly
     @cds.odata.valuelist
     entity Users                              as projection on mngprp.Users;

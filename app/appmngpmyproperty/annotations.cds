@@ -139,6 +139,55 @@ annotate service.Properties with @(
             ]
         },
         {
+            $Type : 'UI.CollectionFacet',
+            Label : '{i18n>FinancialInfo}',
+            Facets: [
+                {
+                    $Type : 'UI.ReferenceFacet',
+                    Label : '{i18n>FinancialInfo}',
+                    Target: '@UI.FieldGroup#FinancialInfo'
+                }
+            ]
+        },
+        {
+            $Type : 'UI.CollectionFacet',
+            Label : '{i18n>PropertyFeatures}',
+            Facets: [
+                {
+                    $Type : 'UI.ReferenceFacet',
+                    Label : '{i18n>PropertyFeatures}',
+                    Target: '@UI.FieldGroup#PropertyFeatures'
+                }
+            ]
+        },
+        {
+            $Type : 'UI.CollectionFacet',
+            Label : '{i18n>UtilitiesAmenities}',
+            Facets: [
+                {
+                    $Type : 'UI.ReferenceFacet',
+                    Label : '{i18n>UtilitiesAmenities}',
+                    Target: '@UI.FieldGroup#UtilitiesAmenities'
+                }
+            ]
+        },
+        {
+            $Type : 'UI.CollectionFacet',
+            Label : '{i18n>LegalCompliance}',
+            Facets: [
+                {
+                    $Type : 'UI.ReferenceFacet',
+                    Label : '{i18n>LegalCompliance}',
+                    Target: '@UI.FieldGroup#LegalCompliance'
+                }
+            ]
+        },
+        {
+            $Type : 'UI.ReferenceFacet',
+            Label : '{i18n>PropertyDetailsInfo}',
+            Target: 'propertyDetails/@UI.FieldGroup#PropertyDetailsGroup'
+        },
+        {
             $Type : 'UI.ReferenceFacet',
             Label : '{i18n>NearByAmenities}',
             Target: 'nearByAmenities/@UI.LineItem'
@@ -211,8 +260,10 @@ annotate service.Properties with @(
                 Value: heatingType
             },
             {
-                $Type: 'UI.DataField',
-                Value: listingStatus.code
+                $Type                : 'UI.DataFieldForAnnotation',
+                Label                : '{i18n>listingStatus}',
+                Target               : '@UI.DataPoint#ListingStatus',
+                ![@UI.Importance]    : #High
             }
         ]
     }
@@ -326,3 +377,325 @@ annotate service.Properties with @(
     }
 );
 
+
+annotate service.Properties with {
+    // Add currency semantic annotations
+    coldRent @(
+        Measures.ISOCurrency: currency_code,
+        Common.Label        : '{i18n>coldRent}'
+    );
+    warmRent @(
+        Measures.ISOCurrency: currency_code,
+        Common.Label        : '{i18n>warmRent}'
+    );
+    securityDeposit @(
+        Measures.ISOCurrency: currency_code,
+        Common.Label        : '{i18n>securityDeposit}'
+    );
+    maintenanceCost @(
+        Measures.ISOCurrency: currency_code,
+        Common.Label        : '{i18n>maintenanceCost}'
+    );
+    utilityCost @(
+        Measures.ISOCurrency: currency_code,
+        Common.Label        : '{i18n>utilityCost}'
+    );
+    propertyTax @(
+        Measures.ISOCurrency: currency_code,
+        Common.Label        : '{i18n>propertyTax}'
+    );
+
+    // Add contact person as contact card
+    contactPerson @(
+        Common.Label: '{i18n>contactPerson}',
+        UI.IsContactCard
+    );
+};
+
+// Add DataPoint for Listing Status with criticality
+annotate service.Properties with @(
+    UI.DataPoint #ListingStatus: {
+        Value                : listingStatus.name,
+        Criticality          : listingStatus.criticality,
+        CriticalityRepresentation: #WithIcon
+    }
+);
+
+// Add criticality field to Statuses
+annotate service.Statuses with {
+    code        @title: '{i18n>code}';
+    name        @title: 'Status';
+    criticality @title: 'Criticality';
+};
+
+// FieldGroup for Financial Information
+annotate service.Properties with @(
+    UI.FieldGroup #FinancialInfo: {
+        $Type: 'UI.FieldGroupType',
+        Data : [
+            {
+                $Type: 'UI.DataField',
+                Value: coldRent
+            },
+            {
+                $Type: 'UI.DataField',
+                Value: warmRent
+            },
+            {
+                $Type: 'UI.DataField',
+                Value: currency_code
+            },
+            {
+                $Type: 'UI.DataField',
+                Value: securityDeposit
+            },
+            {
+                $Type: 'UI.DataField',
+                Value: maintenanceCost
+            },
+            {
+                $Type: 'UI.DataField',
+                Value: utilityCost
+            },
+            {
+                $Type: 'UI.DataField',
+                Value: brokerCommission
+            },
+            {
+                $Type: 'UI.DataField',
+                Value: propertyTax
+            }
+        ]
+    }
+);
+
+// FieldGroup for Property Features
+annotate service.Properties with @(
+    UI.FieldGroup #PropertyFeatures: {
+        $Type: 'UI.FieldGroupType',
+        Data : [
+            {
+                $Type: 'UI.DataField',
+                Value: noOfBedrooms
+            },
+            {
+                $Type: 'UI.DataField',
+                Value: noOfBathrooms
+            },
+            {
+                $Type: 'UI.DataField',
+                Value: noOfRooms
+            },
+            {
+                $Type: 'UI.DataField',
+                Value: hasBalcony
+            },
+            {
+                $Type: 'UI.DataField',
+                Value: balconySize
+            },
+            {
+                $Type: 'UI.DataField',
+                Value: hasdGarten
+            },
+            {
+                $Type: 'UI.DataField',
+                Value: gardenSize
+            },
+            {
+                $Type: 'UI.DataField',
+                Value: isFurnished
+            },
+            {
+                $Type: 'UI.DataField',
+                Value: hasAirConditioning
+            },
+            {
+                $Type: 'UI.DataField',
+                Value: hasBasement
+            },
+            {
+                $Type: 'UI.DataField',
+                Value: hasAttic
+            }
+        ]
+    }
+);
+
+// FieldGroup for Utilities & Amenities
+annotate service.Properties with @(
+    UI.FieldGroup #UtilitiesAmenities: {
+        $Type: 'UI.FieldGroupType',
+        Data : [
+            {
+                $Type: 'UI.DataField',
+                Value: waterSupply
+            },
+            {
+                $Type: 'UI.DataField',
+                Value: powerBackup
+            },
+            {
+                $Type: 'UI.DataField',
+                Value: hasSwimmingPool
+            },
+            {
+                $Type: 'UI.DataField',
+                Value: hasGym
+            },
+            {
+                $Type: 'UI.DataField',
+                Value: hasPassengerLift
+            },
+            {
+                $Type: 'UI.DataField',
+                Value: noOfParkingSpace
+            },
+            {
+                $Type: 'UI.DataField',
+                Value: hasGarageParking
+            },
+            {
+                $Type: 'UI.DataField',
+                Value: minmumInternetSpeed
+            }
+        ]
+    }
+);
+
+// FieldGroup for Legal & Compliance
+annotate service.Properties with @(
+    UI.FieldGroup #LegalCompliance: {
+        $Type: 'UI.FieldGroupType',
+        Data : [
+            {
+                $Type: 'UI.DataField',
+                Value: yearOfConstruction,
+                formatOptions: {groupingEnabled: false},
+                textArrangement: #TextOnly
+            },
+            {
+                $Type: 'UI.DataField',
+                Value: lastRenovationYear,
+                formatOptions: {groupingEnabled: false},
+                textArrangement: #TextOnly
+            },
+            {
+                $Type: 'UI.DataField',
+                Value: occupancyCertificate
+            },
+            {
+                $Type: 'UI.DataField',
+                Value: fireComplianceCert
+            },
+            {
+                $Type: 'UI.DataField',
+                Value: energyEffieicenyClass
+            },
+            {
+                $Type: 'UI.DataField',
+                Value: arePetsAllowed
+            }
+        ]
+    }
+);
+
+// FieldGroup for PropertyDetails
+annotate service.PropertyDetails with @(
+    UI.FieldGroup #PropertyDetailsGroup: {
+        $Type: 'UI.FieldGroupType',
+        Data : [
+            {
+                $Type: 'UI.DataField',
+                Value: interiorDescription
+            },
+            {
+                $Type: 'UI.DataField',
+                Value: exteriorDescription
+            },
+            {
+                $Type: 'UI.DataField',
+                Value: kitchenType
+            },
+            {
+                $Type: 'UI.DataField',
+                Value: flooringType
+            },
+            {
+                $Type: 'UI.DataField',
+                Value: windowType
+            },
+            {
+                $Type: 'UI.DataField',
+                Value: roofType
+            },
+            {
+                $Type: 'UI.DataField',
+                Value: facingDirection
+            },
+            {
+                $Type: 'UI.DataField',
+                Value: viewFromProperty
+            },
+            {
+                $Type: 'UI.DataField',
+                Value: neighborhoodType
+            },
+            {
+                $Type: 'UI.DataField',
+                Value: parkingType
+            },
+            {
+                $Type: 'UI.DataField',
+                Value: storageSpace
+            },
+            {
+                $Type: 'UI.DataField',
+                Value: laundryFacility
+            },
+            {
+                $Type: 'UI.DataField',
+                Value: disabledAccess
+            },
+            {
+                $Type: 'UI.DataField',
+                Value: smokingAllowed
+            },
+            {
+                $Type: 'UI.DataField',
+                Value: soundproofing
+            },
+            {
+                $Type: 'UI.DataField',
+                Value: securityFeatures
+            },
+            {
+                $Type: 'UI.DataField',
+                Value: specialNotes
+            }
+        ]
+    }
+);
+
+// Update ContactRequests to use fullName and contact card
+annotate service.ContactRequests with {
+    requester @(
+        Common.Label: '{i18n>requester}',
+        UI.IsContactCard
+    );
+};
+
+// Update Users with contact information annotation
+annotate service.Users with @(
+    Communication.Contact: {
+        fn  : fullName,
+        tel : [{
+            type: #work,
+            uri : phoneNumber
+        }],
+        email: [{
+            type   : #work,
+            address: emailId
+        }]
+    }
+);

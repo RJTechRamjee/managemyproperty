@@ -151,6 +151,11 @@ class PropertyManager {
         this.srv.on('getNextPropertyId', async () => {
             return await this.getNextPropertyId();
         });
+
+        // Add handler to populate fullName virtual field for Users
+        this.srv.after(['READ', 'EDIT'], 'Users', async (users) => {
+            return await this.populateUserFullName(users);
+        });
     }
 
     /**
@@ -653,6 +658,27 @@ class PropertyManager {
         });
         
         return contactRequests;
+    }
+
+    /**
+     * Populate fullName virtual field for Users
+     */
+    async populateUserFullName(users) {
+        if (!users) return users;
+        
+        const usersArray = Array.isArray(users) ? users : [users];
+        
+        usersArray.forEach(user => {
+            if (user && user.firstName && user.lastName) {
+                user.fullName = `${user.firstName} ${user.lastName}`;
+            } else if (user && user.firstName) {
+                user.fullName = user.firstName;
+            } else if (user && user.lastName) {
+                user.fullName = user.lastName;
+            }
+        });
+        
+        return users;
     }
 
 }
