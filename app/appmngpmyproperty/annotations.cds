@@ -309,19 +309,19 @@ annotate service.NearByAmenities with {
 // Add dropdown annotations for Properties enum fields
 annotate service.Properties with {
     type @(
-        Common.ValueListWithFixedValues: true
+        Common.ValueListWithFixedValues
     );
     listingFor @(
-        Common.ValueListWithFixedValues: true
+        Common.ValueListWithFixedValues
     );
     purpose @(
-        Common.ValueListWithFixedValues: true
+        Common.ValueListWithFixedValues
     );
     state @(
-        Common.ValueListWithFixedValues: true
+        Common.ValueListWithFixedValues
     );
     waterSupply @(
-        Common.ValueListWithFixedValues: true
+        Common.ValueListWithFixedValues
     );
 };
 
@@ -380,6 +380,24 @@ annotate service.Properties with {
             {
                 $Type            : 'Common.ValueListParameterDisplayOnly',
                 ValueListProperty: 'name'
+            }
+        ]
+    };
+    contactPerson      @Common.ValueList: {
+        CollectionPath: 'Users',
+        Parameters    : [
+            {
+                $Type            : 'Common.ValueListParameterInOut',
+                LocalDataProperty: 'contactPerson_ID',
+                ValueListProperty: 'ID'
+            },
+            {
+                $Type            : 'Common.ValueListParameterDisplayOnly',
+                ValueListProperty: 'fullName'
+            },
+            {
+                $Type            : 'Common.ValueListParameterDisplayOnly',
+                ValueListProperty: 'emailId'
             }
         ]
     };
