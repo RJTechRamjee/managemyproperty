@@ -306,7 +306,7 @@ annotate service.Properties with {
 // Add dropdown annotations for PropertyDetails enum fields
 annotate service.PropertyDetails with {
     kitchenType @(
-        Common.ValueListWithFixedValues: true
+        Common.ValueListWithFixedValues
     );
     facingDirection @(
         Common.ValueListWithFixedValues: true
@@ -394,8 +394,8 @@ annotate service.Properties actions {
 // Temporarily disabled to allow editing during development
 annotate service.Properties with @(
     // Capabilities.UpdateRestrictions: {
-        //     Updatable: {$edmJson: {$Path: 'isOwner'}}
-            // },
+    //     Updatable: {$edmJson: {$Path: 'isOwner'}}
+    // },
     Capabilities.DeleteRestrictions: {
         Deletable: {$edmJson: {$Path: 'isOwner'}}
     }
