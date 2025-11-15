@@ -289,6 +289,39 @@ annotate service.NearByAmenities with @(UI.LineItem: [
     },
 ]);
 
+// Add dropdown annotation for AmenityType enum
+annotate service.NearByAmenities with {
+    type @(
+        Common.ValueListWithFixedValues: true
+    );
+};
+
+// Add dropdown annotations for Properties enum fields
+annotate service.Properties with {
+    waterSupply @(
+        Common.ValueListWithFixedValues: true
+    );
+};
+
+// Add dropdown annotations for PropertyDetails enum fields
+annotate service.PropertyDetails with {
+    kitchenType @(
+        Common.ValueListWithFixedValues: true
+    );
+    facingDirection @(
+        Common.ValueListWithFixedValues: true
+    );
+    neighborhoodType @(
+        Common.ValueListWithFixedValues: true
+    );
+    parkingType @(
+        Common.ValueListWithFixedValues: true
+    );
+    soundproofing @(
+        Common.ValueListWithFixedValues: true
+    );
+};
+
 annotate service.ContactRequests with @(UI.lineItem: [
     {
         $Type: 'UI.DataField',
