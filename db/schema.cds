@@ -69,7 +69,7 @@ entity Properties : cuid, managed {
   contactPerson         : Association to one Users                     @(title: '{i18n>contactPerson}');
   address               : Association to one Addresses                 @(title: '{i18n>address}');
   listingStatus         : Association to Statuses default 'NEWLISTING' @(title: '{i18n>listingStatus}');
-  propertyDetails       : Association to one PropertyDetails           @(title: '{i18n>propertyDetails}');
+  propertyDetails       : Composition of  one PropertyDetails           @(title: '{i18n>propertyDetails}');
   nearByAmenities       : Composition of many NearByAmenities
                             on nearByAmenities.property = $self        @(title: '{i18n>nearByAmenities}');
   contactRequests       : Association to many ContactRequests
