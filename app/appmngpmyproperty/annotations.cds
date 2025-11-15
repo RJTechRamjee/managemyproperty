@@ -104,6 +104,11 @@ annotate service.Properties with @(
             textArrangement: #TextOnly
 
         },
+        {
+            $Type: 'UI.DataField',
+            Value: contactPerson.fullName,
+            Label: '{i18n>contactPerson}'
+        },
     ],
 
     UI.HeaderInfo             : {
@@ -253,6 +258,11 @@ annotate service.Properties with @(
                 Value: heatingType
             },
             {
+                $Type: 'UI.DataField',
+                Value: contactPerson.fullName,
+                Label: '{i18n>contactPerson}'
+            },
+            {
                 $Type                : 'UI.DataFieldForAnnotation',
                 Label                : '{i18n>listingStatus}',
                 Target               : '@UI.DataPoint#ListingStatus',
@@ -298,6 +308,18 @@ annotate service.NearByAmenities with {
 
 // Add dropdown annotations for Properties enum fields
 annotate service.Properties with {
+    type @(
+        Common.ValueListWithFixedValues: true
+    );
+    listingFor @(
+        Common.ValueListWithFixedValues: true
+    );
+    purpose @(
+        Common.ValueListWithFixedValues: true
+    );
+    state @(
+        Common.ValueListWithFixedValues: true
+    );
     waterSupply @(
         Common.ValueListWithFixedValues: true
     );

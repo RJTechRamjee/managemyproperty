@@ -8,7 +8,10 @@ service AdminService @(path: 'AdminService') {
     entity Properties1     as projection on mngprp.Properties;
 
     @odata.draft.enabled
-    entity Users           as projection on mngprp.Users;
+    entity Users           as projection on mngprp.Users {
+        *,
+        firstName || ' ' || lastName as fullName : String(81) @title: '{i18n>fullName}'
+    };
 
     entity Statuses        as projection on mngprp.Statuses;
 

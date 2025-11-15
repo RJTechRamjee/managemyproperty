@@ -7,11 +7,8 @@ annotate service.Users with @(
         },
         {
             $Type : 'UI.DataField',
-            Value : firstName,
-        },
-        {
-            $Type : 'UI.DataField',
-            Value : lastName,
+            Value : fullName,
+            Label : '{i18n>fullName}'
         },
         {
             $Type : 'UI.DataField',
@@ -21,6 +18,17 @@ annotate service.Users with @(
             $Type : 'UI.DataField',
             Value : ShortIntro,
         },
+        {
+            $Type : 'UI.DataField',
+            Value : role,
+        },
     ]
 );
+
+// Add dropdown annotation for Users enum field
+annotate service.Users with {
+    role @(
+        Common.ValueListWithFixedValues: true
+    );
+};
 
