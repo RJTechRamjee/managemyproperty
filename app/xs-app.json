@@ -1,0 +1,19 @@
+{
+  "welcomeFile": "appmngpmyproperty/webapp/",
+  "authenticationMethod": "route",
+  "sessionTimeout": 100,
+  "pluginMetadataEndpoint": "/metadata",
+  "routes": [
+    {
+      "source": "^/appmngpmyproperty/webapp/(.*)",
+      "target": "$1",
+      "localDir": "appmngpmyproperty/webapp/",
+      "authenticationType": "xsuaa"
+    },
+    {
+      "source": "^/(.*)$",
+      "destination": "srv-api",
+      "authenticationType": "xsuaa"
+    }
+  ]
+}
