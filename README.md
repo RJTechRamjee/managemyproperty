@@ -133,6 +133,7 @@ For detailed authentication information, see [DEVELOPMENT_AUTH.md](./DEVELOPMENT
 - 🔧 [Implementation Guide](./IMPLEMENTATION_GUIDE.md) - Technical details and architecture
 - 📝 [Usage Examples](./USAGE_EXAMPLES.md) - API examples and common scenarios
 - 📊 [Implementation Summary](./IMPLEMENTATION_SUMMARY.md) - Overview of what was built
+- 🚀 [MTA Developer Guide](./MTA_DEVELOPER_GUIDE.md) - Complete guide for MTA.yaml configuration and deployment
 
 ## API Examples
 
