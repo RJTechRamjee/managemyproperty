@@ -34,44 +34,44 @@
         "auth": {
           "kind": "mocked",
           "users": {
-            "john.buyer": {
-              "id": "john.buyer@email.com",
-              "username": "john.buyer",
+            "U0001": {
+              "id": "john.smith@rjtechsphere.com",
+              "username": "U0001",
               "roles": [
                 "Buyer"
               ]
             },
-            "sarah.seller": {
-              "id": "79a042b1-7ffa-48e1-96d8-c522a84e3a03",
-              "username": "sarah.seller",
+            "U0002": {
+              "id": "sarah.johnson@rjtechsphere.com",
+              "username": "U0002",
               "roles": [
                 "Seller"
               ]
             },
-            "michael.agent": {
-              "id": "d3c31fcf-ecea-4fea-9f67-708d9aa9c96b",
-              "username": "michael.agent",
+            "U0003": {
+              "id": "michael.brown@rjtechsphere.com",
+              "username": "U0003",
               "roles": [
                 "Agent"
               ]
             },
-            "emily.owner": {
-              "id": "7fdda6bd-b9b3-44d7-b12c-35a49ec57e7a",
-              "username": "emily.owner",
+            "U0004": {
+              "id": "emily.davis@rjtechsphere.com",
+              "username": "U0004",
               "roles": [
                 "Owner"
               ]
             },
-            "david.tenant": {
-              "id": "6a5270cb-8cd3-4726-9066-f6209e3191cd",
-              "username": "david.tenant",
+            "U0005": {
+              "id": "david.wilson@rjtechsphere.com",
+              "username": "U0005",
               "roles": [
                 "Tenant"
               ]
             },
-            "lisa.buyer2": {
-              "id": "6ecbc509-9098-45a1-8e03-180f346332c5",
-              "username": "lisa.buyer2",
+            "U0006": {
+              "id": "lisa.martinez@rjtechsphere.com",
+              "username": "U0006",
               "roles": [
                 "Buyer"
               ]

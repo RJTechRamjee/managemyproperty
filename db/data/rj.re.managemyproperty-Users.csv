@@ -1,15 +1,15 @@
 ID,userId,firstName,lastName,emailId,phoneNumber,role,isActive,emailNotifications,appNotifications,ShortIntro,DetailedIntro
-c9537972-9792-4c6e-9091-21ad34305d8a,U0001,John,Smith,john.smith@email.com,+1234567890,Buyer,true,true,true,Looking for a family home in the city,I am a software engineer looking for a 3-bedroom apartment near good schools
-79a042b1-7ffa-48e1-96d8-c522a84e3a03,U0002,Sarah,Johnson,sarah.j@email.com,+1234567891,Seller,true,true,true,Selling my downtown apartment,Professional real estate investor with multiple properties
-d3c31fcf-ecea-4fea-9f67-708d9aa9c96b,U0003,Michael,Brown,m.brown@email.com,+1234567892,Agent,true,true,true,Real estate agent with 10 years experience,Specialized in residential properties and first-time buyers
-7fdda6bd-b9b3-44d7-b12c-35a49ec57e7a,U0004,Emily,Davis,emily.davis@email.com,+1234567893,Owner,true,true,false,Property owner and landlord,I own several rental properties in the downtown area
-6a5270cb-8cd3-4726-9066-f6209e3191cd,U0005,David,Wilson,d.wilson@email.com,+1234567894,Tenant,true,false,true,Looking for a rental apartment,Recent graduate looking for affordable housing
-6ecbc509-9098-45a1-8e03-180f346332c5,U0006,Lisa,Martinez,lisa.m@email.com,+1234567895,Buyer,true,true,true,First-time home buyer,Young professional looking to buy first property
-a5b41e06-370d-4854-894a-531825e4462a,U0007,Robert,Anderson,rob.anderson@email.com,+1234567896,Seller,true,true,true,Selling family home after relocation,Moving to another city for work
-2a04e58a-f083-4f65-a494-d152e2287fcf,U0008,Jennifer,Taylor,jen.taylor@email.com,+1234567897,Agent,true,true,true,Experienced luxury property agent,Specializing in high-end properties and investment opportunities
-a78a09db-caf6-4d08-b81a-f54616843910,U0009,William,Thomas,w.thomas@email.com,+1234567898,Owner,true,true,true,Multiple property owner,Real estate portfolio owner managing 15+ properties
-def99c1b-3fd9-4db0-a755-ff06616bb66d,U0010,Amanda,Jackson,amanda.j@email.com,+1234567899,Tenant,true,true,true,Family looking for spacious home,Family of four looking for 4-bedroom house with garden
-8c296827-9693-4a2f-baa4-6898ef943f3e,U0011,James,White,james.white@email.com,+1234567800,Buyer,true,true,false,Investor looking for properties,Real estate investor looking for good ROI properties
+john.smith@rjtechsphere.com,U0001,John,Smith,john.smith@rjtechsphere.com,+1234567890,Buyer,true,true,true,Looking for a family home in the city,I am a software engineer looking for a 3-bedroom apartment near good schools
+sarah.johnson@rjtechsphere.com,U0002,Sarah,Johnson,sarah.johnson@rjtechsphere.com,+1234567891,Seller,true,true,true,Selling my downtown apartment,Professional real estate investor with multiple properties
+michael.brown@rjtechsphere.com,U0003,Michael,Brown,michael.brown@rjtechsphere.com,+1234567892,Agent,true,true,true,Real estate agent with 10 years experience,Specialized in residential properties and first-time buyers
+emily.davis@rjtechsphere.com,U0004,Emily,Davis,emily.davis@rjtechsphere.com,+1234567893,Owner,true,true,false,Property owner and landlord,I own several rental properties in the downtown area
+david.wilson@rjtechsphere.com,U0005,David,Wilson,david.wilson@rjtechsphere.com,+1234567894,Tenant,true,false,true,Looking for a rental apartment,Recent graduate looking for affordable housing
+lisa.martinez@rjtechsphere.com,U0006,Lisa,Martinez,lisa.martinez@rjtechsphere.com,+1234567895,Buyer,true,true,true,First-time home buyer,Young professional looking to buy first property
+robert.anderson@rjtechsphere.com,U0007,Robert,Anderson,robert.anderson@rjtechsphere.com,+1234567896,Seller,true,true,true,Selling family home after relocation,Moving to another city for work
+jennifer.taylor@rjtechsphere.com,U0008,Jennifer,Taylor,jennifer.taylor@rjtechsphere.com,+1234567897,Agent,true,true,true,Experienced luxury property agent,Specializing in high-end properties and investment opportunities
+william.thomas@rjtechsphere.com,U0009,William,Thomas,william.thomas@rjtechsphere.com,+1234567898,Owner,true,true,true,Multiple property owner,Real estate portfolio owner managing 15+ properties
+amanda.jackson@rjtechsphere.com,U0010,Amanda,Jackson,amanda.jackson@rjtechsphere.com,+1234567899,Tenant,true,true,true,Family looking for spacious home,Family of four looking for 4-bedroom house with garden
+james.white@rjtechsphere.com,U0011,James,White,james.white@rjtechsphere.com,+1234567800,Buyer,true,true,false,Investor looking for properties,Real estate investor looking for good ROI properties
 dd001e1d-f20e-468e-ab73-69f7c451c33b,U0012,Mary,Harris,mary.h@email.com,+1234567801,Seller,true,false,true,Downsizing to smaller home,Empty nesters looking to sell large family home
 5e3cd3ce-4791-4a1f-8e35-322d7fad689b,U0013,Thomas,Martin,t.martin@email.com,+1234567802,Agent,true,true,true,Commercial property specialist,20 years in commercial real estate
 c99d57b8-ed35-4109-94df-080b9c8b5e81,U0014,Patricia,Thompson,pat.thompson@email.com,+1234567803,Owner,true,true,true,Rental property manager,Managing properties for multiple owners
