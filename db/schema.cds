@@ -111,7 +111,6 @@ entity Users : cuid, managed {
   userId             : String(10)                   @(title: '{i18n>userId}');
   firstName          : String(40)                   @(title: '{i18n>firstName}');
   lastName           : String(40)                   @(title: '{i18n>lastName}');
-  emailId            : String(50)                   @(title: '{i18n>emailId}');
   phoneNumber        : String(20)                   @(title: '{i18n>phoneNumber}');
   address            : Association to one Addresses @(title: '{i18n>address}');
   ShortIntro         : String(200)                  @(title: '{i18n>ShortIntro}');
