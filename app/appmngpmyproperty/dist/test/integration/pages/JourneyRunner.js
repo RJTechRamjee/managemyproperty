@@ -1,2 +1,0 @@
-sap.ui.define(["sap/fe/test/JourneyRunner","appmngpmyroperty/test/integration/pages/PropertiesList","appmngpmyroperty/test/integration/pages/PropertiesObjectPage"],function(e,t,r){"use strict";var p=new e({launchUrl:sap.ui.require.toUrl("appmngpmyroperty")+"/test/flp.html#app-preview",pages:{onThePropertiesList:t,onThePropertiesObjectPage:r},async:true});return p});
-//# sourceMappingURL=JourneyRunner.js.map

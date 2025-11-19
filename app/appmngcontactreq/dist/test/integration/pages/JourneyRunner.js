@@ -1,2 +1,0 @@
-sap.ui.define(["sap/fe/test/JourneyRunner","appmngcontactreq/test/integration/pages/ContactRequestsList","appmngcontactreq/test/integration/pages/ContactRequestsObjectPage","appmngcontactreq/test/integration/pages/ConactReqMessagesObjectPage"],function(e,t,a,n){"use strict";var s=new e({launchUrl:sap.ui.require.toUrl("appmngcontactreq")+"/test/flp.html#app-preview",pages:{onTheContactRequestsList:t,onTheContactRequestsObjectPage:a,onTheConactReqMessagesObjectPage:n},async:true});return s});
-//# sourceMappingURL=JourneyRunner.js.map

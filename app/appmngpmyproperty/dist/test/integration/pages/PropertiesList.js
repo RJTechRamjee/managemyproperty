@@ -1,2 +1,0 @@
-sap.ui.define(["sap/fe/test/ListReport"],function(t){"use strict";var e={actions:{},assertions:{}};return new t({appId:"appmngpmyroperty",componentId:"PropertiesList",contextPath:"/Properties"},e)});
-//# sourceMappingURL=PropertiesList.js.map

@@ -1,2 +1,0 @@
-sap.ui.define(["sap/fe/test/ObjectPage"],function(e){"use strict";var t={actions:{},assertions:{}};return new e({appId:"appmngpmyroperty",componentId:"PropertiesObjectPage",contextPath:"/Properties"},t)});
-//# sourceMappingURL=PropertiesObjectPage.js.map
