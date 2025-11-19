@@ -203,3 +203,10 @@ annotate service.ContactRequests with @(
     }
 );
 
+// Add dropdown annotation for ContactRequests enum field
+annotate service.ContactRequests with {
+    status @(
+        Common.ValueListWithFixedValues: true
+    );
+};
+
