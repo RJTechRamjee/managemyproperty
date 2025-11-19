@@ -3,11 +3,7 @@
   "sap.app": {
     "id": "appmngcontactreq",
     "type": "application",
-    "i18n": {
-      "bundleUrl": "i18n/i18n.properties",
-      "supportedLocales": [""],
-      "fallbackLocale": ""
-    },
+    "i18n": "i18n/i18n.properties",
     "applicationVersion": {
       "version": "0.0.1"
     },
@@ -64,9 +60,7 @@
       "i18n": {
         "type": "sap.ui.model.resource.ResourceModel",
         "settings": {
-          "bundleName": "appmngcontactreq.i18n.i18n",
-          "supportedLocales": [""],
-          "fallbackLocale": ""
+          "bundleName": "appmngcontactreq.i18n.i18n"
         }
       },
       "": {
@@ -80,11 +74,7 @@
       },
       "@i18n": {
         "type": "sap.ui.model.resource.ResourceModel",
-        "uri": "i18n/i18n.properties",
-        "settings": {
-          "supportedLocales": [""],
-          "fallbackLocale": ""
-        }
+        "uri": "i18n/i18n.properties"
       }
     },
     "resources": {

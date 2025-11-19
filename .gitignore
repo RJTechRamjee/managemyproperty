@@ -18,9 +18,6 @@ target/
 *.mtar
 mta_archives/
 
-# UI5 build artifacts
-app/*/dist/
-
 # Other
 .DS_Store
 *.orig
