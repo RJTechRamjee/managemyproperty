@@ -106,7 +106,7 @@ annotate service.Properties with @(
         },
         {
             $Type: 'UI.DataField',
-            Value: contactPerson.fullName,
+            Value: contactPerson_ID,
             Label: '{i18n>contactPerson}'
         },
     ],
@@ -259,7 +259,7 @@ annotate service.Properties with @(
             },
             {
                 $Type: 'UI.DataField',
-                Value: contactPerson.fullName,
+                Value: contactPerson_ID,
                 Label: '{i18n>contactPerson}'
             },
             {
