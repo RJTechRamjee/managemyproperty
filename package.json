@@ -75,6 +75,13 @@
               "roles": [
                 "Buyer"
               ]
+            },
+            "ramjee.tenant": {
+              "id": "koradaramjee@gmail.com",
+              "username": "ramjee.tenant",
+              "roles": [
+                "Tenant"
+              ]
             }
           }
         }
