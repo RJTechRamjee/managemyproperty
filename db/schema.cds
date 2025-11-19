@@ -107,7 +107,8 @@ entity NearByAmenities : cuid, managed {
   walkTimeUnit : String(5) default 'min'                       @(title: '{i18n>walkTimeUnit}')
 }
 
-entity Users : cuid, managed {
+entity Users : managed {
+  key ID             : String(100)                  @(title: '{i18n>ID}');
   userId             : String(10)                   @(title: '{i18n>userId}');
   firstName          : String(40)                   @(title: '{i18n>firstName}');
   lastName           : String(40)                   @(title: '{i18n>lastName}');
