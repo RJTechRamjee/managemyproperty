@@ -106,7 +106,7 @@ annotate service.Properties with @(
         },
         {
             $Type: 'UI.DataField',
-            Value: contactPerson.fullName,
+            Value: contactPerson_ID,
             Label: '{i18n>contactPerson}'
         },
     ],
@@ -259,7 +259,7 @@ annotate service.Properties with @(
             },
             {
                 $Type: 'UI.DataField',
-                Value: contactPerson.fullName,
+                Value: contactPerson_ID,
                 Label: '{i18n>contactPerson}'
             },
             {
@@ -394,13 +394,11 @@ annotate service.Properties with {
             {
                 $Type            : 'Common.ValueListParameterDisplayOnly',
                 ValueListProperty: 'fullName'
-            },
-            {
-                $Type            : 'Common.ValueListParameterDisplayOnly',
-                ValueListProperty: 'emailId'
             }
         ]
     };
+    contactPerson      @Common.Text: contactPerson.fullName;
+    contactPerson      @Common.TextArrangement: #TextOnly;
 };
 
 annotate service.ActionParams with {
