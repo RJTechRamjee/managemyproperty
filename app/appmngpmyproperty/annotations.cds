@@ -309,26 +309,26 @@ annotate service.NearByAmenities with {
 // Add dropdown annotations for Properties enum fields
 annotate service.Properties with {
     type @(
-        Common.ValueListWithFixedValues
+        Common.ValueListWithFixedValues: true
     );
     listingFor @(
-        Common.ValueListWithFixedValues
+        Common.ValueListWithFixedValues: true
     );
     purpose @(
-        Common.ValueListWithFixedValues
+        Common.ValueListWithFixedValues: true
     );
     state @(
-        Common.ValueListWithFixedValues
+        Common.ValueListWithFixedValues: true
     );
     waterSupply @(
-        Common.ValueListWithFixedValues
+        Common.ValueListWithFixedValues: true
     );
 };
 
 // Add dropdown annotations for PropertyDetails enum fields
 annotate service.PropertyDetails with {
     kitchenType @(
-        Common.ValueListWithFixedValues
+        Common.ValueListWithFixedValues: true
     );
     facingDirection @(
         Common.ValueListWithFixedValues: true
@@ -732,4 +732,18 @@ annotate service.PropertyDetails with @(
         ]
     }
 );
+
+// Add dropdown annotations for Notifications enum field
+annotate service.Notifications with {
+    notificationType @(
+        Common.ValueListWithFixedValues: true
+    );
+};
+
+// Add dropdown annotations for EmailLogs enum field
+annotate service.EmailLogs with {
+    emailType @(
+        Common.ValueListWithFixedValues: true
+    );
+};
 
