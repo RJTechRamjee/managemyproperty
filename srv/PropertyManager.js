@@ -250,7 +250,7 @@ class PropertyManager {
                     title: 'New Contact Request',
                     message: `You have received a new contact request for property ${property.propertyId || property.ID}`,
                     relatedEntity: 'ContactRequests',
-                    relatedEntityId: insertResult
+                    // relatedEntityId: insertResult
                 });
             }
 
