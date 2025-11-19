@@ -101,7 +101,10 @@ annotate ContactRequests with {
 }
 
 annotate CatalogService  with @(requires: 'authenticated-user');
+<<<<<<< HEAD
 
 annotate CatalogService.Properties with {
   contactRequests @readonly;
 };
+=======
+>>>>>>> 8b78d3a18aae67f2bd3f0846d5d3f1376aa62500
