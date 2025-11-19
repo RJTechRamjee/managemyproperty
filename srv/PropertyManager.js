@@ -215,9 +215,9 @@ class PropertyManager {
             // Get the logged-in user ID from request context
             const requesterId = request.user?.id;
             
-            if (!requesterId || requesterId === 'anonymous') {
-                return request.reject(401, 'User must be authenticated to send a contact request.');
-            }
+            // if (!requesterId || requesterId === 'anonymous') {
+            //     return request.reject(401, 'User must be authenticated to send a contact request.');
+            // }
 
             const tx = cds.tx(request);
 
@@ -250,7 +250,7 @@ class PropertyManager {
                     title: 'New Contact Request',
                     message: `You have received a new contact request for property ${property.propertyId || property.ID}`,
                     relatedEntity: 'ContactRequests',
-                    relatedEntityId: insertResult
+                    // relatedEntityId: insertResult
                 });
             }
 

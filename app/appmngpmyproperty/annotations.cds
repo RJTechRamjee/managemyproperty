@@ -106,7 +106,7 @@ annotate service.Properties with @(
         },
         {
             $Type: 'UI.DataField',
-            Value: contactPerson.fullName,
+            Value: contactPerson_ID,
             Label: '{i18n>contactPerson}'
         },
     ],
@@ -259,7 +259,7 @@ annotate service.Properties with @(
             },
             {
                 $Type: 'UI.DataField',
-                Value: contactPerson.fullName,
+                Value: contactPerson_ID,
                 Label: '{i18n>contactPerson}'
             },
             {
@@ -309,26 +309,26 @@ annotate service.NearByAmenities with {
 // Add dropdown annotations for Properties enum fields
 annotate service.Properties with {
     type @(
-        Common.ValueListWithFixedValues
+        Common.ValueListWithFixedValues: true
     );
     listingFor @(
-        Common.ValueListWithFixedValues
+        Common.ValueListWithFixedValues: true
     );
     purpose @(
-        Common.ValueListWithFixedValues
+        Common.ValueListWithFixedValues: true
     );
     state @(
-        Common.ValueListWithFixedValues
+        Common.ValueListWithFixedValues: true
     );
     waterSupply @(
-        Common.ValueListWithFixedValues
+        Common.ValueListWithFixedValues: true
     );
 };
 
 // Add dropdown annotations for PropertyDetails enum fields
 annotate service.PropertyDetails with {
     kitchenType @(
-        Common.ValueListWithFixedValues
+        Common.ValueListWithFixedValues: true
     );
     facingDirection @(
         Common.ValueListWithFixedValues: true
@@ -394,13 +394,11 @@ annotate service.Properties with {
             {
                 $Type            : 'Common.ValueListParameterDisplayOnly',
                 ValueListProperty: 'fullName'
-            },
-            {
-                $Type            : 'Common.ValueListParameterDisplayOnly',
-                ValueListProperty: 'emailId'
             }
         ]
     };
+    contactPerson      @Common.Text: contactPerson.fullName;
+    contactPerson      @Common.TextArrangement: #TextOnly;
 };
 
 annotate service.ActionParams with {
@@ -734,4 +732,18 @@ annotate service.PropertyDetails with @(
         ]
     }
 );
+
+// Add dropdown annotations for Notifications enum field
+annotate service.Notifications with {
+    notificationType @(
+        Common.ValueListWithFixedValues: true
+    );
+};
+
+// Add dropdown annotations for EmailLogs enum field
+annotate service.EmailLogs with {
+    emailType @(
+        Common.ValueListWithFixedValues: true
+    );
+};
 

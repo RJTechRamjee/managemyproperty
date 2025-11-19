@@ -78,11 +78,7 @@ annotate service.ContactRequests with @(
         },
         {
             $Type: 'UI.DataField',
-            Value: requester.firstName,
-        },
-        {
-            $Type: 'UI.DataField',
-            Value: requester.lastName,
+            Value: requester.fullName,
         },
         {
             $Type: 'UI.DataField',
@@ -202,4 +198,11 @@ annotate service.ContactRequests with @(
         Deletable: {$edmJson: {$Path: 'isPropertyOwner'}}
     }
 );
+
+// Add dropdown annotation for ContactRequests enum field
+annotate service.ContactRequests with {
+    status @(
+        Common.ValueListWithFixedValues: true
+    );
+};
 
