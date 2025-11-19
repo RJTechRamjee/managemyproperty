@@ -21,6 +21,7 @@ server:
         port: 35729
         path: webapp
         delay: 300
+        enabled: false
     - name: fiori-tools-preview
       afterMiddleware: fiori-tools-appreload
       configuration:
