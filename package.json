@@ -35,7 +35,7 @@
           "kind": "mocked",
           "users": {
             "john.buyer": {
-              "id": "c9537972-9792-4c6e-9091-21ad34305d8a",
+              "id": "john.buyer@email.com",
               "username": "john.buyer",
               "roles": [
                 "Buyer"

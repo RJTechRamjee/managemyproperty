@@ -99,3 +99,5 @@ annotate ContactRequests with {
         params : EmailParams
     )                         returns String;
 }
+
+annotate CatalogService  with @(requires: 'authenticated-user');
