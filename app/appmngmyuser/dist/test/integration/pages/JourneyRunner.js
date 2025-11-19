@@ -1,0 +1,2 @@
+sap.ui.define(["sap/fe/test/JourneyRunner","appmngmyuser/test/integration/pages/UsersObjectPage"],function(e,r){"use strict";var s=new e({launchUrl:sap.ui.require.toUrl("appmngmyuser")+"/test/flp.html#app-preview",pages:{onTheUsersObjectPage:r},async:true});return s});
+//# sourceMappingURL=JourneyRunner.js.map

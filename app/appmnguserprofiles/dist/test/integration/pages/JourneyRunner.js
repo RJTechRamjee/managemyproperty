@@ -1,0 +1,2 @@
+sap.ui.define(["sap/fe/test/JourneyRunner","appmnguserprofiles/test/integration/pages/UsersList","appmnguserprofiles/test/integration/pages/UsersObjectPage"],function(e,s,r){"use strict";var t=new e({launchUrl:sap.ui.require.toUrl("appmnguserprofiles")+"/test/flp.html#app-preview",pages:{onTheUsersList:s,onTheUsersObjectPage:r},async:true});return t});
+//# sourceMappingURL=JourneyRunner.js.map
