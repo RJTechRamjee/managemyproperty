@@ -4,7 +4,7 @@
     "generatorPlatform": "SAP Business Application Studio",
     "serviceType": "Local CAP",
     "metadataFilename": "",
-    "serviceUrl": "http://localhost:4004/odata/v4/AdminService/",
+    "serviceUrl": "http://localhost:4004/odata/v4/UserProfileService/",
     "appName": "appmnguserprofiles",
     "appTitle": "Manage User Profiles",
     "appDescription": "Manage User Profiles",

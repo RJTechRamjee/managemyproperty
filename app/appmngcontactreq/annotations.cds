@@ -42,7 +42,7 @@ annotate service.ContactRequests with @(
         {
             $Type : 'UI.DataFieldForAction',
             Label : 'Respond to Request',
-            Action: 'CatalogService.RespondToRequest'
+            Action: 'ContactRequestService.RespondToRequest'
         },
         {
             $Type : 'UI.DataFieldForAction',
@@ -69,7 +69,7 @@ annotate service.ContactRequests with @(
         {
             $Type : 'UI.DataFieldForAction',
             Label : 'Respond to Request',
-            Action: 'CatalogService.RespondToRequest'
+            Action: 'ContactRequestService.RespondToRequest'
         },
         {
             $Type : 'UI.DataFieldForAction',
