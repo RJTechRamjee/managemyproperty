@@ -28,7 +28,7 @@ service CatalogService @(path: 'CatalogService') {
     entity Properties                         as
         projection on mngprp.Properties {
             *,
-            @readonly
+            
             contactRequests : redirected to ContactRequests,
             virtual null as isOwner : Boolean
         }
@@ -102,6 +102,6 @@ annotate ContactRequests with {
 
 annotate CatalogService  with @(requires: 'authenticated-user');
 
-annotate CatalogService.Properties with {
-  contactRequests @readonly;
-};
+// annotate CatalogService.Properties with {
+//   contactRequests @readonly;
+// };

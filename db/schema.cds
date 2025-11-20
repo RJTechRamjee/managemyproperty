@@ -73,7 +73,7 @@ entity Properties : cuid, managed {
   nearByAmenities       : Composition of many NearByAmenities
                             on nearByAmenities.property = $self        @(title: '{i18n>nearByAmenities}');
   contactRequests       : Association to many ContactRequests
-                            on contactRequests.property = $self        @(title: '{i18n>contactRequests}')  @readonly;
+                            on contactRequests.property = $self        @(title: '{i18n>contactRequests}') ;
 }
 
 entity PropertyDetails : cuid, managed {
