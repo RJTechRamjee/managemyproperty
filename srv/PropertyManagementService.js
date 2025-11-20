@@ -1,7 +1,7 @@
 const cds = require('@sap/cds');
 const { PropertyManager } = require('./PropertyManager');
 
-class CatalogService extends cds.ApplicationService {
+class PropertyManagementService extends cds.ApplicationService {
     init() {
         // Initialize PropertyManager with this service
         const propertyManager = new PropertyManager(this);
@@ -13,4 +13,4 @@ class CatalogService extends cds.ApplicationService {
     }
 }
 
-module.exports = { CatalogService };
+module.exports = { PropertyManagementService };

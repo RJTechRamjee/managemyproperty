@@ -1,4 +1,4 @@
-using AdminService as service from '../../srv/catalog_service';
+using UserManagementService as service from '../../srv/UserManagementService';
 annotate service.Users with @(
     odata.draft.enabled,
     UI.FieldGroup #GeneratedGroup : {

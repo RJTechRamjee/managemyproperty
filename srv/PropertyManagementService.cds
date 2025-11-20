@@ -1,7 +1,6 @@
 using {rj.re.managemyproperty as mngprp} from '../db/schema';
 
-
-service CatalogService @(path: 'CatalogService') {
+service PropertyManagementService @(path: 'PropertyManagementService') {
 
     type ActionParams : {
         newStatusCode : String(10)
@@ -62,18 +61,7 @@ service CatalogService @(path: 'CatalogService') {
             requester.lastName,
             requester.ShortIntro,
             virtual null as isPropertyOwner : Boolean
-        }
-        actions {
-            action RespondToRequest(responseMessage: String(300) @UI.MultiLineText)         returns String;
-            action CloseRequest()                                          returns String;
         };
-
-// Mark requester_ID as readonly to prevent user modification
-annotate ContactRequests with {
-    requester @readonly @Core.Computed;
-}
-
-    entity ConactReqMessages                  as projection on mngprp.ConactReqMessages;
 
     entity Notifications                      as projection on mngprp.Notifications;
 
@@ -100,8 +88,4 @@ annotate ContactRequests with {
     )                         returns String;
 }
 
-annotate CatalogService  with @(requires: 'authenticated-user');
-
-// annotate CatalogService.Properties with {
-//   contactRequests @readonly;
-// };
+annotate PropertyManagementService  with @(requires: 'authenticated-user');

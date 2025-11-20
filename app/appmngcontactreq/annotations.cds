@@ -1,4 +1,4 @@
-using CatalogService as service from '../../srv/catalog_service';
+using ContactRequestService as service from '../../srv/ContactRequestService';
 
 annotate service.ContactRequests with @(
     UI.FieldGroup #GeneratedGroup: {
@@ -42,7 +42,7 @@ annotate service.ContactRequests with @(
         {
             $Type : 'UI.DataFieldForAction',
             Label : 'Respond to Request',
-            Action: 'CatalogService.RespondToRequest'
+            Action: 'ContactRequestService.RespondToRequest'
         },
         {
             $Type : 'UI.DataFieldForAction',
@@ -69,7 +69,7 @@ annotate service.ContactRequests with @(
         {
             $Type : 'UI.DataFieldForAction',
             Label : 'Respond to Request',
-            Action: 'CatalogService.RespondToRequest'
+            Action: 'ContactRequestService.RespondToRequest'
         },
         {
             $Type : 'UI.DataFieldForAction',

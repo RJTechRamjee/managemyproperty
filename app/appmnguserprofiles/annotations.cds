@@ -1,4 +1,4 @@
-using AdminService as service from '../../srv/catalog_service';
+using UserProfileService as service from '../../srv/UserProfileService';
 annotate service.Users with @(
     UI.LineItem : [
         {

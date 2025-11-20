@@ -1,4 +1,4 @@
-using CatalogService as service from '../../srv/catalog_service';
+using PropertyManagementService as service from '../../srv/PropertyManagementService';
 
 annotate service.Properties with @(
     odata.draft.enabled,
@@ -23,7 +23,7 @@ annotate service.Properties with @(
             Actions: [
                 {
                     $Type : 'UI.DataFieldForAction',
-                    Action: 'CatalogService.ReservepProperty',
+                    Action: 'PropertyManagementService.ReservepProperty',
                     Label : 'Reserve Property'
                 // InvocationGrouping : ,
                 // Inline : ,
@@ -322,7 +322,7 @@ annotate service.ContactRequests with @(UI.LineItem #PropertiesView: [
     {
         $Type : 'UI.DataFieldForAction',
         Label : 'Close Request',
-        Action: 'CatalogService.CloseRequest'
+        Action: 'ContactRequestService.CloseRequest'
     },
     {
         $Type: 'UI.DataField',
