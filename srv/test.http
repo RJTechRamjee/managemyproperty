@@ -1,11 +1,11 @@
 
-GET http://localhost:4004/odata/v4/CatalogService
+GET http://localhost:4004/odata/v4/PropertyManagementService
 
 ### Read
-GET http://localhost:4004/odata/v4/CatalogService/Properties
+GET http://localhost:4004/odata/v4/PropertyManagementService/Properties
 
 ### call function
-GET http://localhost:4004/odata/v4/CatalogService/getNextPropertyId()
+GET http://localhost:4004/odata/v4/PropertyManagementService/getNextPropertyId()
 
 
 ### Create
