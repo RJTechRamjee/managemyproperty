@@ -315,18 +315,14 @@ annotate service.PropertyDetails with {
 
 annotate service.ContactRequests with @(UI.LineItem #PropertiesView: [
     {
-        $Type                       : 'UI.DataFieldForAction',
-        Label                       : 'Respond to Request',
-        Action                      : 'CatalogService.RespondToRequest',
-        // ![@UI.Hidden]               : {$edmJson: {$Not: {$Path: 'property/isOwner'}}},
-        // ![@Core.OperationAvailable] : {$edmJson: {$Path: 'property/isOwner'}}
+        $Type : 'UI.DataFieldForAction',
+        Label : 'Respond to Request',
+        Action: 'CatalogService.RespondToRequest'
     },
     {
-        $Type                       : 'UI.DataFieldForAction',
-        Label                       : 'Close Request',
-        Action                      : 'CatalogService.CloseRequest',
-        // ![@UI.Hidden]               : {$edmJson: {$Not: {$Path: 'property/isOwner'}}},
-        // ![@Core.OperationAvailable] : {$edmJson: {$Path: 'property/isOwner'}}
+        $Type : 'UI.DataFieldForAction',
+        Label : 'Close Request',
+        Action: 'CatalogService.CloseRequest'
     },
     {
         $Type: 'UI.DataField',
