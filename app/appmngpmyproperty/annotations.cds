@@ -1,4 +1,4 @@
-using CatalogService as service from '../../srv/catalog_service';
+using PropertyManagementService as service from '../../srv/PropertyManagementService';
 
 annotate service.Properties with @(
     odata.draft.enabled,
